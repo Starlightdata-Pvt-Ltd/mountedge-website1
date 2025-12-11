@@ -1,103 +1,104 @@
+import CTA from "@/components/sections/cta/default";
+import FAQ from "@/components/sections/faq/default";
+import FooterSection from "@/components/sections/footer/default";
+import Hero from "@/components/sections/hero/default";
+import Items from "@/components/sections/items/default";
+import Logos from "@/components/sections/logos/default";
+import Navbar from "@/components/sections/navbar/default";
+import Stats from "@/components/sections/stats/default";
+import { Button } from "@/components/ui/button";
+import { Section } from "@/components/ui/section";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <Navbar />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <Hero
+        title={"WELCOME TO MOUNTEDGE"}
+        description={
+          "Leave the tech to us. We simplify technology with cloud, cybersecurity, and digital transformation so your business stays secure, agile, and ahead of the competition."
+        }
+        badge={false}
+        mockup={false}
+      />
+
+      <Section>
+        <div className="max-w-container mx-auto grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { title: "Equity Investment", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing." },
+            { title: "Startup Focus", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing." },
+            { title: "High Reward", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing." },
+            { title: "Access to Capital", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing." },
+          ].map((f) => (
+            <div key={f.title} className="p-6 rounded-2xl border bg-card shadow-sm">
+              <h4 className="text-lg font-semibold">{f.title}</h4>
+              <p className="text-muted-foreground mt-2">{f.desc}</p>
+            </div>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </Section>
+
+      <Section>
+        <div className="max-w-container mx-auto">
+          <h3 className="text-3xl font-semibold text-center mb-8">Our Services</h3>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {["Cybersecurity Solutions","Cloud & IT Infrastructure","Digital Transformation & Innovation","Consulting & Managed Services"].map((s) => (
+              <div key={s} className="p-6 rounded-2xl border bg-card shadow-sm">
+                <h4 className="text-xl font-semibold">{s}</h4>
+                <p className="text-muted-foreground mt-3">Protecting your business is at the core of what we do. Our services ensure resilience and scalability as you grow.</p>
+                <a className="mt-4 inline-block text-primary hover:underline" href="#">Read more →</a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section>
+        <div className="max-w-container mx-auto text-center">
+          <h3 className="text-3xl font-semibold">Partners</h3>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-6">
+            {[1,2,3,4,5,6].map((i) => (
+              <img
+                key={i}
+                src={`https://mountedge-website.netlify.app/partners/${i}.svg`}
+                alt={`partner-${i}`}
+                className="h-12 w-auto opacity-90"
+              />
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section>
+        <div className="max-w-container mx-auto">
+          <h3 className="text-3xl font-semibold text-center">Products</h3>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <div className="p-6 rounded-2xl border bg-card shadow-sm flex items-center gap-6">
+              <div className="flex-shrink-0">
+                <img src="https://mountedge-website.netlify.app/star-secure-logo-transparent.svg" alt="Star Secure" className="h-16 w-16" />
+              </div>
+              <div>
+                <h4 className="text-xl font-semibold">Star Secure Browser (SSB)</h4>
+                <p className="text-muted-foreground mt-2">An enterprise-grade secure browser built with zero-trust principles to protect users, data, and IT assets.</p>
+                <a className="mt-3 inline-block text-primary hover:underline" href="#">View All Products →</a>
+              </div>
+            </div>
+            <div className="p-6 rounded-2xl border bg-card shadow-sm">
+              <h4 className="text-xl font-semibold">Why MountEdge?</h4>
+              <p className="text-muted-foreground mt-2">We combine industry expertise, client-centric processes, and innovative technology to drive business outcomes.</p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Items />
+      <FAQ />
+      <CTA />
+      <Stats />
+      <Button>Button</Button>
+      <FooterSection />
+    </>
   );
 }
