@@ -15,14 +15,7 @@ export default function Home() {
     <>
       <Navbar />
 
-      <Hero
-        title={"WELCOME TO MOUNTEDGE"}
-        description={
-          "Leave the tech to us. We simplify technology with cloud, cybersecurity, and digital transformation so your business stays secure, agile, and ahead of the competition."
-        }
-        badge={false}
-        mockup={false}
-      />
+      <Hero/>
 
       <Section>
         <div className="max-w-container mx-auto grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
