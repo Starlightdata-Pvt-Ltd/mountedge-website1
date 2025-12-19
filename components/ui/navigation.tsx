@@ -44,13 +44,11 @@ interface NavigationProps {
 
 export default function Navigation({
   menuItems = [
-    { title: "Home",  },
+    { title: "Home", content: "home", href: "/", isLink:true }, 
     { title: "Services", content: "components" },
-
     { title: "Resources", content: "resources" },
     { title: "Company", content: "company" },
   ],
-
   components = [
     { title: "Cybersecurity Services", href: "/solutions/cyber", description: "" },
     { title: "Cloud & IT Infrastructure", href: "/solutions/cloud/", description: "" },
@@ -73,23 +71,17 @@ export default function Navigation({
   resources = [
     { title: "Blogs", href: "", description: "" },
     { title: "Case Studies", href: "", description: "" },
-    { title: "Whitepapers", href: "", description: "" },
-    { title: "Reports", href: "", description: "" },
+    { title: "Knowledge Base", href: "", description: "" },
     { title: "Press Release", href: "", description: "" },
   ],
 
   company = [
     { title: "About Us", href: "/company/about", description: "" },
-    { title: "Leadership", href: "/company/leadership", description: "" },
     { title: "Careers", href: "/company/careers", description: "" },
     { title: "Contact", href: "/company/contact", description: "" },
-    { title: "Culture", href: "/company/culture", description: "" },
   ],
 
-  logo = <LaunchUI />,
-  logoTitle = "",
-  logoDescription = "",
-  logoHref = "",
+  
 }: NavigationProps) {
   return (
     <NavigationMenu viewport={false}>

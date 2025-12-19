@@ -14,8 +14,8 @@ export default function HomePage() {
       <Hero />
       <OurServices />
       <Approach />
-      < FinalCTA />
       <Methodology/>
+      < FinalCTA />
       <IndustryExpertise/>
       <Enterprise/>
 
@@ -87,13 +87,13 @@ function Approach() {
       </p>
 
       {/* Cards */}
-      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 sm:px-10 lg:px-20 mx-auto">
         {steps.map((s) => (
           <div
             key={s.num}
             className="group rounded-xl border border-slate-200 p-6 text-left bg-white
                        shadow-sm hover:shadow-xl hover:-translate-y-1
-                       transition-all duration-300 ease-out"
+                       transition-all duration-300 ease-out w-full sm:w-56"
           >
             {/* Number */}
             <div className="text-sky-600 font-bold text-xl tracking-wide">
@@ -117,43 +117,6 @@ function Approach() {
 }
 
 
-/* ================= FINAL CTA ================= */
-function FinalCTA() {
-  return (
-    <section className="py-24 bg-white text-slate-900">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="rounded-xl border border-slate-200 p-10 text-center bg-white">
-          
-          <div className="inline-block text-sm px-3 py-1 rounded-full bg-sky-600 text-white text-sm font-medium hover:bg-sky-700 transition">
-            Platform + Services
-          </div>
-
-          <h2 className="mt-4 text-2xl md:text-3xl font-semibold text-slate-900">
-            How Our Services Support the MSPL Platform
-          </h2>
-
-          <p className="mt-4 text-base text-slate-600 max-w-3xl mx-auto">
-            Our services enable seamless implementation, integration, and ongoing management of the MSPL Secure Access Platform—including Zero Trust Browser, MFN, and unified governance layers.
-          </p>
-
-          <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-slate-600">
-            <span>Platform implementation</span>
-            <span>Identity & policy alignment</span>
-            <span>Security posture modernization</span>
-            <span>Cloud + Zero Trust integration</span>
-          </div>
-
-          <div className="mt-8 flex justify-center gap-4 flex-wrap">
-            <button className="px-6 py-2 rounded-md bg-sky-600 text-white text-sm font-medium hover:bg-sky-700">
-              Explore Secure Access Platform
-            </button>
-          </div>
-
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function Methodology() {
   const steps = [
@@ -218,6 +181,45 @@ function Methodology() {
 }
 
 
+/* ================= FINAL CTA ================= */
+function FinalCTA() {
+  return (
+    <section className="py-24 bg-white text-slate-900">
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="rounded-xl border border-slate-200 p-10 text-center bg-white">
+          
+          <div className="inline-block text-sm px-3 py-1 rounded-full bg-sky-600 text-white text-sm font-medium hover:bg-sky-700 transition">
+            Platform + Services
+          </div>
+
+          <h2 className="mt-4 text-2xl md:text-3xl font-semibold text-slate-900">
+            How Our Services Support the MSPL Platform
+          </h2>
+
+          <p className="mt-4 text-base text-slate-600 max-w-3xl mx-auto">
+            Our services enable seamless implementation, integration, and ongoing management of the MSPL Secure Access Platform—including Zero Trust Browser, MFN, and unified governance layers.
+          </p>
+
+          <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-slate-600">
+            <span>Platform implementation</span>
+            <span>Identity & policy alignment</span>
+            <span>Security posture modernization</span>
+            <span>Cloud + Zero Trust integration</span>
+          </div>
+
+          <div className="mt-8 flex justify-center gap-4 flex-wrap">
+            <button className="px-6 py-2 rounded-md bg-sky-600 text-white text-sm font-medium hover:bg-sky-700">
+              Explore Secure Access Platform
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 function IndustryExpertise() {
   const industries = [
     {
@@ -260,25 +262,26 @@ function IndustryExpertise() {
       </p>
 
       {/* Industry Cards */}
-      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {industries.map((item) => {
-          const Icon = item.icon;
-          return (
-            <div
-              key={item.id}
-              className="rounded-xl border border-slate-200 p-8 bg-white hover:shadow-lg transition text-center"
-            >
-              <div className="mx-auto w-14 h-14 rounded-full bg-sky-50 flex items-center justify-center">
-                <Icon className="w-7 h-7 text-sky-600" />
-              </div>
+      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1 px-40 mx-auto">
+  {industries.map((item) => {
+    const Icon = item.icon;
+    return (
+      <div
+        key={item.id}
+        className="rounded-xl border border-slate-200 p-8 bg-white hover:shadow-lg transition text-center w-full sm:w-56"
+      >
+        <div className="mx-auto w-14 h-14 rounded-full bg-sky-50 flex items-center justify-center">
+          <Icon className="w-7 h-7 text-sky-600" />
+        </div>
 
-              <h4 className="mt-4 text-lg font-semibold text-slate-900">
-                {item.title}
-              </h4>
-            </div>
-          );
-        })}
+        <h4 className="mt-4 text-lg font-semibold text-slate-900">
+          {item.title}
+        </h4>
       </div>
+    );
+  })}
+</div>
+
     </section>
   );
 }

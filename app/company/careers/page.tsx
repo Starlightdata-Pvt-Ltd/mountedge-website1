@@ -87,7 +87,6 @@ export default function CareersPage() {
     if (!/^\S+@\S+\.\S+$/.test(appEmail)) return alert("Please enter a valid email.");
     if (!appResume) return alert("Please attach your resume (PDF or DOC).");
 
-    // simulate submit
     setSubmitting(true);
     await new Promise((r) => setTimeout(r, 900));
     setSubmitting(false);
@@ -96,10 +95,10 @@ export default function CareersPage() {
   }
 
   return (
-    <main className="w-full">
+    <main className="w-full overflow-x-hidden">
       {/* HERO */}
       <Section className="pt-12 pb-8">
-        <div className="max-w-container mx-auto text-center">
+        <div className="max-w-full mx-auto text-center px-4 sm:px-6 lg:px-8">
           <Badge variant="outline" className="mx-auto mb-4">
             We're hiring
           </Badge>
@@ -126,7 +125,7 @@ export default function CareersPage() {
 
       {/* MOCKUP / BRAND */}
       <Section className="pt-0 pb-6">
-        <div className="max-w-container mx-auto relative">
+        <div className="max-w-full mx-auto relative px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="order-2 md:order-1">
               <h2 className="text-2xl sm:text-3xl font-semibold mb-3">Work with great people and meaningful problems</h2>
@@ -145,12 +144,11 @@ export default function CareersPage() {
             <div className="order-1 md:order-2">
               <MockupFrame size="small" className="rounded-xl shadow-xl overflow-hidden">
                 <Mockup type="responsive" className="w-full bg-background/90 p-4 rounded-xl">
-                  {/* simple image mockup; replace src with your screenshot */}
-                  <div className=" flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg">
+                  <div className="flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg overflow-hidden">
                     <img
                       src="/star.png"
                       alt="product mockup"
-                      className="w-full h-full object-contain"
+                      className="w-full max-w-full h-full object-contain"
                       draggable={false}
                       loading="eager"
                     />
@@ -165,7 +163,7 @@ export default function CareersPage() {
 
       {/* OPEN ROLES */}
       <Section id="open-roles" className="pt-6 pb-6">
-        <div className="max-w-container mx-auto">
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-2xl font-semibold">Open Roles</h3>
             <div className="hidden sm:flex gap-2">
@@ -184,7 +182,6 @@ export default function CareersPage() {
             </div>
           </div>
 
-          {/* Mobile filter */}
           <div className="flex sm:hidden gap-2 mb-4 overflow-auto">
             {filters.map((f) => (
               <button
@@ -200,17 +197,17 @@ export default function CareersPage() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-hidden">
             {visibleJobs.map((job) => (
               <article
                 key={job.id}
                 className="rounded-xl border border-slate-100 p-6 bg-white/80 shadow-sm hover:shadow-md transition"
               >
-                <div className="flex justify-between items-start gap-4">
-                  <div>
+                <div className="flex flex-col lg:flex-row justify-between items-start gap-4">
+                  <div className="flex-1">
                     <h4 className="text-lg font-semibold">{job.title}</h4>
                     <p className="text-sm text-muted-foreground mt-1">{job.summary}</p>
-                    <div className="flex gap-2 mt-3 text-xs">
+                    <div className="flex gap-2 mt-3 text-xs flex-wrap">
                       <span className="px-2 py-1 rounded bg-slate-50 border border-slate-100">{job.type}</span>
                       <span className="px-2 py-1 rounded bg-slate-50 border border-slate-100">{job.location}</span>
                       <span className="px-2 py-1 rounded bg-slate-50 border border-slate-100">{job.team}</span>
@@ -234,7 +231,7 @@ export default function CareersPage() {
 
       {/* WHY MSPL / PERKS */}
       <Section id="why-mspl" className="pt-6 pb-6">
-        <div className="max-w-container mx-auto">
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <h3 className="text-2xl font-semibold mb-4">Why work at MSPL?</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="p-5 rounded-lg border border-slate-100 bg-white/80">
@@ -257,9 +254,9 @@ export default function CareersPage() {
         </div>
       </Section>
 
-      {/* APPLY FORM (in-page) */}
+      {/* APPLY FORM */}
       <Section className="pt-6 pb-12">
-        <div className="max-w-container mx-auto">
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto bg-white/80 border border-slate-100 rounded-xl p-6 shadow">
             <h4 className="text-xl font-semibold mb-3">
               {selectedJob ? `Apply — ${selectedJob.title}` : "Apply for a role"}
@@ -302,8 +299,8 @@ export default function CareersPage() {
                 />
               </div>
 
-              <div className="flex items-center gap-3">
-                <Button variant="default" size="lg" asChild>
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <Button variant="default" size="lg" asChild className="flex-1">
                   <button type="submit" disabled={submitting} className="w-full">
                     {submitting ? "Submitting..." : "Submit Application"}
                   </button>
@@ -319,6 +316,7 @@ export default function CareersPage() {
                     setAppResume(null);
                     if (fileRef.current) fileRef.current.value = "";
                   }}
+                  className="flex-1"
                 >
                   Clear
                 </Button>
