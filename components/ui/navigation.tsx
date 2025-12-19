@@ -1,4 +1,4 @@
- /*"use client";
+"use client";
 
 import Link from "next/link";
 import * as React from "react";
@@ -27,232 +27,7 @@ interface MenuItem {
   title: string;
   href?: string;
   isLink?: boolean;
-  content?: ReactNode;
-}
-
-interface NavigationProps {
-  menuItems?: MenuItem[];
-  components?: ComponentItem[];
-  logo?: ReactNode;
-  logoTitle?: string;
-  logoDescription?: string;
-  logoHref?: string;
-  introItems?: {
-    title: string;
-    href: string;
-    description: string;
-  }[];
-}
-
-export default function Navigation({
-  menuItems = [
-    {
-      title: "Home",
-      isLink: true,
-      href: "/",
-    },
-    {
-      title: "About",
-      isLink: true,
-      href: "/about",
-    },
-    {
-      title: "Services",
-      isLink: true,
-      href: "/services",
-    },
-    {
-      title: "Contact",
-      isLink: true,
-      href: "/contact",
-    },
-    {
-      title: "Components",
-      content: "components",
-    },
-  ],
-  components = [
-    {
-      title: "Alert Dialog",
-      href: "/docs/primitives/alert-dialog",
-      description:
-        "A modal dialog that interrupts the user with important content and expects a response.",
-    },
-    {
-      title: "Hover Card",
-      href: "/docs/primitives/hover-card",
-      description:
-        "For sighted users to preview content available behind a link.",
-    },
-    {
-      title: "Progress",
-      href: "/docs/primitives/progress",
-      description:
-        "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-    },
-    {
-      title: "Scroll-area",
-      href: "/docs/primitives/scroll-area",
-      description: "Visually or semantically separates content.",
-    },
-    {
-      title: "Tabs",
-      href: "/docs/primitives/tabs",
-      description:
-        "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-    },
-    {
-      title: "Tooltip",
-      href: "/docs/primitives/tooltip",
-      description:
-        "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-    },
-  ],
-  logo = <LaunchUI />,
-  logoTitle = "Launch UI",
-  logoDescription = "Landing page template built with React, Shadcn/ui and Tailwind that you can copy/paste into your project.",
-  logoHref = "https://www.launchuicomponents.com/",
-  introItems = [
-    {
-      title: "Introduction",
-      href: "https://www.launchuicomponents.com/",
-      description:
-        "Re-usable components built using Radix UI and Tailwind CSS.",
-    },
-    {
-      title: "Installation",
-      href: "https://www.launchuicomponents.com/",
-      description: "How to install dependencies and structure your app.",
-    },
-    {
-      title: "Typography",
-      href: "https://www.launchuicomponents.com/",
-      description: "Styles for headings, paragraphs, lists...etc",
-    },
-  ],
-}: NavigationProps) {
-  return (
-    <NavigationMenu className="hidden md:flex">
-      <NavigationMenuList>
-        {menuItems.map((item, index) => (
-          <NavigationMenuItem key={index}>
-            {item.isLink ? (
-              <NavigationMenuLink
-                className={navigationMenuTriggerStyle()}
-                asChild
-              >
-                <Link href={item.href || ""}>{item.title}</Link>
-              </NavigationMenuLink>
-            ) : (
-              <>
-                <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  {item.content === "default" ? (
-                    <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <a
-                            className="from-muted/30 to-muted/10 flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
-                            href={logoHref}
-                          >
-                            {logo}
-                            <div className="mt-4 mb-2 text-lg font-medium">
-                              {logoTitle}
-                            </div>
-                            <p className="text-muted-foreground text-sm leading-tight">
-                              {logoDescription}
-                            </p>
-                          </a>
-                        </NavigationMenuLink>
-                      </li>
-                      {introItems.map((intro, i) => (
-                        <ListItem key={i} href={intro.href} title={intro.title}>
-                          {intro.description}
-                        </ListItem>
-                      ))}
-                    </ul>
-                  ) : item.content === "components" ? (
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                      {components.map((component) => (
-                        <ListItem
-                          key={component.title}
-                          title={component.title}
-                          href={component.href}
-                        >
-                          {component.description}
-                        </ListItem>
-                      ))}
-                    </ul>
-                  ) : (
-                    item.content
-                  )}
-                </NavigationMenuContent>
-              </>
-            )}
-          </NavigationMenuItem>
-        ))}
-      </NavigationMenuList>
-    </NavigationMenu>
-  );
-}
-
-function ListItem({
-  className,
-  title,
-  children,
-  ...props
-}: React.ComponentProps<"a"> & { title: string }) {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          data-slot="list-item"
-          className={cn(
-            "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline outline-hidden transition-colors select-none",
-            className,
-          )}
-          {...props}
-        >
-          <div className="text-sm leading-none font-medium">{title}</div>
-          <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-} */
-
-  "use client";
-
-import Link from "next/link";
-import * as React from "react";
-import { ReactNode } from "react";
-
-import { cn } from "@/lib/utils";
-
-import LaunchUI from "../logos/launch-ui";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "./navigation-menu";
-
-interface ComponentItem {
-  title: string;
-  href: string;
-  description: string;
-}
-
-interface MenuItem {
-  title: string;
-  href?: string;
-  isLink?: boolean;
-  content?: ReactNode;
+  content?: ReactNode | string;
 }
 
 interface NavigationProps {
@@ -265,79 +40,27 @@ interface NavigationProps {
   logoTitle?: string;
   logoDescription?: string;
   logoHref?: string;
-  introItems?: {
-    title: string;
-    href: string;
-    description: string;
-  }[];
 }
 
 export default function Navigation({
   menuItems = [
-    {
-      title: "Product",
-      content: "default",
-    },
-    {
-      title: "Services",
-      content: "components",
-    },
+    { title: "Home",  },
+    { title: "Services", content: "components" },
 
-    {
-      title: "Industries",
-      content: "industries", // 👈 UPDATED
-    },
-
-    {
-      title: "Resources",
-      content: "resources",
-    },
-
-    {
-      title: "Company",
-      content: "company",
-    },
+    { title: "Resources", content: "resources" },
+    { title: "Company", content: "company" },
   ],
 
   components = [
-    {
-      title: "Cybersecurity Services",
-      href: "",
-      description: "",
-    },
-    {
-      title: "Cloud & IT Infrastructure",
-      href: "",
-      description: "",
-    },
-    {
-      title: "Digital Transformation",
-      href: "",
-      description: "",
-    },
-    {
-      title: "Automation & RPA",
-      href: "",
-      description: "",
-    },
-    {
-      title: "Data & Analytics",
-      href: "",
-      description: "",
-    },
-    {
-      title: "Managed IT & Security OPs",
-      href: "",
-      description: "",
-    },
-    {
-      title: "GRC & Compilance",
-      href: "",
-      description: "",
-    },
+    { title: "Cybersecurity Services", href: "/solutions/cyber", description: "" },
+    { title: "Cloud & IT Infrastructure", href: "/solutions/cloud/", description: "" },
+    { title: "Digital Transformation", href: "/solutions/digital", description: "" },
+    { title: "Automation & RPA", href: "/solutions/automation", description: "" },
+    { title: "Data & Analytics", href: "/solutions/data-analytics", description: "" },
+    { title: "Managed IT & Security Ops", href: "/solutions/manage", description: "" },
+    { title: "GRC & Compliance", href: "", description: "" },
   ],
 
-  // ⭐⭐⭐ ADDED INDUSTRIES LIST
   industries = [
     { title: "Banking & Finance", href: "", description: "" },
     { title: "Healthcare", href: "", description: "" },
@@ -347,88 +70,29 @@ export default function Navigation({
     { title: "Education & EdTech", href: "", description: "" },
   ],
 
-  // Added Resources List 
   resources = [
-    {
-      title: "Blogs",
-      href: "",
-      description: "",
-    },
-    {
-      title: "Case Studies",
-      href: "",
-      description: "",
-    },
-    {
-      title: "Whitepapers",
-      href: "",
-      description: "",
-    },
-    {
-      title: "Reports",
-      href: "",
-      description: "",
-    },
-    {
-      title: "Press Release",
-      href: "",
-      description: "",
-    },
+    { title: "Blogs", href: "", description: "" },
+    { title: "Case Studies", href: "", description: "" },
+    { title: "Whitepapers", href: "", description: "" },
+    { title: "Reports", href: "", description: "" },
+    { title: "Press Release", href: "", description: "" },
   ],
 
   company = [
-    {
-      title: "About Us",
-      href: "",
-      description: "",
-    },
-    {
-      title: "Leadership",
-      href: "",
-      description: "",
-    },
-    {
-      title: "Careers",
-      href: "",
-      description: "",
-    },
-    {
-      title: "Contact",
-      href: "",
-      description: "",
-    },
-    {
-      title: "Culture",
-      href: "",
-      description: "",
-    },
+    { title: "About Us", href: "/company/about", description: "" },
+    { title: "Leadership", href: "/company/leadership", description: "" },
+    { title: "Careers", href: "/company/careers", description: "" },
+    { title: "Contact", href: "/company/contact", description: "" },
+    { title: "Culture", href: "/company/culture", description: "" },
   ],
 
-  
   logo = <LaunchUI />,
   logoTitle = "",
   logoDescription = "",
   logoHref = "",
-  introItems = [
-    {
-      title: "",
-      href: "",
-      description: "",
-    },
-    {
-      title: "",
-      href: "",
-      description: "",
-    },
-    {
-      title: "",
-      href: "",
-      description: "",
-    },
-  ],
 }: NavigationProps) {
   return (
-    <NavigationMenu className="hidden md:flex ml-auto justify-end pr-6">
+    <NavigationMenu viewport={false}>
       <NavigationMenuList>
         {menuItems.map((item, index) => (
           <NavigationMenuItem key={index}>
@@ -442,47 +106,57 @@ export default function Navigation({
             ) : (
               <>
                 <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
-                <NavigationMenuContent  >
-                  {item.content === "default" ? (
-                    <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <a
-                            className="from-muted/30 to-muted/10 flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
-                            href={logoHref}
+
+                <NavigationMenuContent>
+                  {/* ================= SERVICES ================= */}
+                  {item.content === "components" ? (
+                    <div className="flex w-[780px] gap-8 p-6">
+                      {/* LEFT: SERVICES LIST */}
+                      <ul className="space-y-1 list-none p-0">
+                        {components.map((component) => (
+                          <ListItem
+                            key={component.title}
+                            title={component.title}
+                            href={component.href}
+                            className="py-2"
                           >
-                            {logo}
-                            <div className="mt-4 mb-2 text-lg font-medium">
-                              {logoTitle}
-                            </div>
-                            <p className="text-muted-foreground text-sm leading-tight">
-                              {logoDescription}
-                            </p>
-                          </a>
-                        </NavigationMenuLink>
-                      </li>
-                      {introItems.map((intro, i) => (
-                        <ListItem key={i} href={intro.href} title={intro.title}>
-                          {intro.description}
-                        </ListItem>
-                      ))}
-                    </ul>
-                  ) : item.content === "components" ? (
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols- lg:w-[600px]">
-                      {components.map((component) => (
-                        <ListItem
-                          key={component.title}
-                          title={component.title}
-                          href={component.href}
+                            {component.description}
+                          </ListItem>
+                        ))}
+
+                        <li className="pt-2  pl-4">
+                          <Link
+                            href="/services"
+                            className="text-sm font-medium text-primary hover:underline"
+                          >
+                            All Services →
+                          </Link>
+                        </li>
+                      </ul>
+
+
+                      {/* RIGHT: INFO CARD */}
+                      <div className="w-[220px] rounded-xl bg-gradient-to-b from-slate-900 to-slate-800 p-6 text-white">
+                        <h4 className="text-lg font-semibold">
+                          Need Guidance?
+                        </h4>
+
+                        <p className="mt-2 text-sm text-slate-300">
+                          Our experts can help design the right security
+                          architecture for your needs
+                        </p>
+
+                        <Link
+                          href="/contact"
+                          className="mt-8 block rounded-xl bg-blue-600 py-3 text-center text-sm font-semibold text-white transition hover:bg-blue-700"
                         >
-                          {component.description}
-                        </ListItem>
-                      ))}
-                    </ul>
+                          Book Consultation
+                        </Link>
+                      </div>
+                    </div>
 
-                  ) : item.content === "industries" ? ( // ⭐⭐⭐ ADDED BLOCK
-                    <ul className="grid w-[150px] gap-0.5 p-3 md:w-[150px] md:grid-cols-1 lg:w-[200px]">
-
+                  ) : item.content === "industries" ? (
+                    <ul className="grid w-[220px] gap-1 p-4">
                       {industries.map((industry) => (
                         <ListItem
                           key={industry.title}
@@ -495,15 +169,16 @@ export default function Navigation({
                     </ul>
 
                   ) : item.content === "resources" ? (
-                   <ul className="grid w-[150px] gap-0.5 p-3 md:w-[150px] md:grid-cols-1 lg:w-[200px]">
+                    <ul className="grid w-[220px] gap-1 p-4">
                       {resources.map((r) => (
                         <ListItem key={r.title} title={r.title} href={r.href}>
                           {r.description}
                         </ListItem>
                       ))}
                     </ul>
+
                   ) : item.content === "company" ? (
-                   <ul className="grid w-[150px] gap-0.5 p-3 md:w-[150px] md:grid-cols-1 lg:w-[200px]">
+                    <ul className="grid w-[220px] gap-1 p-4">
                       {company.map((c) => (
                         <ListItem key={c.title} title={c.title} href={c.href}>
                           {c.description}
@@ -533,17 +208,16 @@ function ListItem({
     <li>
       <NavigationMenuLink asChild>
         <a
-          data-slot="list-item"
           className={cn(
-            "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline outline-hidden transition-colors select-none",
+            "block rounded-md px-3 py-2 text-sm no-underline transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
           )}
           {...props}
         >
-          <div className="text-sm leading-none font-medium">{title}</div>
-          <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
-            {children}
-          </p>
+          <div className="font-medium">{title}</div>
+          {children && (
+            <p className="text-xs text-muted-foreground">{children}</p>
+          )}
         </a>
       </NavigationMenuLink>
     </li>

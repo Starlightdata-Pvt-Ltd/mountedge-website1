@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "@/components/sections/navbar/default";
-import FooterSection from "@/components/sections/footer/default";
 import Hero from "@/components/sections/hero/default";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
@@ -12,7 +10,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <Navbar />
+
       <Hero
         title={"Contact Us"}
         description={"Get in touch — we’d love to hear about your project."}
@@ -96,8 +94,9 @@ export default function ContactPage() {
           </div>
         </div>
       </Section>
-
-      <FooterSection />
     </>
+
+
+
   );
 }
