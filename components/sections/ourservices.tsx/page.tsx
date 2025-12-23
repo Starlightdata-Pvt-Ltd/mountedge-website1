@@ -1,11 +1,13 @@
-// components/OurServices.tsx
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
 
 type Service = {
   title: string;
   desc: string;
   points: string[];
-  color?: string; // accent color for the small icon badge
+  color?: string;
 };
 
 const SERVICES: Service[] = [
@@ -84,11 +86,17 @@ const SERVICES: Service[] = [
 
 export default function OurServices() {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-white py-24">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
-        {/* header */}
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="inline-block px-3 py-1 rounded-full  bg-sky-600 text-white text-sm font-medium hover:bg-sky-700 transition ">
+        {/* HEADER */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="text-center max-w-3xl mx-auto"
+        >
+          <span className="inline-block px-3 py-1 rounded-full bg-sky-600 text-white text-sm font-medium">
             Full-Stack Services
           </span>
 
@@ -100,12 +108,12 @@ export default function OurServices() {
             Comprehensive service offerings spanning cybersecurity, cloud infrastructure, digital
             transformation, and managed operations.
           </p>
-        </div>
+        </motion.div>
 
-        {/* grid */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {SERVICES.map((s) => (
-            <ServiceCard key={s.title} {...s} />
+        {/* GRID */}
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {SERVICES.map((s, i) => (
+            <ServiceCard key={s.title} {...s} index={i} />
           ))}
         </div>
       </div>
@@ -113,52 +121,68 @@ export default function OurServices() {
   );
 }
 
-/* ---------------- Reusable Service Card ---------------- */
-function ServiceCard({ title, desc, points, color = "text-sky-600" }: Service) {
+/* ---------------- Animated Service Card ---------------- */
+function ServiceCard({
+  title,
+  desc,
+  points,
+  color = "text-sky-600",
+  index,
+}: Service & { index: number }) {
   return (
-    <article
-      className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm hover:shadow-lg transition-shadow duration-150"
+    <motion.article
+      initial={{ opacity: 0, y: 36 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.08,
+        ease: "easeOut",
+      }}
+      whileHover={{
+        y: -10,
+        boxShadow: "0 25px 60px rgba(15, 23, 42, 0.15)",
+      }}
+      className="group rounded-2xl border border-slate-200 bg-white p-6 md:p-8 transition-all"
       aria-labelledby={title.replace(/\s+/g, "-").toLowerCase()}
     >
-      {/* icon badge */}
       <div className="flex items-start gap-4">
+        {/* ICON */}
         <div
-          className={`flex-none h-12 w-12 rounded-lg inline-flex items-center justify-center bg-slate-50 ring-1 ring-slate-100 ${color}`}
-          aria-hidden
+          className={`flex-none h-12 w-12 rounded-xl inline-flex items-center justify-center
+          bg-slate-50 ring-1 ring-slate-100 transition-all duration-300
+          group-hover:scale-110 group-hover:bg-slate-100 ${color}`}
         >
           <SmallIcon />
         </div>
 
         <div className="min-w-0">
-          <h3 id={title.replace(/\s+/g, "-").toLowerCase()} className="text-lg font-semibold text-slate-900">
-            {title}
-          </h3>
+          <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
 
           <p className="mt-2 text-sm text-slate-600">{desc}</p>
 
           <ul className="mt-4 space-y-2 text-sm text-slate-600">
             {points.map((p) => (
               <li key={p} className="flex items-start gap-3">
-                <span className="mt-1 inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                <span className="truncate">{p}</span>
+                <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
+                <span>{p}</span>
               </li>
             ))}
           </ul>
 
           <a
             href="#"
-            className="mt-6 inline-block text-sm font-medium text-sky-600 hover:underline"
-            aria-label={`Explore ${title}`}
+            className="mt-6 inline-block text-sm font-medium text-sky-600 transition group-hover:translate-x-1"
           >
             Explore Service →
           </a>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
 
-/* small neutral SVG to represent an icon — replace with brand SVGs if you want */
+/* ---------------- Icon ---------------- */
 function SmallIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>

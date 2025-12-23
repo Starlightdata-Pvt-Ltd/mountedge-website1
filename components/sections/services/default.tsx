@@ -38,7 +38,7 @@ const SERVICES = [
     cta: "Explore",
     logo: "consulting",
   },
-  
+
 ];
 
 function Logo({ type }: { type: string }) {
@@ -184,7 +184,19 @@ export default function Services({ className }: { className?: string }) {
           {SERVICES.map((s) => (
             <article
               key={s.id}
-              className="group relative p-6 rounded-2xl border border-white/10 bg-gradient-to-tr from-white/6 to-white/3 backdrop-blur-md shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition duration-300 flex flex-col justify-between overflow-hidden"
+              className="
+  group relative p-6 rounded-2xl
+  border border-white/10
+  bg-gradient-to-tr from-white/6 to-white/3
+  backdrop-blur-md
+  shadow-lg
+  
+
+  hover:shadow-2xl
+  hover:border-blue-500/40
+  flex flex-col justify-between overflow-hidden
+"
+
               aria-labelledby={`service-${s.id}`}
             >
               {/* decorative gradient blur circle */}
@@ -196,16 +208,26 @@ export default function Services({ className }: { className?: string }) {
               <div>
                 <div className="flex items-center justify-between">
                   <div className="inline-flex items-center gap-3">
-                    <div className="h-12 w-12 flex items-center justify-center rounded-lg bg-white/6 border border-white/8 backdrop-blur shadow-sm">
+                    <div className="h-12 w-12 flex items-center justify-center rounded-lg bg-white/6 border border-white/8 backdrop-blur shadow-sm transition-all duration-300
+    group-hover:border-blue-500/50
+    group-hover:bg-blue-500/10">
                       <div className="group-hover:scale-105 transition-transform">
                         <Logo type={s.logo} />
                       </div>
                     </div>
 
                     <div>
-                      <h3 id={`service-${s.id}`} className="text-lg sm:text-xl font-semibold">
+                      <h3
+                        id={`service-${s.id}`}
+                        className="
+    text-lg sm:text-xl font-semibold
+    transition-colors duration-300
+    group-hover:text-blue-500
+  "
+                      >
                         {s.title}
                       </h3>
+
                     </div>
                   </div>
 

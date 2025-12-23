@@ -53,13 +53,14 @@ function Hero() {
             >
               Request Technical Walkthrough
             </a>
-            <a href="relative inline-flex items-center px-5 py-2 rounded-md text-sm font-medium text-slate-900 
-          border border-transparent hover:border-blue-500 transition-all duration-300 overflow-hidden">
-  Download Architecture Whitepaper
-  <span className="absolute inset-0 rounded-md border-2 border-blue-500 scale-0 hover:scale-100 transition-transform duration-300 pointer-events-none"></span>
-</a>
-
-
+            <a
+              href="#"
+              className="relative inline-flex items-center px-5 py-2 rounded-md text-sm font-medium text-slate-900 
+             border border-gray-500 hover:border-blue-500 hover:bg-white hover:text-black
+             transition-all duration-300 overflow-hidden"
+            >
+              Download Architecture Whitepaper
+            </a>
 
           </div>
         </div>
@@ -147,7 +148,8 @@ function WhatMakesUsDifferent() {
     <section className="bg-white border-t border-slate-100">
       <div className="max-w-6xl mx-auto px-6 md:px-8 py-16">
         <div className="text-center">
-          <div className="inline-block text-sm px-3 py-1 rounded-full bg-slate-50 text-slate-600">
+          <div className="inline-block text-sm px-3 bg-blue
+           hover:text-blue-600 py-1 rounded-full bg-slate-50 text-slate-600">
             What Sets Us Apart
           </div>
           <h2 className="mt-6 text-3xl font-semibold">What Makes Us Different</h2>
@@ -160,10 +162,16 @@ function WhatMakesUsDifferent() {
           {features.map((f) => (
             <div
               key={f.title}
-              className="rounded-lg border border-slate-200 p-5 hover:shadow-lg transition-shadow bg-white"
+              className="rounded-lg border border-dark gray p-5 
+                         hover:border-blue-500 hover:shadow-xl hover:-translate-y-2 
+                         transition-all duration-300 bg-white cursor-pointer"
             >
-              <h4 className="text-lg font-semibold text-slate-800">{f.title}</h4>
-              <p className="mt-2 text-lg text-slate-600">{f.desc}</p>
+              <h4 className="text-lg font-semibold text-slate-800 hover:text-blue-600 transition-colors duration-300">
+                {f.title}
+              </h4>
+              <p className="mt-2 text-lg text-slate-600  transition-colors duration-300">
+                {f.desc}
+              </p>
             </div>
           ))}
         </div>
@@ -171,6 +179,7 @@ function WhatMakesUsDifferent() {
     </section>
   );
 }
+
 
 /* --- Small SVG icons --- */
 function DotIcon() {
@@ -288,21 +297,25 @@ function Leadership() {
   ];
 
   return (
-    <section className="py-16 border-t border-slate-100 text-center">
+    <section className="py-16 border-t border-slate-100 text-center px-6 sm:px-12">
       <h2 className="mt-4 text-3xl font-bold">Leadership</h2>
-      <p className="mt-2 text-lg text-slate-600 max-w-xl mx-auto">Led by security engineers and product architects with decades of enterprise experience.</p>
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <p className="mt-2 text-lg text-slate-600 max-w-xl mx-auto">
+        Led by security engineers and product architects with decades of enterprise experience.
+      </p>
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 justify-center">
         {leaders.map((l) => (
-          <div key={l.role} className="rounded-lg border border-slate-200 p-6 text-left">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-sky-600 text-white flex items-center justify-center font-semibold">
-                {l.title}
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold">{l.role}</h4>
-                <p className="mt-2 text-sm text-slate-600">{l.desc}</p>
-              </div>
+          <div 
+            key={l.role} 
+            className="rounded-lg border border-gray-500 p-6 flex flex-col items-center justify-center max-w-xs h-72 mx-auto"
+          >
+            {/* Icon */}
+            <div className="w-16 h-16 rounded-full bg-sky-600 text-white flex items-center justify-center font-semibold text-lg mb-4">
+              {l.title}
             </div>
+            {/* Role */}
+            <h4 className="text-lg font-semibold text-center">{l.role}</h4>
+            {/* Description */}
+            <p className="mt-2 text-sm text-slate-600 text-center">{l.desc}</p>
           </div>
         ))}
       </div>
@@ -310,17 +323,36 @@ function Leadership() {
   );
 }
 
+
+
 /* ---------- Partner ecosystem (buttons grid) ---------- */
 function Partners() {
-  const logos = ["Microsoft Azure", "AWS", "Google Cloud", "Cisco", "Palo Alto Networks", "CrowdStrike", "Okta", "HashiCorp"];
-  return (
-    <section className="py-16 text-center">
-      <h3 className="mt-4 text-3xl font-bold">Partner Ecosystem</h3>
-      <p className="mt-2 text-lg text-slate-600 max-w-2xl mx-auto">MSPL collaborates with leading OEMs, cloud platforms, and technology partners.</p>
+  const logos = [
+    "Microsoft Azure",
+    "CrowdStrike",
+    "Google Cloud",
+    "HashiCorp",
+    "Palo Alto Networks",
+    "AWS",
+    "Okta",
+    "Cisco"
+  ];
 
-      <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-3 justify-items-center">
+  return (
+    <section className="py-16 text-center px-6 sm:px-12">
+      <h3 className="mt-4 text-3xl font-bold">Partner Ecosystem</h3>
+      <p className="mt-2 text-lg text-slate-600 max-w-2xl mx-auto">
+        MSPL collaborates with leading OEMs, cloud platforms, and technology partners.
+      </p>
+
+      <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-6 justify-items-center">
         {logos.map((l) => (
-          <button key={l} className="text-sm px-4 py-2 rounded-md border border-slate-200 text-slate-700 hover:bg-slate-50">
+          <button
+            key={l}
+            className="w-40 h-20 flex items-center justify-center rounded-lg border border-gray-500
+                       text-slate-700 font-medium transition-all duration-300 ease-in-out
+                       hover:border-blue-500 hover:shadow-lg hover:scale-105"
+          >
             {l}
           </button>
         ))}
@@ -328,6 +360,7 @@ function Partners() {
     </section>
   );
 }
+
 
 /* ---------- Our Approach (4 numbered cards) ---------- */
 function Approach() {
@@ -339,9 +372,11 @@ function Approach() {
   ];
 
   return (
-    <section className="py-16 border-t border-slate-100 text-center">
+    <section className="py-16 border-t border-slate-100 text-center px-6 sm:px-12">
       <h3 className="mt-4 text-3xl font-bold">Our Approach</h3>
-      <p className="mt-2 text-lg text-slate-600 max-w-xl mx-auto">A proven methodology for delivering secure, compliant solutions.</p>
+      <p className="mt-2 text-lg text-slate-600 max-w-xl mx-auto">
+        A proven methodology for delivering secure, compliant solutions.
+      </p>
 
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {steps.map((s) => (
@@ -356,7 +391,9 @@ function Approach() {
   );
 }
 
+
 /* ================= SECURITY & COMPLIANCE ================= */
+
 function SecurityCompliance() {
   const items = [
     {
@@ -378,27 +415,21 @@ function SecurityCompliance() {
   ];
 
   return (
-    <section className="py-20 border-t border-slate-100">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-center text-2xl font-bold">
-          Our Commitment to Security & Compliance
-        </h2>
+    <section className="py-16 px-6 sm:px-12">
+      <div className="text-center">
+        <h3 className="mt-4 text-3xl font-bold">Security & Compliance</h3>
+        <p className="mt-2 text-lg text-slate-600 max-w-2xl mx-auto">
+          Our solutions are designed with security and compliance as top priorities.
+        </p>
+      </div>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {items.map((item) => (
-            <div
-              key={item.title}
-              className="rounded-lg border border-slate-200 p-6 bg-white hover:shadow-md transition"
-            >
-              <h3 className="text-lg font-semibold text-slate-800">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-sm text-slate-600">
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </div>
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {items.map((it) => (
+          <div key={it.title} className="rounded-lg border border-slate-200 p-6 text-left">
+            <h4 className="text-lg font-semibold">{it.title}</h4>
+            <p className="mt-2 text-sm text-slate-600">{it.desc}</p>
+          </div>
+        ))}
       </div>
     </section>
   );

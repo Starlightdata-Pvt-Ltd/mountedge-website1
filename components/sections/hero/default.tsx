@@ -385,7 +385,7 @@ export default function Hero({
   variant={button.variant || "default"}
   size="lg"
   asChild
-  className={button.text === "Download Architecture WhitePaper" ? "border-2 border-blue-500 rounded-md hover:bg-blue-50 border-blue-500 transition" : ""}
+  className={button.text === "Download Architecture WhitePaper" ? "border-2 border-blue-500 rounded-md hover:bg-blue-50  transition" : ""}
 >
   <a href={button.href}>
     {button.icon}

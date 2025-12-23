@@ -181,43 +181,40 @@ function Methodology() {
 }
 
 
-/* ================= FINAL CTA ================= */
+
 function FinalCTA() {
   return (
-    <section className="py-24 bg-white text-slate-900">
+    <section className="py-24 bg-slate-900 text-white">
       <div className="max-w-4xl mx-auto px-6">
-        <div className="rounded-xl border border-slate-200 p-10 text-center bg-white">
-          
-          <div className="inline-block text-sm px-3 py-1 rounded-full bg-sky-600 text-white text-sm font-medium hover:bg-sky-700 transition">
-            Platform + Services
-          </div>
-
-          <h2 className="mt-4 text-2xl md:text-3xl font-semibold text-slate-900">
-            How Our Services Support the MSPL Platform
+        <div className="rounded-xl border border-white/10 p-10 text-center bg-slate-900">
+          <h2 className="text-2xl font-semibold">
+            Ready to strengthen your enterprise security?
           </h2>
-
-          <p className="mt-4 text-base text-slate-600 max-w-3xl mx-auto">
-            Our services enable seamless implementation, integration, and ongoing management of the MSPL Secure Access Platform—including Zero Trust Browser, MFN, and unified governance layers.
+          <p className="mt-3 text-sm text-slate-300">
+            Partner with MSPL to build a comprehensive Zero Trust security architecture.
           </p>
-
-          <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-slate-600">
-            <span>Platform implementation</span>
-            <span>Identity & policy alignment</span>
-            <span>Security posture modernization</span>
-            <span>Cloud + Zero Trust integration</span>
-          </div>
 
           <div className="mt-8 flex justify-center gap-4 flex-wrap">
             <button className="px-6 py-2 rounded-md bg-sky-600 text-white text-sm font-medium hover:bg-sky-700">
+              Book Consultation
+            </button>
+            <button className="px-6 py-2 rounded-md border border-white/30 text-sm font-medium hover:bg-white/10">
               Explore Secure Access Platform
             </button>
           </div>
 
+          <div className="mt-6 flex justify-center gap-6 text-xs text-slate-400">
+            <span>Engineering-first approach</span>
+            <span>Compliance-ready solutions</span>
+            <span>Proven track record</span>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
+
 
 
 function IndustryExpertise() {

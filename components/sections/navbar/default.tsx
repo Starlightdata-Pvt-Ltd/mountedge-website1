@@ -61,6 +61,7 @@ export default function Navbar({
   homeUrl = "/",
   mobileLinks = [
     { text: "Home", href: "/" },
+     { text: "Products", href: "/products" },
     { text: "Services", href: "/services" },
     { text: "Resources", href: "/resources" },
     { text: "company", href: "/company" },

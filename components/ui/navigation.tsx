@@ -6,7 +6,6 @@ import { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
-import LaunchUI from "../logos/launch-ui";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -45,6 +44,7 @@ interface NavigationProps {
 export default function Navigation({
   menuItems = [
     { title: "Home", content: "home", href: "/", isLink:true }, 
+    { title: "Products", content: "products" },
     { title: "Services", content: "components" },
     { title: "Resources", content: "resources" },
     { title: "Company", content: "company" },
@@ -59,14 +59,6 @@ export default function Navigation({
     { title: "GRC & Compliance", href: "", description: "" },
   ],
 
-  industries = [
-    { title: "Banking & Finance", href: "", description: "" },
-    { title: "Healthcare", href: "", description: "" },
-    { title: "Retail & E-commerce", href: "", description: "" },
-    { title: "Manufacturing", href: "", description: "" },
-    { title: "Telecommunications", href: "", description: "" },
-    { title: "Education & EdTech", href: "", description: "" },
-  ],
 
   resources = [
     { title: "Blogs", href: "", description: "" },
@@ -147,18 +139,7 @@ export default function Navigation({
                       </div>
                     </div>
 
-                  ) : item.content === "industries" ? (
-                    <ul className="grid w-[220px] gap-1 p-4">
-                      {industries.map((industry) => (
-                        <ListItem
-                          key={industry.title}
-                          title={industry.title}
-                          href={industry.href}
-                        >
-                          {industry.description}
-                        </ListItem>
-                      ))}
-                    </ul>
+                
 
                   ) : item.content === "resources" ? (
                     <ul className="grid w-[220px] gap-1 p-4">

@@ -8,7 +8,7 @@ import {
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
 
-export default function PlatformArchitecture () {
+export default function PlatformArchitecture() {
   return (
     <section className="bg-white py-20 px-4">
       <div className="max-w-6xl mx-auto text-center">
@@ -32,9 +32,9 @@ export default function PlatformArchitecture () {
         <div className="mt-14 border border-gray-200 rounded-2xl p-6 sm:p-10 shadow-sm">
           {/* Layers */}
           <div className="space-y-4">
-            <ArchitectureRow title="Control Plane" />
+            <ArchitectureRow title="Control Plane" active/>
             <ArchitectureRow title="Data Plane" active />
-            <ArchitectureRow title="Policy Layer" />
+            <ArchitectureRow title="Policy Layer" active />
           </div>
 
           {/* Divider */}
@@ -117,19 +117,60 @@ function ArchitectureRow({
   );
 }
 
+
 function Pillar({
   icon: Icon,
   title,
   desc,
+  
 }: {
   icon: any;
   title: string;
   desc: string;
 }) {
   return (
-    <div className="rounded-2xl border border-gray-200 p-6 hover:shadow-md transition">
-      <Icon className="h-7 w-7 text-blue-600 mb-4" />
-      <h4 className="font-semibold text-gray-900">{title}</h4>
+    <div
+      className="
+        group
+        rounded-2xl
+        border border-gray-200
+        p-6
+        transition-all duration-300 ease-out
+        hover:-translate-y-2
+        hover:border-blue-500/60
+        hover:shadow-lg
+      "
+    >
+      {/* Icon */}
+      <div
+        className="
+          mb-4
+          inline-flex
+          rounded-full
+          border border-blue-500/40
+          bg-blue-500/10
+          p-3
+          transition-all duration-300 ease-out
+          group-hover:-translate-y-1
+          group-hover:border-blue-500
+        "
+      >
+        <Icon className="h-7 w-7 text-blue-600" />
+      </div>
+
+      {/* Title */}
+      <h4
+        className="
+          font-semibold
+          text-gray-900
+          transition-colors duration-300
+          group-hover:text-indigo-600
+        "
+      >
+        {title}
+      </h4>
+
+      {/* Description */}
       <p className="mt-2 text-sm text-gray-600">{desc}</p>
     </div>
   );
