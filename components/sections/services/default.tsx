@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 
@@ -38,7 +40,6 @@ const SERVICES = [
     cta: "Explore",
     logo: "consulting",
   },
-
 ];
 
 function Logo({ type }: { type: string }) {
@@ -164,116 +165,174 @@ function Logo({ type }: { type: string }) {
 }
 
 export default function Services({ className }: { className?: string }) {
+  const ACTIVE_ID = "cyber"; // default active card
+
   return (
-    <Section className={cn("py-16 sm:py-20", className)}>
-      <div className="max-w-container mx-auto px-4">
-        <div className="mb-10 text-center">
-          <p className="text-sm font-semibold uppercase text-muted-foreground tracking-wider">
-            Enterprise  Services
+    <Section
+      className={cn(
+        "relative bg-white py-16 sm:py-20 overflow-hidden rounded-2xl border border-gray-100",
+        className
+      )}
+    >
+      {/* Blue radial glow + subtle grid texture (background accents) */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        {/* main blue glow */}
+        <div
+          className="absolute left-1/2 -translate-x-1/2 -top-36 w-[900px] h-[420px] rounded-full blur-[84px] opacity-70"
+          style={{
+            background:
+              "radial-gradient(circle at 40% 30%, rgba(11,110,255,0.14), rgba(11,110,255,0.06) 35%, transparent 60%)",
+          }}
+        />
+        {/* secondary soft glow on right */}
+        <div
+          className="absolute -right-24 top-12 w-56 h-56 rounded-full blur-3xl opacity-8"
+          style={{
+            background:
+              "radial-gradient(circle at center, rgba(43,176,255,0.12), transparent 60%)",
+          }}
+        />
+
+        {/* faint grid texture for depth */}
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(15,23,42,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(15,23,42,0.03) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+      </div>
+
+      <div className="max-w-container mx-auto px-4 relative z-10">
+        <div className="mb-10 text-center relative">
+          {/* blue texture directly behind heading */}
+          <div
+            aria-hidden
+            className="absolute left-1/2 -translate-x-1/2 -top-6 w-[520px] h-[120px] rounded-full blur-3xl opacity-60"
+            style={{
+              background:
+                "radial-gradient(circle at 30% 40%, rgba(11,110,255,0.12), rgba(11,110,255,0.05) 35%, transparent 70%)",
+              zIndex: 0,
+            }}
+          />
+
+          <p className="relative z-10 text-sm font-semibold uppercase text-muted-foreground tracking-wider">
+            Enterprise Services
           </p>
-          <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
+
+          <h2 className="relative z-10 mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-gray-900">
             Comprehensive services to secure and scale your business
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
+
+          <p className="relative z-10 mt-4 max-w-2xl mx-auto text-muted-foreground">
             We combine best-in-class technology, hands-on expertise and operational
             processes to deliver outcomes—resilience, compliance, and velocity.
           </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {SERVICES.map((s) => (
-            <article
-              key={s.id}
-              className="
-  group relative p-6 rounded-2xl
-  border border-white/10
-  bg-gradient-to-tr from-white/6 to-white/3
-  backdrop-blur-md
-  shadow-lg
-  
+          {SERVICES.map((s) => {
+            const isActive = s.id === ACTIVE_ID;
 
-  hover:shadow-2xl
-  hover:border-blue-500/40
-  flex flex-col justify-between overflow-hidden
-"
+            return (
+              <article
+                key={s.id}
+                className={cn(
+                  "group relative p-6 rounded-2xl border bg-white/95 backdrop-blur-md shadow-lg transform transition duration-300 ease-out flex flex-col justify-between overflow-hidden",
+                  isActive
+                    ? "border-blue-400 bg-white shadow-2xl scale-[1.01]"
+                    : "border border-white/10 hover:shadow-2xl hover:border-blue-500/30"
+                )}
+                aria-labelledby={`service-${s.id}`}
+                aria-current={isActive ? "true" : undefined}
+              >
+                {/* decorative soft accent circle for each card */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-8 -top-8 w-36 h-36 rounded-full opacity-10 blur-3xl"
+                  style={{
+                    background:
+                      "radial-gradient(circle at center, rgba(11,110,255,0.10), transparent 60%)",
+                  }}
+                />
 
-              aria-labelledby={`service-${s.id}`}
-            >
-              {/* decorative gradient blur circle */}
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -right-10 -top-10 w-44 h-44 rounded-full opacity-10 blur-3xl bg-gradient-to-tr from-primary to-secondary"
-              />
+                <div>
+                  <div className="flex items-center justify-between">
+                    <div className="inline-flex items-center gap-3">
+                      <div
+                        className={cn(
+                          "h-12 w-12 flex items-center justify-center rounded-lg bg-white/60 border border-gray-100 backdrop-blur-sm shadow-sm transition-all duration-300"
+                        )}
+                        style={{
+                          borderColor: isActive ? "rgba(59,130,246,0.45)" : undefined,
+                          background: isActive
+                            ? "linear-gradient(135deg, rgba(11,110,255,0.04), rgba(11,110,255,0.02))"
+                            : undefined,
+                        }}
+                      >
+                        <div className="group-hover:scale-105 transition-transform">
+                          <Logo type={s.logo} />
+                        </div>
+                      </div>
 
-              <div>
-                <div className="flex items-center justify-between">
-                  <div className="inline-flex items-center gap-3">
-                    <div className="h-12 w-12 flex items-center justify-center rounded-lg bg-white/6 border border-white/8 backdrop-blur shadow-sm transition-all duration-300
-    group-hover:border-blue-500/50
-    group-hover:bg-blue-500/10">
-                      <div className="group-hover:scale-105 transition-transform">
-                        <Logo type={s.logo} />
+                      <div>
+                        <h3
+                          id={`service-${s.id}`}
+                          className={cn(
+                            "text-lg sm:text-xl font-semibold transition-colors duration-300",
+                            isActive ? "text-blue-600" : "text-gray-900 group-hover:text-blue-600"
+                          )}
+                        >
+                          {s.title}
+                        </h3>
                       </div>
                     </div>
 
-                    <div>
-                      <h3
-                        id={`service-${s.id}`}
-                        className="
-    text-lg sm:text-xl font-semibold
-    transition-colors duration-300
-    group-hover:text-blue-500
-  "
-                      >
-                        {s.title}
-                      </h3>
-
-                    </div>
+                    {/* subtle corner tag (kept empty intentionally, can be used for badges) */}
+                    <div className="hidden sm:flex items-center gap-2 px-2 py-1 rounded-full text-[11px] font-medium bg-white/40 border border-gray-100" />
                   </div>
 
-                  {/* small badge (kept empty as in original) */}
-                  <div className="hidden sm:flex items-center gap-2 px-2 py-1 rounded-full text-[11px] font-medium bg-gradient-to-r from-white/4 to-white/6 border border-white/6">
-                  </div>
+                  <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
                 </div>
 
-                <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-              </div>
+                <div className="mt-6 flex items-center justify-between">
+                  <Button asChild size="sm" className="group inline-flex items-center gap-2">
+                    <Link
+                      href={`/solutions/${s.id}`}
+                      aria-label={`${s.title} - ${s.cta}`}
+                      className="inline-flex items-center gap-2"
+                    >
+                      <span className="text-sm">{s.cta}</span>
+                      <span className="transform transition-transform group-hover:translate-x-1">→</span>
+                    </Link>
+                  </Button>
 
-              <div className="mt-6 flex items-center justify-between">
-                <Button asChild size="sm" className="group inline-flex items-center gap-2">
-                  <Link
-                    href={`/solutions/${s.id}`}
-                    aria-label={`${s.title} - ${s.cta}`}
-                    className="inline-flex items-center gap-2"
-                  >
-                    <span className="text-sm">{s.cta}</span>
-                    <span className="transform transition-transform group-hover:translate-x-1">
-                      →
-                    </span>
-                  </Link>
-                </Button>
-
-                <div className="text-xs text-muted-foreground">Trusted partners</div>
-              </div>
-            </article>
-          ))}
+                  <div className="text-xs text-muted-foreground">Trusted partners</div>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
-        <div className="mt-12 rounded-2xl border border-white/10 bg-gradient-to-r from-white/5 to-white/3 backdrop-blur-md p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
+        <div className="mt-12 rounded-2xl border border-gray-100 bg-white/95 backdrop-blur-md p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
           <div className="flex-1">
-            <h4 className="text-lg font-semibold">Need a tailored solution?</h4>
+            <h4 className="text-lg font-semibold text-gray-900">Need a tailored solution?</h4>
             <p className="mt-2 text-muted-foreground">
               Request a technical demo or a security posture assessment and we'll
               prepare a customised plan for your organisation.
             </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {/* micro partner logos (SVG circles) */}
+            <div className="mt-3 flex flex-wrap gap-3 items-center">
               <div className="flex items-center gap-2">
-                <span className="h-8 w-8 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white text-xs font-semibold">M</span>
+                <span className="h-8 w-8 rounded-full bg-gradient-to-tr from-blue-500 to-sky-400 flex items-center justify-center text-white text-xs font-semibold">
+                  M
+                </span>
                 <span className="text-sm text-muted-foreground">MountEdge</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="h-8 w-8 rounded-full bg-gradient-to-tr from-indigo-400 to-teal-400 flex items-center justify-center text-white text-xs font-semibold">A</span>
+                <span className="h-8 w-8 rounded-full bg-gradient-to-tr from-indigo-400 to-teal-400 flex items-center justify-center text-white text-xs font-semibold">
+                  A
+                </span>
                 <span className="text-sm text-muted-foreground">Auth</span>
               </div>
             </div>
@@ -282,7 +341,9 @@ export default function Services({ className }: { className?: string }) {
           <div className="flex-shrink-0">
             <div className="flex gap-3">
               <Button asChild>
-                <a href="#" className="shadow-sm">Request Technical Demo</a>
+                <a href="#" className="shadow-sm">
+                  Request Technical Demo
+                </a>
               </Button>
               <Button variant="ghost" asChild>
                 <a href="#">Contact Sales</a>

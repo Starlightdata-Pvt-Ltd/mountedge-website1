@@ -1,112 +1,266 @@
-// app/page.tsx
+"use client";
+
 import React from "react";
+import { motion, Variants } from "framer-motion";
+import { Code2, ShieldCheck, Zap, Users } from "lucide-react";
+
+
+/*
+  Animated About page (single-file). 
+  - Uses framer-motion for entrance + subtle hover animations
+  - SectionWrapper handles per-section background color + reveal stagger
+  - Keep this file as app/page.tsx (or replace existing file)
+
+  INSTALL: npm i framer-motion
+*/
+
+
+const cardContainerVariants: Variants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const titleVariants: Variants = {
+  hidden: { opacity: 0, y: 6, scale: 0.995 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.45,
+      ease: "easeInOut",
+    },
+  },
+};
+const container: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.2, 0.8, 0.2, 1] } },
+};
+
+const heroBgGradient = "bg-gradient-to-br from-sky-50 to-white";
 
 export default function HomePage() {
   return (
-    <main className="bg-white text-slate-900 antialiased">
+    <main className="text-slate-900 antialiased selection:bg-sky-200 selection:text-slate-900">
       <Hero />
-      <WhoWeAre />
-      <InfoCards />
-      <WhatMakesUsDifferent />
-      <Expertise />
-      <Leadership />
-      <Partners />
-      <Approach />
-      <SecurityCompliance />
-      <CultureValues />
-      <JoinTeam />
-      <FinalCTA />
+
+      <SectionWrapper id="who" bg="white">
+        <WhoWeAre />
+      </SectionWrapper>
+
+      <SectionWrapper id="info" bg="slate-50">
+        <InfoCards />
+      </SectionWrapper>
+
+      <SectionWrapper id="different" bg="white">
+        <WhatMakesUsDifferent />
+      </SectionWrapper>
+
+      <SectionWrapper id="expertise" bg="slate-50">
+        <Expertise />
+      </SectionWrapper>
+
+      <SectionWrapper id="leadership" bg="white">
+        <Leadership />
+      </SectionWrapper>
+
+      <SectionWrapper id="partners" bg="slate-50">
+        <Partners />
+      </SectionWrapper>
+
+      <SectionWrapper id="approach" bg="white">
+        <Approach />
+      </SectionWrapper>
+
+      <SectionWrapper id="security" bg="slate-50">
+        <SecurityCompliance />
+      </SectionWrapper>
+
+      <SectionWrapper id="culture" bg="white">
+        <CultureValues />
+      </SectionWrapper>
+
+      <SectionWrapper id="join" bg="slate-50">
+        <JoinTeam />
+      </SectionWrapper>
+
+      <SectionWrapper id="final" bg="slate-900 text-white py-24">
+        <FinalCTA />
+      </SectionWrapper>
 
       <footer className="py-10 text-center text-sm text-slate-500">© 2025 MSPL. All rights reserved.</footer>
     </main>
   );
 }
 
+/* ---------- Section wrapper with reveal animation + bg handling ---------- */
+function SectionWrapper({
+  children,
+  id,
+  bg = "white",
+}: {
+  children: React.ReactNode;
+  id?: string;
+  bg?: string;
+}) {
+  // allows passing simple tailwind bg names like "white", "slate-50", or complex strings
+  const bgClass = bg.includes(" ") ? bg : `bg-${bg}`;
+
+  return (
+    <motion.section
+      id={id}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.12 }}
+      variants={container}
+      className={`${bgClass} py-16 transition-colors duration-700`}
+    >
+      <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-12">
+        <motion.div variants={fadeUp}>{children}</motion.div>
+      </div>
+    </motion.section>
+  );
+}
+
+/* ----------------------------- Hero ----------------------------- */
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      {/* subtle decorative circle */}
-      <div className="absolute right-0 top-10 -z-10 opacity-10 pointer-events-none w-80 h-80 rounded-full bg-gradient-to-br from-sky-200 to-indigo-200 hidden lg:block" />
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className={`relative overflow-hidden ${heroBgGradient} py-20 lg:py-28`}
+    >
+      {/* decorative bubble */}
+      <motion.div
+        animate={{ x: [0, -12, 0], y: [0, -6, 0] }}
+        transition={{ duration: 8, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
+        className="absolute right-0 top-10 -z-10 opacity-20 pointer-events-none w-80 h-80 rounded-full bg-gradient-to-br from-sky-200 to-indigo-200 hidden lg:block"
+      />
 
-      <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-12 py-20 lg:py-28">
-        <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+      <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-12">
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="inline-flex items-center gap-2 px-5 py-1 rounded-full 
+             bg-sky-50 border border-sky-200 
+             text-sm text-sky-700 font-medium mb-5"
+          >
+            <span className="w-2 h-2 rounded-full bg-sky-500"></span>
+            About Us
+          </motion.div>
+
+
+          <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
             Engineering the Future of
             <span className="block text-sky-600">Secure Access</span>
-          </h1>
+          </motion.h1>
 
-          <p className="mt-6 text-sm md:text-base text-slate-600">
+          <motion.p variants={fadeUp} className="mt-6 text-sm md:text-base text-slate-600">
             A unified, Zero Trust-driven security ecosystem built for high-compliance enterprises by a team
             with 50+ years collective experience in cybersecurity and enterprise IT.
-          </p>
+          </motion.p>
 
-          <ul className="mt-6 flex flex-wrap justify-center gap-6 text-xs text-slate-500">
+          <motion.ul variants={fadeUp} className="mt-6 flex flex-wrap justify-center gap-6 text-xs text-slate-500">
             <li>50+ Years Collective Expertise</li>
             <li>Engineering-First Approach</li>
             <li>10+ OEM Partners</li>
-          </ul>
+          </motion.ul>
 
-          <div className="mt-8 flex justify-center gap-4 flex-wrap">
-            <a
+          <motion.div variants={fadeUp} className="mt-8 flex justify-center gap-4 flex-wrap">
+            <motion.a
+              whileHover={{ scale: 1.03 }}
               className="inline-flex items-center px-5 py-2 rounded-md bg-sky-600 text-white text-sm font-medium shadow hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-300"
               href="#request"
             >
               Request Technical Walkthrough
-            </a>
-            <a
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              className="relative inline-flex items-center px-5 py-2 rounded-md text-sm font-medium text-slate-900 border border-gray-300 hover:border-blue-500 hover:bg-white hover:text-black transition-all duration-300 overflow-hidden"
               href="#"
-              className="relative inline-flex items-center px-5 py-2 rounded-md text-sm font-medium text-slate-900 
-             border border-gray-500 hover:border-blue-500 hover:bg-white hover:text-black
-             transition-all duration-300 overflow-hidden"
             >
               Download Architecture Whitepaper
-            </a>
-
-          </div>
-        </div>
+            </motion.a>
+          </motion.div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
+/* ----------------------------- Who We Are ----------------------------- */
 function WhoWeAre() {
   return (
-    <section className="bg-white border-t border-b border-slate-100">
-      <div className="max-w-5xl mx-auto px-6 md:px-8 py-16 text-center">
-        <h2 className="text-2xl md:text-3xl font-bold text-slate-700">Who We Are</h2>
-        <p className="mt-4 text-slate-600 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
-          MSPL builds a modular cybersecurity ecosystem—Zero Trust Browser, Micro Firewall Network, and Secure
-          Access Suite—designed to unify secure access across users, devices, apps, and networks. Our
-          engineering-led services strengthen adoption, governance, and long-term resilience across cloud, cyber,
-          and IT environments.
-        </p>
-        <a className="mt-6 inline-block text-sky-600 text-base font-medium hover:underline">
-          See Product Suite →
-        </a>
+    <div className="text-center">
+      <motion.div
+  whileHover={{ scale: 1.04 }}
+  className="inline-block text-sm px-4 py-1.5 
+             rounded-full 
+             bg-gradient-to-r from-sky-700 to-blue-700
+             text-white 
+             font-medium
+             shadow-md"
+>
+  Who We Are
+</motion.div>
 
-      </div>
-    </section>
+
+      <motion.h2 className="mt-6 text-2xl md:text-3xl font-bold text-slate-700">Who We Are</motion.h2>
+      <motion.p className="mt-4 text-slate-600 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
+        MSPL builds a modular cybersecurity ecosystem—Zero Trust Browser, Micro Firewall Network, and Secure
+        Access Suite—designed to unify secure access across users, devices, apps, and networks. Our
+        engineering-led services strengthen adoption, governance, and long-term resilience across cloud, cyber,
+        and IT environments.
+      </motion.p>
+
+      <motion.a whileHover={{ scale: 1.02 }} className="mt-6 inline-block text-sky-600 text-base font-medium hover:underline">
+        See Product Suite →
+      </motion.a>
+    </div>
   );
 }
 
-function InfoCards() {
+/* ----------------------------- Info Cards ----------------------------- */
+
+ function InfoCards() {
   return (
-    <section className="max-w-6xl mx-auto px-6 md:px-8 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
-        <Card title="Vision" icon={<DotIcon />}>
-          A secure access ecosystem engineered for modern, compliance-heavy enterprises.
-        </Card>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
+      <AnimatedCard title="Vision" icon={<DotIcon />}>
+        A secure access ecosystem engineered for modern, compliance-heavy enterprises.engineered for modern, compliance-heavy enterprises.
+      </AnimatedCard>
 
-        <Card title="Mission" icon={<LockIcon />}>
-          Build products and solutions that unify Zero Trust enforcement, strengthen governance, and simplify
-          security at scale.
-        </Card>
-      </div>
-    </section>
+      <AnimatedCard title="Mission" icon={<LockIcon />}>
+        Build products and solutions that unify Zero Trust enforcement, strengthen governance, and simplify
+        security at scale.
+      </AnimatedCard>
+    </div>
   );
 }
 
-function Card({
+function AnimatedCard({
   title,
   children,
   icon,
@@ -116,23 +270,48 @@ function Card({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow duration-150 bg-white">
-      <div className="flex items-start gap-4">
-        <div className="flex-none">{icon}</div>
-        <div>
-          <h3 className="text-lg md:text-xl font-semibold text-slate-800">
-            {title}
-          </h3>
+    <motion.div
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.18 }}
+  variants={cardContainerVariants}
+  className="rounded-2xl p-[1.5px] bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-600"
+>
+  {/* Inner card fully covers background → border-only look */}
+  <motion.div
+    whileHover={{ scale: 1.01 }}
+    transition={{ type: "spring", stiffness: 260, damping: 26 }}
+    className="rounded-xl bg-white p-6 shadow-sm hover:shadow-md hover:bg-blue-50 transition-all duration-200"
+  >
+    <div className="flex items-start gap-4">
+      <div className="flex-none">{icon}</div>
 
-          <p className="mt-2 text-base md:text-lg text-slate-600 leading-relaxed">
-            {children}
-          </p>
+      <div>
+        <motion.h3
+          variants={titleVariants}
+          className="text-lg md:text-xl font-semibold text-slate-800"
+        >
+          {title}
+        </motion.h3>
 
-        </div>
+        <p className="mt-2 text-base md:text-lg text-slate-600 leading-relaxed">
+          {children}
+        </p>
       </div>
     </div>
+  </motion.div>
+</motion.div>
+
   );
 }
+
+/* Notes:
+ - Outer element creates a visible gradient border using a 1px padding (p-[1px]).
+ - The inner element stays white by default and transitions to a very light blue/purple gradient on hover
+   for a premium, subtle effect that works on a white page.
+ - Rounded corners use rounded-2xl (outer) / rounded-xl (inner) so the gradient border shows neatly.
+ - Transition and shadow are added for a smooth, elevated hover effect.
+*/
 
 function WhatMakesUsDifferent() {
   const features = [
@@ -145,96 +324,65 @@ function WhatMakesUsDifferent() {
   ];
 
   return (
-    <section className="bg-white border-t border-slate-100">
-      <div className="max-w-6xl mx-auto px-6 md:px-8 py-16">
-        <div className="text-center">
-          <div className="inline-block text-sm px-3 bg-blue
-           hover:text-blue-600 py-1 rounded-full bg-slate-50 text-slate-600">
-            What Sets Us Apart
-          </div>
-          <h2 className="mt-6 text-3xl font-semibold">What Makes Us Different</h2>
-          <p className="mt-3 text-lg text-slate-600 max-w-2xl mx-auto">
-            Our philosophy is rooted in deep engineering expertise and security-first thinking.
-          </p>
-        </div>
+    <div>
+      <div className="text-center">
+        <motion.div
+          whileHover={{ scale: 1.04 }}
+          className="inline-block text-sm px-4 py-1.5 
+             rounded-full 
+             bg-gradient-to-r from-sky-700 to-blue-700
+             text-white 
+             font-medium
+             shadow-md
+             transition-transform"
+        >
+          What Sets Us Apart
+        </motion.div>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((f) => (
-            <div
-              key={f.title}
-              className="rounded-lg border border-dark gray p-5 
-                         hover:border-blue-500 hover:shadow-xl hover:-translate-y-2 
-                         transition-all duration-300 bg-white cursor-pointer"
-            >
-              <h4 className="text-lg font-semibold text-slate-800 hover:text-blue-600 transition-colors duration-300">
-                {f.title}
-              </h4>
-              <p className="mt-2 text-lg text-slate-600  transition-colors duration-300">
-                {f.desc}
-              </p>
-            </div>
-          ))}
-        </div>
+        <h2 className="mt-6 text-3xl font-semibold">What Makes Us Different</h2>
+        <p className="mt-3 text-lg text-slate-600 max-w-2xl mx-auto">Our philosophy is rooted in deep engineering expertise and security-first thinking.</p>
       </div>
-    </section>
-  );
-}
 
+      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {features.map((f) => (
+         <motion.div
+  key={f.title}
+  initial={{ opacity: 0, scale: 0.97 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  viewport={{ once: true, amount: 0.15 }}
+  whileHover={{
+    borderRadius: 16,
+    background:
+      "linear-gradient(180deg, rgba(240,251,255,0.9), rgba(255,255,255,1))",
+    boxShadow:
+      "0 0 0 1px rgba(34, 48, 238, 0.45), 0 20px 40px rgba(34, 48, 238, 0.18)",
+  }}
+  transition={{ type: "spring", stiffness: 180, damping: 26 }}
+  style={{
+    boxShadow:
+      "0 0 0 1px rgba(34, 34, 238, 0.35), 0 10px 28px rgba(34,211,238,0.12)",
+  }}
+  className="
+    rounded-xl
+    border border-slate-200
+    bg-white
+    p-5
+    transition-all duration-300
+    cursor-pointer
+  "
+>
+  <h4 className="text-lg font-semibold text-slate-800">{f.title}</h4>
+  <p className="mt-2 text-lg text-slate-600">{f.desc}</p>
+</motion.div>
 
-/* --- Small SVG icons --- */
-function DotIcon() {
-  return (
-    <div className="w-11 h-11 rounded-full bg-sky-50 flex items-center justify-center ring-1 ring-sky-100">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <circle cx="12" cy="12" r="6" stroke="#0ea5e9" strokeWidth="1.5" fill="#7dd3fc" />
-      </svg>
-    </div>
-  );
-}
-function LockIcon() {
-  return (
-    <div className="w-11 h-11 rounded-full bg-indigo-50 flex items-center justify-center ring-1 ring-indigo-100">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <rect x="5" y="10" width="14" height="9" rx="1.5" stroke="#4f46e5" strokeWidth="1.5" />
-        <path d="M8 10V8a4 4 0 118 0v2" stroke="#4f46e5" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    </div>
-  );
-}
-
-function SmallCard({ title, children, accent }: { title: string; children: React.ReactNode; accent?: string }) {
-  return (
-    <div className="rounded-xl border border-slate-200 p-6 bg-white shadow-sm">
-      <div className="flex items-start gap-4">
-        <div className="w-12 h-12 rounded-full flex items-center justify-center"
-          style={{ background: accent === "indigo" ? "#eef2ff" : "#ecfeff" }}>
-          {accent === "indigo" ? <EmojiLock /> : <EmojiDot />}
-        </div>
-        <div>
-          <h3 className="text-sm font-semibold">{title}</h3>
-          <p className="mt-2 text-sm text-slate-600">{children}</p>
-        </div>
+        ))}
       </div>
     </div>
   );
 }
 
-function EmojiDot() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="12" cy="12" r="6" fill="#7dd3fc" />
-    </svg>
-  );
-}
-function EmojiLock() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <rect x="5" y="10" width="14" height="9" rx="2" stroke="#6366f1" strokeWidth="1.2" fill="#c7d2fe" />
-    </svg>
-  );
-}
 
-/* ---------- Expertise grid (6 small boxes) ---------- */
+/* ----------------------------- Expertise ----------------------------- */
 function Expertise() {
   const items = [
     { title: "Zero Trust Architecture", subtitle: "Policy, posture, governance", accent: "sky" },
@@ -246,21 +394,39 @@ function Expertise() {
   ];
 
   return (
-    <section className="py-16">
+    <section className="py-8">
       <div className="text-center">
-        <div className="text-sm inline-block px-3 py-1 rounded-full bg-slate-50 text-slate-600">Core Capabilities</div>
+        <motion.div
+  whileHover={{ scale: 1.04 }}
+  className="inline-block text-sm px-4 py-1.5 
+             rounded-full 
+             bg-gradient-to-r from-sky-700 to-blue-700
+             text-white 
+             font-medium
+             shadow-md
+             transition-transform"
+>
+  Core capabilities
+</motion.div>
+
         <h2 className="mt-4 text-3xl font-bold">Our Expertise</h2>
-        <p className="mt-2 text-lg text-slate-600 max-w-2xl mx-auto">
-          Six core capabilities that power our products and services.
-        </p>
+        <p className="mt-2 text-lg text-slate-600 max-w-2xl mx-auto">Six core capabilities that power our products and services.</p>
       </div>
 
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {items.map((it) => (
-          <div key={it.title} className="rounded-lg border border-slate-200 p-5 hover:shadow-lg transition">
+          <motion.div
+            key={it.title}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            whileHover={{ borderRadius: "1rem",
+    boxShadow: "0 12px 28px rgba(73, 37, 235, 0.18)", }}
+            transition={{ type: "spring", stiffness: 250, damping: 20 }}
+            className="rounded-lg border border-slate-200 p-5 hover:shadow-lg transition"
+          >
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-md flex items-center justify-center ring-1"
-                style={{ background: getBg(it.accent), color: "white" }}>
+              <div className="w-10 h-10 rounded-md flex items-center justify-center ring-1" style={{ background: getBg(it.accent), color: "white" }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="6" fill="white" opacity="0.12" /></svg>
               </div>
               <div>
@@ -268,27 +434,14 @@ function Expertise() {
                 <p className="mt-1 text-sm text-slate-500">{it.subtitle}</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
   );
 }
 
-/* color helper for small icon blocks */
-function getBg(accent = "sky") {
-  const map: Record<string, string> = {
-    sky: "#0ea5e9",
-    teal: "#14b8a6",
-    purple: "#8b5cf6",
-    amber: "#f59e0b",
-    emerald: "#10b981",
-    rose: "#f43f5e",
-  };
-  return map[accent] ?? "#0ea5e9";
-}
-
-/* ---------- Leadership (3 profile cards) ---------- */
+/* ----------------------------- Leadership ----------------------------- */
 function Leadership() {
   const leaders = [
     { role: "Founder & CEO", title: "CEO", desc: "30+ years in cybersecurity, cloud and enterprise IT." },
@@ -297,72 +450,88 @@ function Leadership() {
   ];
 
   return (
-    <section className="py-16 border-t border-slate-100 text-center px-6 sm:px-12">
+    <div className="text-center">
       <h2 className="mt-4 text-3xl font-bold">Leadership</h2>
-      <p className="mt-2 text-lg text-slate-600 max-w-xl mx-auto">
-        Led by security engineers and product architects with decades of enterprise experience.
-      </p>
+      <p className="mt-2 text-lg text-slate-600 max-w-xl mx-auto">Led by security engineers and product architects with decades of enterprise experience.</p>
+
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 justify-center">
         {leaders.map((l) => (
-          <div 
-            key={l.role} 
-            className="rounded-lg border border-gray-500 p-6 flex flex-col items-center justify-center max-w-xs h-72 mx-auto"
-          >
-            {/* Icon */}
-            <div className="w-16 h-16 rounded-full bg-sky-600 text-white flex items-center justify-center font-semibold text-lg mb-4">
-              {l.title}
-            </div>
-            {/* Role */}
-            <h4 className="text-lg font-semibold text-center">{l.role}</h4>
-            {/* Description */}
-            <p className="mt-2 text-sm text-slate-600 text-center">{l.desc}</p>
-          </div>
+          <motion.div
+  key={l.role}
+  whileHover={{
+    boxShadow: "0 14px 30px rgba(14, 165, 233, 0.18)",
+    borderColor: "#38bdf8",
+  }}
+  transition={{ type: "spring", stiffness: 200, damping: 28 }}
+  className="
+    group
+    rounded-xl
+    border border-gray-300
+    p-6
+    flex flex-col
+    items-center
+    justify-center
+    max-w-xs
+    h-72
+    mx-auto
+    bg-white
+    transition-all duration-300
+    hover:bg-sky-50
+  "
+>
+  {/* Icon */}
+  <motion.div
+    whileHover={{ scale: 1.06 }}
+    transition={{ type: "spring", stiffness: 260, damping: 20 }}
+    className="
+      w-16 h-16
+      rounded-full
+      bg-sky-600
+      text-white
+      flex items-center
+      justify-center
+      font-semibold
+      text-lg
+      mb-4
+      shadow-sm
+      group-hover:shadow-[0_0_0_6px_rgba(56,189,248,0.18)]
+      transition-all duration-300
+    "
+  >
+    {l.title}
+  </motion.div>
+
+  <h4 className="text-lg font-semibold text-center">{l.role}</h4>
+  <p className="mt-2 text-sm text-slate-600 text-center">{l.desc}</p>
+</motion.div>
+
         ))}
       </div>
-    </section>
+    </div>
   );
 }
 
-
-
-/* ---------- Partner ecosystem (buttons grid) ---------- */
+/* ----------------------------- Partners ----------------------------- */
 function Partners() {
-  const logos = [
-    "Microsoft Azure",
-    "CrowdStrike",
-    "Google Cloud",
-    "HashiCorp",
-    "Palo Alto Networks",
-    "AWS",
-    "Okta",
-    "Cisco"
-  ];
+  const logos = ["Microsoft Azure", "CrowdStrike", "Google Cloud", "HashiCorp", "Palo Alto Networks", "AWS", "Okta", "Cisco"];
 
   return (
-    <section className="py-16 text-center px-6 sm:px-12">
+    <div className="text-center">
       <h3 className="mt-4 text-3xl font-bold">Partner Ecosystem</h3>
-      <p className="mt-2 text-lg text-slate-600 max-w-2xl mx-auto">
-        MSPL collaborates with leading OEMs, cloud platforms, and technology partners.
-      </p>
+      <p className="mt-2 text-lg text-slate-600 max-w-2xl mx-auto">MSPL collaborates with leading OEMs, cloud platforms, and technology partners.</p>
 
       <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-6 justify-items-center">
         {logos.map((l) => (
-          <button
-            key={l}
-            className="w-40 h-20 flex items-center justify-center rounded-lg border border-gray-500
-                       text-slate-700 font-medium transition-all duration-300 ease-in-out
-                       hover:border-blue-500 hover:shadow-lg hover:scale-105"
-          >
+          <motion.button key={l} whileHover={{ scale: 1.03 }} transition={{ type: "spring", stiffness: 260, damping: 24 }} className="w-40 h-20 flex items-center justify-center rounded-lg border border-gray-300 text-slate-700 font-medium transition-all duration-300 ease-in-out bg-white">
             {l}
-          </button>
+          </motion.button>
         ))}
       </div>
-    </section>
+    </div>
   );
 }
 
-
-/* ---------- Our Approach (4 numbered cards) ---------- */
+/* ----------------------------- Approach ----------------------------- */
 function Approach() {
   const steps = [
     { num: "01", title: "Assess", desc: "Deep-dive analysis of security posture, compliance requirements, and business objectives." },
@@ -372,70 +541,171 @@ function Approach() {
   ];
 
   return (
-    <section className="py-16 border-t border-slate-100 text-center px-6 sm:px-12">
+    <div className="text-center">
       <h3 className="mt-4 text-3xl font-bold">Our Approach</h3>
-      <p className="mt-2 text-lg text-slate-600 max-w-xl mx-auto">
-        A proven methodology for delivering secure, compliant solutions.
-      </p>
+      <p className="mt-2 text-lg text-slate-600 max-w-xl mx-auto">A proven methodology for delivering secure, compliant solutions.</p>
 
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {steps.map((s) => (
-          <div key={s.num} className="rounded-lg border border-slate-200 p-6 text-left">
-            <div className="text-slate-700 font-semibold text-lg">{s.num}</div>
-            <h4 className="mt-3 text-lg font-semibold">{s.title}</h4>
-            <p className="mt-2 text-sm text-slate-600">{s.desc}</p>
-          </div>
+          <motion.div
+  key={s.num}
+  initial={{ opacity: 0, scale: 0.97 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  viewport={{ once: true, amount: 0.15 }}
+  whileHover={{
+    borderColor: "#2563eb",
+    boxShadow: "0 14px 32px rgba(37,99,235,0.18)",
+  }}
+  transition={{ type: "spring", stiffness: 200, damping: 26 }}
+  className="
+    rounded-xl
+    border border-slate-200
+    p-6
+    text-left
+    bg-white
+    backdrop-blur-sm
+    transition-all duration-300
+    hover:bg-blue-50
+  "
+>
+  {/* Number synced with border color */}
+  <div className="
+    text-blue-600
+    font-semibold
+    text-lg
+    tracking-wide
+  ">
+    {s.num}
+  </div>
+
+  <h4 className="mt-3 text-lg font-semibold">{s.title}</h4>
+  <p className="mt-2 text-sm text-slate-600">{s.desc}</p>
+</motion.div>
+
         ))}
       </div>
-    </section>
+    </div>
   );
 }
 
+const IconShield = () => (
+  <svg className="w-7 h-7 text-cyan-400" fill="none" viewBox="0 0 24 24">
+    <path
+      d="M12 2l7 3v5c0 5-3 9-7 12-4-3-7-7-7-12V5l7-3z"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
-/* ================= SECURITY & COMPLIANCE ================= */
+const IconLock = () => (
+  <svg className="w-7 h-7 text-cyan-400" fill="none" viewBox="0 0 24 24">
+    <rect x="3" y="11" width="18" height="10" rx="2" stroke="currentColor" strokeWidth="1.6" />
+    <path d="M7 11V8a5 5 0 0110 0v3" stroke="currentColor" strokeWidth="1.6" />
+  </svg>
+);
 
+const IconLayers = () => (
+  <svg className="w-7 h-7 text-cyan-400" fill="none" viewBox="0 0 24 24">
+    <path d="M12 3l9 5-9 5-9-5 9-5z" stroke="currentColor" strokeWidth="1.6" />
+    <path d="M3 13l9 5 9-5" stroke="currentColor" strokeWidth="1.6" />
+  </svg>
+);
+
+const IconCode = () => (
+  <svg className="w-7 h-7 text-cyan-400" fill="none" viewBox="0 0 24 24">
+    <path d="M8 17l-5-5 5-5M16 7l5 5-5 5" stroke="currentColor" strokeWidth="1.6" />
+  </svg>
+);
+
+/* ----------------------------- SecurityCompliance ----------------------------- */
 function SecurityCompliance() {
   const items = [
     {
       title: "Data Sovereignty",
-      desc: "Designed to meet global, regional, and industry-specific data residency and sovereignty requirements.",
+      desc: "All data stored in India, fully aligned with MeitY guidelines and DPDP Act requirements.",
+      icon: <IconShield />,
     },
     {
       title: "Built for Compliance",
-      desc: "Designed for GDPR, CCPA, ISO 27001, and other security standards from the ground up.",
+      desc: "Designed for DPDP, GDPR, RBI, IRDAI, and other industry-specific standards from the ground up.",
+      icon: <IconLock />,
     },
     {
       title: "Access Governance",
-      desc: "Zero Trust access control and continuous policy enforcement across users and products.",
+      desc: "Zero Trust access control and continuous policy enforcement baked into every product.",
+      icon: <IconLayers />,
     },
     {
       title: "Secure Development",
-      desc: "Security-first development lifecycle with DevSecOps principles across delivery stages.",
+      desc: "Internal secure development lifecycle (SDL) principles ensure security at every stage.",
+      icon: <IconCode />,
     },
   ];
 
   return (
-    <section className="py-16 px-6 sm:px-12">
-      <div className="text-center">
-        <h3 className="mt-4 text-3xl font-bold">Security & Compliance</h3>
-        <p className="mt-2 text-lg text-slate-600 max-w-2xl mx-auto">
-          Our solutions are designed with security and compliance as top priorities.
-        </p>
-      </div>
+    <section className="bg-white py-20">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Heading */}
+        <h3 className="text-center text-3xl font-semibold text-black">
+          Our Commitment to Security & Compliance
+        </h3>
 
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {items.map((it) => (
-          <div key={it.title} className="rounded-lg border border-slate-200 p-6 text-left">
-            <h4 className="text-lg font-semibold">{it.title}</h4>
-            <p className="mt-2 text-sm text-slate-600">{it.desc}</p>
-          </div>
-        ))}
+        {/* Cards */}
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-8">
+          {items.map((it) => (
+            <motion.div
+  key={it.title}
+  initial={{ opacity: 0, scale: 0.97 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  viewport={{ once: true, amount: 0.2 }}
+  transition={{ type: "spring", stiffness: 180, damping: 28 }}
+  style={{
+    boxShadow:
+      "0 0 0 1px rgba(34,211,238,0.35), 0 20px 40px rgba(34,211,238,0.12)",
+  }}
+  className="
+    rounded-xl
+    border border-slate-200
+    bg-white
+    backdrop-blur-xl
+    p-8
+    transition-all duration-300
+  "
+>
+  {/* Icon */}
+  <div className="mb-6">{it.icon}</div>
+
+  {/* Title */}
+  <h4 className="text-xl font-semibold text-slate-900">
+    {it.title}
+  </h4>
+
+  {/* Description */}
+  <p className="mt-3 text-base text-slate-600 leading-relaxed">
+    {it.desc}
+  </p>
+</motion.div>
+
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-/* ================= CULTURE & VALUES ================= */
+/* ----------------------------- Culture & Values ----------------------------- */
+
+const icons: Record<string, React.ReactNode> = {
+
+  Innovation: <Code2 className="w-6 h-6 text-sky-500" />,
+  Integrity: <ShieldCheck className="w-6 h-6 text-sky-500" />,
+  Agility: <Zap className="w-6 h-6 text-sky-500" />,
+  Partnership: <Users className="w-6 h-6 text-sky-500" />,
+};
+
 function CultureValues() {
   const values = [
     { title: "Innovation", desc: "Pushing the boundaries of secure access technology." },
@@ -445,50 +715,74 @@ function CultureValues() {
   ];
 
   return (
-    <section className="py-20 bg-slate-50">
-      <div className="max-w-6xl mx-auto px-6 text-center">
-        <h2 className="text-2xl font-bold">Our Culture & Values</h2>
-        <p className="mt-2 text-lg text-slate-600">
-          The principles that guide how we build, partner, and grow.
-        </p>
+    <div className="max-w-6xl mx-auto px-6 text-center">
+      <h2 className="text-2xl font-bold">Our Culture & Values</h2>
+      <p className="mt-2 text-lg text-slate-600">The principles that guide how we build, partner, and grow.</p>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {values.map((v) => (
-            <div
-              key={v.title}
-              className="rounded-lg border border-slate-200 p-6 bg-white hover:shadow-md transition"
-            >
-              <h4 className="text-lg font-semibold text-slate-800">
-                {v.title}
-              </h4>
-              <p className="mt-2 text-sm text-slate-600">
-                {v.desc}
-              </p>
-            </div>
-          ))}
-        </div>
+      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {values.map((v) => (
+          <motion.div
+  key={v.title}
+  initial={{ opacity: 0, scale: 0.97 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  viewport={{ once: true, amount: 0.2 }}
+  transition={{ type: "spring", stiffness: 180, damping: 28 }}
+  style={{
+    boxShadow:
+      "0 0 0 1px rgba(34,211,238,0.35), 0 20px 40px rgba(34,211,238,0.12)",
+  }}
+  className="
+    rounded-xl
+    border border-slate-200
+    bg-white
+    p-6
+    transition-all duration-300
+  "
+>
+
+            <div className="mb-4 flex items-center justify-center">
+  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-slate-200 bg-slate-50">
+    {icons[v.title]}
+  </div>
+</div>
+
+<h4 className="text-lg font-semibold text-slate-800">{v.title}</h4>
+<p className="mt-2 text-sm text-slate-600">{v.desc}</p>
+
+          </motion.div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }
 
-/* ================= JOIN OUR TEAM ================= */
+/* ----------------------------- JoinTeam ----------------------------- */
+
 function JoinTeam() {
   return (
-    <section className="py-20 text-center">
+    <div className="text-center">
+      {/* Icon above the heading */}
+      <Users className="mx-auto mb-4 w-12 h-12 text-sky-600" />
+
       <h3 className="text-2xl font-bold">Join Our Team</h3>
       <p className="mt-2 text-lg text-slate-600 max-w-xl mx-auto">
         We're building a future-ready team for modern cybersecurity and cloud innovation.
       </p>
 
-      <button className="mt-6 inline-flex items-center px-6 py-2 rounded-md bg-sky-600 text-white text-lg font-medium hover:bg-sky-700">
+      <motion.button
+        whileHover={{ scale: 1.03 }}
+        className="mt-6 inline-flex items-center px-6 py-2 rounded-md bg-sky-600 text-white text-lg font-medium hover:bg-sky-700"
+      >
         View Open Roles
-      </button>
-    </section>
+      </motion.button>
+    </div>
   );
 }
 
-/* ================= FINAL CTA ================= */
+
+
+/* ----------------------------- Final CTA ----------------------------- */
+
 function FinalCTA() {
   return (
     <section className="py-24 bg-slate-900 text-white">
@@ -521,3 +815,55 @@ function FinalCTA() {
   );
 }
 
+/* ----------------------------- Small icons (same as your original file) ----------------------------- */
+function IconWrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex-none">
+      {/* small gradient ring around a white circular icon for a premium look */}
+      <div className="rounded-full p-[1.5px] bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-600">
+        <div className="rounded-full bg-white p-2 shadow-sm">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+
+
+
+function DotIcon() {
+  return (
+    <IconWrapper>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+        <circle cx="12" cy="12" r="6" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    </IconWrapper>
+  );
+}
+
+
+
+function LockIcon() {
+  return (
+    <IconWrapper>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+        <rect x="3" y="11" width="18" height="10" rx="2" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M7 11V8a5 5 0 0110 0v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </IconWrapper>
+  );
+}
+
+function getBg(accent = "sky") {
+  const map: Record<string, string> = {
+    sky: "#0ea5e9",
+    teal: "#14b8a6",
+    purple: "#8b5cf6",
+    amber: "#f59e0b",
+    emerald: "#10b981",
+    rose: "#f43f5e",
+  };
+  return map[accent] ?? "#0ea5e9";
+}

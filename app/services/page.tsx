@@ -1,4 +1,7 @@
-// app/page.tsx
+// app/page.tsx//
+"use client";
+import type { Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import OurServices from "@/components/sections/ourservices.tsx/page";
 import React from "react";
 import {
@@ -7,53 +10,119 @@ import {
   GraduationCap,
   Building2,
 } from "lucide-react";
+import MethodologyHero from "@/components/ourmethodlogy/default";
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1], // correct ease
+    },
+  },
+};
 
 export default function HomePage() {
   return (
     <main className="bg-white text-slate-900 antialiased">
       <Hero />
       <OurServices />
-      <Approach />
-      <Methodology/>
-      < FinalCTA />
-      <IndustryExpertise/>
+       <Approach />
+      <MethodologyHero />
       <Enterprise/>
-
-
+      <IndustryExpertise/>
+      <FinalCTA />
+      
     </main>
   );
 }
 
+/* Replace the existing `Hero` function in your file with the code below.
+   This version is production-ready, uses framer-motion (already imported),
+   is fully responsive, and includes a blue-tint transitional "bleed" at the bottom
+   to visually connect the header section to the "Our Services" section. */
+
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      {/* subtle decorative circle */}
-      <div className="absolute right-0 top-10 -z-10 opacity-10 pointer-events-none w-80 h-80 rounded-full bg-gradient-to-br from-sky-200 to-indigo-200 hidden lg:block" />
+    <section className="relative overflow-hidden bg-gradient-to-b from-sky-50 via-blue-50 to-white">
+      {/* Background blur elements */}
+      <div className="absolute -top-24 -right-24 w-96 h-96 bg-sky-300/30 rounded-full blur-3xl" />
+      <div className="absolute top-40 -left-24 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl" />
 
-      <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-12 py-20 lg:py-28">
-        <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
-            Our Services
-            <span className="block text-sky-600"></span>
-          </h1>
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className="relative max-w-6xl mx-auto px-6 md:px-8 lg:px-12 py-24 lg:py-32"
+      >
+        <div className="max-w-3xl mx-auto text-center">
+          {/* Badge */}
+          <motion.div
+            variants={itemVariants}
+            className="inline-flex items-center px-6 py-2  rounded-full bg-sky-600/10 text-sky-700 text-5xl mt-1 font-medium -mt-4"
+          >
+           Our Services 
+          </motion.div>
 
-          <p className="mt-6 text-sm md:text-base text-slate-600">
-            End-to-end cybersecurity, cloud, and IT modernization services engineered for enterprise scale and compliance-heavy environments.
-            <br></br>
+          {/* Heading */}
+          <motion.h1
+            variants={itemVariants}
+            className="mt-6 text-xl sm:text-l lg:text-l font-extrabold tracking-tight text-slate-900"
+          >
             MSPL delivers full-stack cybersecurity, cloud, digital transformation, and managed IT services—built to help enterprises modernize securely and scale with confidence.
-          </p>
+  
+          </motion.h1>
 
-          <ul className="mt-6 flex flex-wrap justify-center gap-6 text-xs text-slate-500">
+          {/* Description */}
+          <motion.p
+            variants={itemVariants}
+            className="mt-6 text-base md:text-lg text-slate-600 leading-relaxed"
+          >
+            End-to-end cybersecurity, cloud, and IT modernization services
+            designed for enterprises operating in compliance-heavy
+            environments.
+          </motion.p>
 
-          </ul>
+          {/* CTA */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-10 flex justify-center gap-4 flex-wrap"
+          >
+            <button className="px-7 py-3 rounded-md bg-sky-600 text-white text-sm font-semibold hover:bg-sky-700 transition shadow-md">
+              Book a Consultation
+            </button>
 
+            <button className="px-7 py-3 rounded-md border border-slate-300 text-slate-700 text-sm font-semibold hover:bg-white transition">
+              Explore Our Services
+            </button>
+          </motion.div>
 
+          {/* Trust indicators */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-10 flex justify-center gap-6 text-sm text-slate-500 flex-wrap"
+          >
+            <span>Zero Trust Architecture</span>
+            <span>Compliance-Ready</span>
+            <span>Enterprise Scale</span>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
-
 
 
 function Approach() {
@@ -67,6 +136,42 @@ function Approach() {
       desc: "10+ OEM technology partnerships for comprehensive solutions",
     },
   ];
+
+  // Icon mapper: square-style SVG icons chosen per title (no extra deps)
+  function StepIcon({ title }: { title: string }) {
+    const commonClasses = "w-6 h-6";
+    if (title.includes("Engineering")) {
+      return (
+        <svg className={commonClasses} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <path d="M12 15.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M19.4 15a7.9 7.9 0 00.6-2.5 7.9 7.9 0 00-.6-2.5l2.2-1.7-2-3.4-2.6.9a8 8 0 00-2.2-1.3L14 0h-4l-.6 4.5a8 8 0 00-2.2 1.3l-2.6-.9-2 3.4 2.2 1.7a7.9 7.9 0 000 5l-2.2 1.7 2 3.4 2.6-.9c.7.45 1.5.82 2.2 1.3L10 24h4l.6-4.5c.76-.28 1.47-.66 2.15-1.11L19 19l.4-4z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      );
+    }
+    if (title.includes("Security")) {
+      return (
+        <svg className={commonClasses} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <path d="M12 2l7 3v5c0 5-3.5 9.5-7 11-3.5-1.5-7-6-7-11V5l7-3z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M9.5 11.5l1.8 1.8L15 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      );
+    }
+    if (title.includes("Agile")) {
+      return (
+        <svg className={commonClasses} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <path d="M3 12h6l-2 8 10-12h-6l2-8L3 12z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      );
+    }
+    // Partnership / default
+    return (
+      <svg className={commonClasses} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+        <path d="M3 21v-6a4 4 0 014-4h3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M21 3v6a4 4 0 01-4 4h-3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M7 10l10 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    );
+  }
 
   return (
     <section className="py-20 border-t border-slate-100 bg-white text-center">
@@ -91,22 +196,39 @@ function Approach() {
         {steps.map((s) => (
           <div
             key={s.num}
-            className="group rounded-xl border border-slate-200 p-6 text-left bg-white
+            className="group relative rounded-xl border border-slate-200 p-6 text-left bg-white
                        shadow-sm hover:shadow-xl hover:-translate-y-1
                        transition-all duration-300 ease-out w-full sm:w-56"
           >
-            {/* Number */}
-            <div className="text-sky-600 font-bold text-xl tracking-wide">
-              {s.num}
+            {/* blurred glow overlay (hover) - does not change layout */}
+            <div className="pointer-events-none absolute inset-0 -z-10 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <div className="absolute inset-0 rounded-xl blur-3xl bg-sky-50/60" />
+            </div>
+
+            {/* Icon (centered) */}
+            <div className="flex justify-center">
+              {/* square icon box — uplift only the icon on hover, square not circle */}
+              <div
+                className="w-14 h-14 flex items-center justify-center border border-slate-200 bg-white
+                           transform transition-all duration-300 ease-out
+                           group-hover:-translate-y-2
+                           group-hover:border-sky-600
+                           group-hover:rounded-md"
+                aria-hidden
+              >
+                <span className="text-sky-600">
+                  <StepIcon title={s.title} />
+                </span>
+              </div>
             </div>
 
             {/* Title */}
-            <h4 className="mt-4 text-lg font-semibold text-slate-900 group-hover:text-sky-600 transition-colors">
+            <h4 className="mt-4 text-lg font-semibold text-slate-900 text-center group-hover:text-sky-600 transition-colors">
               {s.title}
             </h4>
 
             {/* Description */}
-            <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+            <p className="mt-3 text-sm text-slate-600 leading-relaxed text-center">
               {s.desc}
             </p>
           </div>
@@ -115,7 +237,6 @@ function Approach() {
     </section>
   );
 }
-
 
 
 function Methodology() {
@@ -286,30 +407,103 @@ function IndustryExpertise() {
 
 function Enterprise() {
   return (
-    <section className="py-24 bg-white text-slate-900">
+   <section className="py-24 bg-gradient-to-b from-sky-50 via-blue-50 to-white text-slate-900">
+
+
       <div className="max-w-4xl mx-auto px-6">
-        <div className="rounded-xl border border-slate-200 p-10 text-center bg-white">
+        
+<div className="rounded-xl border border-sky-200/50 p-10 text-center bg-white/70 backdrop-blur-lg shadow-lg">
+
           
           {/* Badge */}
           <div className="inline-block text-sm px-3 py-1 rounded-full bg-sky-600 text-white text-sm font-medium hover:bg-sky-700 transition">
-            Ready to Modernize?
+            Platform + Services
           </div>
 
           {/* Heading */}
           <h2 className="mt-4 text-2xl md:text-3xl font-semibold  text-slate-900">
-            Ready to Modernize Your Enterprise?
+           How Our Services Support the MSPL Platform
           </h2>
 
           {/* Sub text */}
           <p className="mt-4 text-base text-slate-600 max-w-3xl mx-auto">
-            Partner with MSPL for end-to-end cybersecurity and IT transformation services
+            Our services enable seamless implementation, integration, and ongoing management of the MSPL Secure Access Platform—including Zero Trust Browser, MFN, and unified governance layers.
           </p>
 
           {/* Highlights */}
-          <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-slate-600">
-            <span>50+ Years Expertise</span>
-            <span>10+ OEM Partners</span>
-            <span>Engineering-First Approach</span>
+          <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm text-slate-600">
+           <span className="inline-flex items-center gap-2 text-slate-600">
+  <svg
+    className="w-4 h-4 text-emerald-500"
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden
+  >
+    <path
+      d="M5 12l4 4L19 7"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+   Platform implementation
+</span>
+
+            <span className="inline-flex items-center gap-2 text-slate-600">
+  <svg
+    className="w-4 h-4 text-emerald-500"
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden
+  >
+    <path
+      d="M5 12l4 4L19 7"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+ Security posture modernization
+</span>
+
+            <span className="inline-flex items-center gap-2 text-slate-600">
+  <svg
+    className="w-4 h-4 text-emerald-500"
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden
+  >
+    <path
+      d="M5 12l4 4L19 7"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+  Cloud + Zero Trust integration
+</span>
+
+             <span className="inline-flex items-center gap-2 text-slate-600">
+  <svg
+    className="w-4 h-4 text-emerald-500"
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden
+  >
+    <path
+      d="M5 12l4 4L19 7"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+ Identity & policy alignment
+</span>
+
           </div>
 
           {/* Buttons */}

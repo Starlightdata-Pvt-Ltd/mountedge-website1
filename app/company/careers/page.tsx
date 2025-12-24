@@ -125,10 +125,10 @@ export default function CareersPage() {
 
       {/* MOCKUP / BRAND */}
       <Section className="pt-0 pb-6">
-        <div className="max-w-full mx-auto relative px-4 sm:px-6 lg:px-8">
+        <div className="max-w-full mx-auto  text:center relative px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="order-2 md:order-1">
-              <h2 className="text-2xl sm:text-3xl font-semibold mb-3">Work with great people and meaningful problems</h2>
+              <h2 className="text-2xl  sm:text-3xl font-semibold mb-3">Work with great people and meaningful problems</h2>
               <p className="text-muted-foreground mb-6">
                 From product to infrastructure, we ship quickly, iterate with customers, and invest in a robust engineering culture.
               </p>
@@ -141,22 +141,7 @@ export default function CareersPage() {
               </div>
             </div>
 
-            <div className="order-1 md:order-2">
-              <MockupFrame size="small" className="rounded-xl shadow-xl overflow-hidden">
-                <Mockup type="responsive" className="w-full bg-background/90 p-4 rounded-xl">
-                  <div className="flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg overflow-hidden">
-                    <img
-                      src="/star.png"
-                      alt="product mockup"
-                      className="w-full max-w-full h-full object-contain"
-                      draggable={false}
-                      loading="eager"
-                    />
-                  </div>
-                </Mockup>
-              </MockupFrame>
-              <Glow variant="top" className="mt-4" />
-            </div>
+            
           </div>
         </div>
       </Section>

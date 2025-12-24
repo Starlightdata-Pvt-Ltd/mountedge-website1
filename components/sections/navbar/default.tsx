@@ -74,7 +74,7 @@ export default function Navbar({
   actions = [
     {
       text: "Request Demo",
-      href: "/contact",
+      href: "/company/contact",
       isButton: true,
       variant: "default",
     },

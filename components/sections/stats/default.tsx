@@ -1,8 +1,12 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { Section } from "../../ui/section";
+import { motion } from "framer-motion";
 
 interface StatItemProps {
   label?: string;
-  value: string | number;
+  value: number | string;
   suffix?: string;
   description?: string;
 }
@@ -12,68 +16,159 @@ interface StatsProps {
   className?: string;
 }
 
+/* -------------------- Count-up Hook -------------------- */
+function useCount(target: number, duration = 1100) {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    let raf = 0;
+    let start: number | null = null;
+
+    if (!Number.isFinite(target)) {
+      setValue(target);
+      return;
+    }
+
+    function step(ts: number) {
+      if (!start) start = ts;
+      const elapsed = ts - start;
+      const t = Math.min(1, elapsed / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+
+      const next = target * eased;
+      const decimals = target % 1 !== 0 ? 2 : 0;
+      setValue(Number(next.toFixed(decimals)));
+
+      if (t < 1) raf = requestAnimationFrame(step);
+    }
+
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration]);
+
+  return value;
+}
+
+/* -------------------- Single Stat Item -------------------- */
+function StatItem({ item, index }: { item: StatItemProps; index: number }) {
+  const isNumber = typeof item.value === "number" && !Number.isNaN(item.value);
+  const animatedValue = isNumber ? useCount(item.value as number, 1200 + index * 120) : null;
+
+  const formatNumber = (n: number) => {
+    const decimals = n % 1 !== 0 ? 2 : 0;
+    return n.toLocaleString(undefined, {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    });
+  };
+
+  return (
+    <motion.div
+      className="flex flex-col items-start gap-3 text-left"
+      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 8 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.45, delay: index * 0.06 }}
+      role="listitem"
+      aria-label={item.label ?? `stat-${index}`}
+    >
+      {item.label && (
+        <div className="text-slate-500 dark:text-slate-400 text-sm font-semibold uppercase tracking-wide">
+          {item.label}
+        </div>
+      )}
+
+      <div className="flex items-baseline gap-3">
+        <div
+          className="stat-value bg-clip-text text-transparent font-semibold leading-none"
+          style={{
+            backgroundImage: "linear-gradient(90deg,#0ea5e9,#3b82f6)",
+          }}
+        >
+          <span className="text-3xl sm:text-4xl md:text-5xl">
+            {isNumber
+              ? formatNumber(animatedValue ?? (item.value as number))
+              : item.value}
+          </span>
+        </div>
+
+        {item.suffix && (
+          <div className="text-sky-600 dark:text-sky-400 font-semibold text-lg sm:text-xl">
+            {item.suffix}
+          </div>
+        )}
+      </div>
+
+      {item.description && (
+        <div className="text-slate-500 dark:text-slate-400 text-sm">
+          {item.description}
+        </div>
+      )}
+    </motion.div>
+  );
+}
+
+/* -------------------- Stats Section -------------------- */
 export default function Stats({
   items = [
     {
-      label: "used by",
-      value: Math.round(1000 / 100) / 10,
-      suffix: "k",
-      description: "designers on Figma Community",
+      label: "Enterprise clients",
+      value: 320,
+      description: "Global enterprises across finance, healthcare & retail",
     },
     {
-      label: "over",
-      value: 1000,
-      description: "clones and of the template on Github",
+      label: "Projects delivered",
+      value: 1250,
+      description: "End-to-end cloud, security and infra projects",
     },
     {
-      label: "already",
-      value: Math.round(1000 / 100) / 10,
-      suffix: "k",
-      description: "installations with shadcn/ui CLI",
+      label: "Average SLA uptime",
+      value: 99.99,
+      suffix: "%",
+      description: "Weighted uptime across managed services",
     },
     {
-      label: "includes",
-      value: 1000,
-      description: "blocks and sections",
+      label: "R&D engineers",
+      value: 180,
+      suffix: "+",
+      description: "Security, backend, data and SRE engineers",
     },
   ],
   className,
 }: StatsProps) {
+  if (items === false || items.length === 0) return null;
+
   return (
     <Section className={className}>
-      <div className="container mx-auto max-w-[960px]">
-        {items !== false && items.length > 0 && (
-          <div className="grid grid-cols-2 gap-12 sm:grid-cols-4">
-            {items.map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-start gap-3 text-left"
-              >
-                {item.label && (
-                  <div className="text-muted-foreground text-sm font-semibold">
-                    {item.label}
-                  </div>
-                )}
-                <div className="flex items-baseline gap-2">
-                  <div className="from-foreground to-foreground dark:to-brand bg-linear-to-r bg-clip-text text-4xl font-medium text-transparent drop-shadow-[2px_1px_24px_var(--brand-foreground)] transition-all duration-300 sm:text-5xl md:text-6xl">
-                    {item.value}
-                  </div>
-                  {item.suffix && (
-                    <div className="text-brand text-2xl font-semibold">
-                      {item.suffix}
-                    </div>
-                  )}
-                </div>
-                {item.description && (
-                  <div className="text-muted-foreground text-sm font-semibold text-pretty">
-                    {item.description}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
+      <div className="container mx-auto max-w-[980px] px-4">
+        <div
+          className="grid grid-cols-2 sm:grid-cols-4 gap-10 md:gap-14 items-start"
+          role="list"
+          aria-label="Company statistics"
+        >
+          {items.map((item, index) => (
+            <StatItem key={index} item={item} index={index} />
+          ))}
+        </div>
       </div>
+
+      <style>{`
+        .stat-value {
+          -webkit-background-clip: text;
+          background-clip: text;
+        }
+
+        .stat-value span {
+          text-shadow: 0 6px 20px rgba(59,130,246,0.08);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          * {
+            transition: none !important;
+            animation: none !important;
+          }
+        }
+      `}</style>
     </Section>
   );
 }

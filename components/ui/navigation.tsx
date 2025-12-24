@@ -3,6 +3,7 @@
 import Link from "next/link";
 import * as React from "react";
 import { ReactNode } from "react";
+import { Square, Grid2X2 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -43,22 +44,22 @@ interface NavigationProps {
 
 export default function Navigation({
   menuItems = [
-    { title: "Home", content: "home", href: "/", isLink:true }, 
+    { title: "Home", content: "home", href: "/", isLink: true },
     { title: "Products", content: "products" },
     { title: "Services", content: "components" },
     { title: "Resources", content: "resources" },
     { title: "Company", content: "company" },
   ],
+
   components = [
     { title: "Cybersecurity Services", href: "/solutions/cyber", description: "" },
     { title: "Cloud & IT Infrastructure", href: "/solutions/cloud/", description: "" },
     { title: "Digital Transformation", href: "/solutions/digital", description: "" },
     { title: "Automation & RPA", href: "/solutions/automation", description: "" },
-    { title: "Data & Analytics", href: "/solutions/data-analytics", description: "" },
+    { title: "Data & Analytics", href: "/solutions/data analytics", description: "" },
     { title: "Managed IT & Security Ops", href: "/solutions/manage", description: "" },
     { title: "GRC & Compliance", href: "", description: "" },
   ],
-
 
   resources = [
     { title: "Blogs", href: "", description: "" },
@@ -72,8 +73,6 @@ export default function Navigation({
     { title: "Careers", href: "/company/careers", description: "" },
     { title: "Contact", href: "/company/contact", description: "" },
   ],
-
-  
 }: NavigationProps) {
   return (
     <NavigationMenu viewport={false}>
@@ -92,10 +91,98 @@ export default function Navigation({
                 <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
 
                 <NavigationMenuContent>
-                  {/* ================= SERVICES ================= */}
-                  {item.content === "components" ? (
+                  {/* ================= PRODUCTS ================= */}
+                  {item.content === "products" ? (
+                    <div className="flex w-full gap-1 rounded-xl bg-white p-3">
+                      {/* LEFT */}
+                      <div className="w-[340px] space-y-1">
+                        <div className="rounded-lg px-3 py-2">
+                          <h4 className="text-sm font-semibold">Zero Trust Browser</h4>
+                          <p className="text-xs text-slate-500">
+                            Secure browsing with built-in zero trust
+                          </p>
+                        </div>
+
+                        <div className="rounded-lg px-3 py-2">
+                          <h4 className="text-sm font-semibold">
+                            Micro Firewall Network (MFN)
+                          </h4>
+                          <p className="text-xs text-slate-500">
+                            Network segmentation and enforcement
+                          </p>
+                        </div>
+
+                        <div className="rounded-lg  px-3 py-2">
+                          <h4 className="text-sm font-semibold">
+                            Secure Access Suite
+                          </h4>
+                          <p className="text-xs text-slate-600">
+                            Complete access management solution
+                          </p>
+                        </div>
+
+                        <Link
+                          href="/products"
+                          className="block px-4 pt-1 text-xs font-medium text-blue-600 hover:underline"
+                        >
+                          All Products
+                        </Link>
+
+
+                        <div className="mt-2 rounded-lg border-t border-slate-200 pt-2 px-2">
+                          <p className="mb-2 text-[10px] uppercase tracking-wide text-slate-400">
+                            Coming Soon
+                          </p>
+
+                          <div className="flex items-center justify-between py-1 text-[11px] text-slate-500">
+                            <span>Identity Layer</span>
+                            <span className="rounded-full bg-slate-200 px-2 py-[2px] text-[10px]">
+                              Comming Soon
+                            </span>
+                          </div>
+
+                          <div className="flex justify-between text-[11px] leading-tight text-slate-500">
+                            <span>Analytics Engine</span>
+                            <span className="rounded-full bg-slate-200 px-2 text-[10px]">
+                              Coming Soon
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* RIGHT CARD */}
+                      <div className="w-[240px] rounded-2xl bg-gradient-to-b from-blue-900 to-blue-800 p-5 text-white">
+                        <h3 className="text-sm font-semibold">
+                          Unified with the MSPL Platform
+                        </h3>
+
+                        <p className="mt-1 text-xs text-blue-100">
+                          Zero Trust security across browser, network and access layers
+                        </p>
+
+                        <div className="mt-2 flex gap-2">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20 text-blue-900">
+                            ●
+                          </div>
+                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20 text-blue-900">
+                            ●
+                          </div>
+                        </div>
+
+                        <Link
+                          href="/platform"
+                          className="mt-4 inline-block text-xs font-medium underline underline-offset-4"
+                        >
+                          → Explore Platform
+                        </Link>
+                      </div>
+                    </div>
+
+
+
+                    /* ================= SERVICES ================= */
+                  ) : item.content === "components" ? (
                     <div className="flex w-[780px] gap-8 p-6">
-                      {/* LEFT: SERVICES LIST */}
                       <ul className="space-y-1 list-none p-0">
                         {components.map((component) => (
                           <ListItem
@@ -108,54 +195,41 @@ export default function Navigation({
                           </ListItem>
                         ))}
 
-                        <li className="pt-2  pl-4">
+                        <li className="pt-2 pl-4">
                           <Link
                             href="/services"
-                            className="text-sm font-medium text-primary hover:underline"
+                            className="text-sm font-medium text-blue-600 hover:underline"
                           >
                             All Services →
                           </Link>
                         </li>
                       </ul>
 
-
-                      {/* RIGHT: INFO CARD */}
-                      <div className="w-[220px] rounded-xl bg-gradient-to-b from-slate-900 to-slate-800 p-6 text-white">
-                        <h4 className="text-lg font-semibold">
-                          Need Guidance?
-                        </h4>
-
+                      <div className="w-[220px] rounded-xl bg-gradient-to-b from-blue-900 to-blue-800 p-6 text-white">
+                        <h4 className="text-lg font-semibold">Need Guidance?</h4>
                         <p className="mt-2 text-sm text-slate-300">
-                          Our experts can help design the right security
-                          architecture for your needs
+                          Our experts can help design the right security architecture
                         </p>
-
                         <Link
                           href="/contact"
-                          className="mt-8 block rounded-xl bg-blue-600 py-3 text-center text-sm font-semibold text-white transition hover:bg-blue-700"
+                          className="mt-8 block rounded-xl bg-blue-600 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700"
                         >
                           Book Consultation
                         </Link>
                       </div>
                     </div>
 
-                
-
                   ) : item.content === "resources" ? (
                     <ul className="grid w-[220px] gap-1 p-4">
                       {resources.map((r) => (
-                        <ListItem key={r.title} title={r.title} href={r.href}>
-                          {r.description}
-                        </ListItem>
+                        <ListItem key={r.title} title={r.title} href={r.href} />
                       ))}
                     </ul>
 
                   ) : item.content === "company" ? (
                     <ul className="grid w-[220px] gap-1 p-4">
                       {company.map((c) => (
-                        <ListItem key={c.title} title={c.title} href={c.href}>
-                          {c.description}
-                        </ListItem>
+                        <ListItem key={c.title} title={c.title} href={c.href} />
                       ))}
                     </ul>
                   ) : (
@@ -182,7 +256,7 @@ function ListItem({
       <NavigationMenuLink asChild>
         <a
           className={cn(
-            "block rounded-md px-3 py-2 text-sm no-underline transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground",
             className
           )}
           {...props}
@@ -196,4 +270,3 @@ function ListItem({
     </li>
   );
 }
-

@@ -6,34 +6,32 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const PARTNER_COUNT = 6;
-const PARTNER_SRC = (i: number) =>
-  `https://mountedge-website.netlify.app/partners/${i}.svg`;
+
+// images placed in: public/partners/1.png ... 6.png
+const PARTNER_SRC = (i: number) => `/${i}.png`;
 
 export default function PartnersPage() {
   const partners = Array.from({ length: PARTNER_COUNT }, (_, i) => i + 1);
   const trackRef = useRef<HTMLDivElement | null>(null);
 
-  // pause/resume helpers
   const pause = () => {
     const t = trackRef.current;
     if (!t) return;
-    // respect reduced motion — if user prefers reduced motion, nothing to do
-    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     t.style.animationPlayState = "paused";
   };
 
   const resume = () => {
     const t = trackRef.current;
     if (!t) return;
-    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     t.style.animationPlayState = "running";
   };
 
-  // ensure animation is running initially on mount (some browsers might not set it from inline style when modified)
   useEffect(() => {
     const t = trackRef.current;
     if (!t) return;
-    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       t.style.animation = "none";
       return;
     }
@@ -43,21 +41,20 @@ export default function PartnersPage() {
   return (
     <main>
       <Section className={cn("py-20")}>
-        <div className="max-w-container mx-auto text-center">
+        <div className="max-w-container mx-auto text-center px-4">
           <p className="text-sm font-semibold uppercase text-muted-foreground tracking-wide">
             Trusted By
           </p>
 
-          <h1 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold">
+          <h1 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold fancy-heading">
             Our Partners & Integrations
           </h1>
 
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
-            We collaborate with best-in-class technology partners to deliver
-            secure, reliable and scalable outcomes for our customers.
+            We collaborate with best-in-class technology partners to deliver secure,
+            reliable and scalable outcomes for our customers.
           </p>
 
-          {/* CTA */}
           <div className="mt-6 flex items-center justify-center gap-3">
             <Button asChild>
               <a href="/contact">Contact Sales</a>
@@ -67,106 +64,128 @@ export default function PartnersPage() {
             </Button>
           </div>
 
-          {/* Scrolling partners rail */}
           <div className="mt-10">
             <div className="relative overflow-hidden">
-              {/* Track: duplicated to create seamless loop */}
-              <div
-                ref={trackRef}
-                className="partners-track will-change-transform flex gap-8 items-center"
-                style={{
-                  animation: "partners-marquee 18s linear infinite",
-                }}
-                role="list"
-                aria-label="Partners carousel"
-              >
-                {/* first copy */}
-                {partners.map((i) => (
-                  <div
-                    key={`p1-${i}`}
-                    className="flex-shrink-0 flex items-center justify-center"
-                    role="listitem"
-                    aria-label={`Partner ${i}`}
-                    // Pause on hover/focus/touch on each partner item
-                    onMouseEnter={pause}
-                    onMouseLeave={resume}
-                    onFocus={pause}
-                    onBlur={resume}
-                    onTouchStart={pause}
-                    onTouchEnd={resume}
-                    tabIndex={0} // allow keyboard focus so focus pauses too
-                  >
-                    <img
-                      src={PARTNER_SRC(i)}
-                      alt={`partner-${i}`}
-                      className="h-12 w-auto opacity-90 filter transition-transform transform group-hover:scale-105"
-                      loading="lazy"
-                      draggable={false}
-                    />
-                  </div>
-                ))}
+              <div className="mx-auto max-w-4xl">
+                <div className="relative rounded-2xl border border-white/6 bg-gradient-to-b from-white/3 to-white/2 p-6 shadow-lg">
 
-                {/* second copy (for seamless scroll) */}
-                {partners.map((i) => (
                   <div
-                    key={`p2-${i}`}
-                    className="flex-shrink-0 flex items-center justify-center"
-                    role="listitem"
-                    aria-label={`Partner ${i}`}
-                    onMouseEnter={pause}
-                    onMouseLeave={resume}
-                    onFocus={pause}
-                    onBlur={resume}
-                    onTouchStart={pause}
-                    onTouchEnd={resume}
-                    tabIndex={0}
+                    ref={trackRef}
+                    className="partners-track will-change-transform flex gap-8 items-center"
+                    role="list"
+                    aria-label="Partners carousel"
                   >
-                    <img
-  src={PARTNER_SRC(i)}
-  alt={`partner-${i}`}
-  loading="lazy"
-  draggable={false}
-  className="
-    h-12 
-    w-auto 
-    bg-transparent
-    mix-blend-multiply
-    opacity-90
-    transition-transform
-    hover:scale-105
-  "
-/>
+                    {partners.map((i) => (
+                      <div
+                        key={`p1-${i}`}
+                        className="flex-shrink-0 flex items-center justify-center px-4"
+                        role="listitem"
+                        aria-label={`Partner ${i}`}
+                        onMouseEnter={pause}
+                        onMouseLeave={resume}
+                        onFocus={pause}
+                        onBlur={resume}
+                        onTouchStart={pause}
+                        onTouchEnd={resume}
+                        tabIndex={0}
+                      >
+                        <img
+                          src={PARTNER_SRC(i)}
+                          alt={`Partner ${i} logo`}
+                          loading="lazy"
+                          draggable={false}
+                          className="logo-img h-12 w-auto object-contain"
+                        />
+                      </div>
+                    ))}
 
+                    {partners.map((i) => (
+                      <div
+                        key={`p2-${i}`}
+                        className="flex-shrink-0 flex items-center justify-center px-4"
+                        role="listitem"
+                        aria-label={`Partner ${i}`}
+                        onMouseEnter={pause}
+                        onMouseLeave={resume}
+                        onFocus={pause}
+                        onBlur={resume}
+                        onTouchStart={pause}
+                        onTouchEnd={resume}
+                        tabIndex={0}
+                      >
+                        <img
+                          src={PARTNER_SRC(i)}
+                          alt={`Partner ${i} logo`}
+                          loading="lazy"
+                          draggable={false}
+                          className="logo-img h-12 w-auto object-contain"
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
+
+                  <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white/95 to-transparent" />
+                  <div className="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white/95 to-transparent" />
+                </div>
               </div>
-
-              {/* Optional left & right overlays for soft fade */}
-              <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-background/100 to-transparent" />
-              <div className="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-background/100 to-transparent" />
             </div>
-
-       
           </div>
         </div>
       </Section>
 
-      {/* Inline CSS for marquee animation and hover-pause fallback */}
       <style>{`
+        :root { --marquee-duration: 18s; }
+
         @keyframes partners-marquee {
-          0% { transform: translateX(-50%); }
-          100% { transform: translateX(0%); }
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
         }
 
         .partners-track {
-          width: calc(200% + 4rem); /* two copies inline for seamless loop */
+          width: calc(200% + 6rem);
+          gap: 2rem;
+          padding: 0.5rem 0;
+          animation: partners-marquee var(--marquee-duration) linear infinite;
         }
 
-        /* For users who prefer reduced motion, stop animation entirely */
+        .logo-img {
+          filter: drop-shadow(0 6px 20px rgba(14,165,233,0.06));
+          transition: transform 220ms ease, filter 220ms ease;
+          border-radius: 6px;
+        }
+
+        .logo-img:hover,
+        .logo-img:focus {
+          transform: translateY(-3px) scale(1.06);
+          filter: drop-shadow(0 10px 30px rgba(14,165,233,0.09));
+        }
+
         @media (prefers-reduced-motion: reduce) {
-          .partners-track {
-            animation: none !important;
-          }
+          .partners-track { animation: none !important; }
+        }
+
+        @media (min-width: 1024px) {
+          :root { --marquee-duration: 24s; }
+        }
+
+        @media (max-width: 480px) {
+          :root { --marquee-duration: 12s; }
+        }
+
+        .partners-track [tabindex]:focus {
+          outline: 3px solid rgba(59,130,246,0.18);
+          outline-offset: 4px;
+          border-radius: 8px;
+        }
+
+        .fancy-heading {
+          background-image:
+            linear-gradient(90deg, #0f172a 60%, rgba(59,130,246,0.25)),
+            repeating-linear-gradient(135deg, rgba(59,130,246,0.03) 0 3px, transparent 3px 8px);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          -webkit-text-stroke: 0.35px rgba(0,0,0,0.9);
         }
       `}</style>
     </main>

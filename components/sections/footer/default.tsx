@@ -70,11 +70,11 @@ export default function FooterSection({
     {
       title: "Company",
       links: [
-        { text: "About Us", href: "/about" },
+        { text: "About Us", href: "/company/about" },
         
         { text: "Partners", href: "/" },
-        { text: "Careers", href: "/" },
-        { text: "Contact", href: "/" },
+        { text: "Careers", href: "/company/career" },
+        { text: "Contact", href: "/company/career" },
       ],
     },
     {

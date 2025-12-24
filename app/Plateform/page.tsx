@@ -43,7 +43,7 @@ export default function ServicesAmplifyPage() {
                   StarSecure Zero Trust Browser
                 </h3>
                 <p className="mt-2 text-sm text-slate-600">
-                  IAM services integrate seamlessly with browser-based access
+                  I AM services integrate seamlessly with browser-based access
                   controls for granular, context-aware authentication and
                   authorization.
                 </p>
