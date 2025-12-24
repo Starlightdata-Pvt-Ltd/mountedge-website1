@@ -70,18 +70,18 @@ export default function FooterSection({
     {
       title: "Company",
       links: [
-        { text: "About Us", href: "/about" },
-        { text: "Leadership", href: "/" },
+        { text: "About Us", href: "/company/about" },
+        
         { text: "Partners", href: "/" },
-        { text: "Careers", href: "/" },
-        { text: "Contact", href: "/" },
+        { text: "Careers", href: "/company/career" },
+        { text: "Contact", href: "/company/career" },
       ],
     },
     {
       title: "Resources",
       links: [
         { text: "Resources Archive", href: "/" },
-        { text: "Whitepapers", href: "/" },
+        { text: "Knowledge Base", href: "/" },
         { text: "Product Documenet", href: "/" },
         { text: "Architecture Guides", href: "/" },
         { text: "Blogs", href: "/" },

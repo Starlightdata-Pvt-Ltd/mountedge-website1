@@ -30,6 +30,9 @@ type CTAButtonProps = {
 
 
 import { ComponentType } from "react";
+import IndustriesPage from "@/app/industries/page";
+import PlatformArchitecture from "@/components/sections/PlateformArchitecture/default";
+import ServicesAmplifyPage from "@/app/Plateform/page";
 
 type FeatureCardProps = {
   Icon: ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -86,150 +89,150 @@ const SectionBadge = ({ text }: { text: string }) => (
 
 
 
- /*function Services() {
-  return (
-    <section className="py-24 bg-white">
-      <Container>
-        {/* Heading *
-        <div className="text-center mb-16">
-          <span className="inline-flex items-center px-4 py-1.5 mb-4 text-sm rounded-full border border-slate-300 text-slate-700">
-            Service Catalogue
-          </span>
+/*function Services() {
+ return (
+   <section className="py-24 bg-white">
+     <Container>
+       {/* Heading *
+       <div className="text-center mb-16">
+         <span className="inline-flex items-center px-4 py-1.5 mb-4 text-sm rounded-full border border-slate-300 text-slate-700">
+           Service Catalogue
+         </span>
 
-          <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
-            Cybersecurity Services We Deliver
-          </h2>
+         <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
+           Cybersecurity Services We Deliver
+         </h2>
 
-          <p className="mt-4 text-sm text-slate-600 max-w-xl mx-auto">
-            Comprehensive security services spanning identity, infrastructure,
-            data, and operations
-          </p>
-        </div>
+         <p className="mt-4 text-sm text-slate-600 max-w-xl mx-auto">
+           Comprehensive security services spanning identity, infrastructure,
+           data, and operations
+         </p>
+       </div>
 
-        {/* Cards *
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            {
-               icon: ShieldCheckIcon,
-              title: "Zero Trust Network Access (ZTNA) Implementation",
-              desc: "Design and deploy identity-centric, context-aware access controls that eliminate implicit trust.",
-              items: [
-                "Policy-based access enforcement",
-                "Continuous verification architecture",
-                "Micro-segmentation implementation",
-                "Integration with identity providers",
-              ],
-            },
-            {
-              icon: KeyIcon,
+       {/* Cards *
+       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+         {[
+           {
+              icon: ShieldCheckIcon,
+             title: "Zero Trust Network Access (ZTNA) Implementation",
+             desc: "Design and deploy identity-centric, context-aware access controls that eliminate implicit trust.",
+             items: [
+               "Policy-based access enforcement",
+               "Continuous verification architecture",
+               "Micro-segmentation implementation",
+               "Integration with identity providers",
+             ],
+           },
+           {
+             icon: KeyIcon,
 
-              title: "Identity & Access Management (IAM)",
-              desc: "Comprehensive IAM strategy, implementation, and governance for enterprise identity infrastructure.",
-              items: [
-                "Centralized identity governance",
-                "MFA & adaptive authentication",
-                "Role-based access control (RBAC)",
-                "Privileged access management (PAM)",
-              ],
-            },
-            {
-              icon: ComputerDesktopIcon,
-              title: "Security Monitoring & SIEM",
-              desc: "Deploy enterprise-grade SIEM and event management for real-time threat detection.",
-              items: [
-                "Centralized log management",
-                "Threat detection & correlation",
-                "Compliance reporting automation",
-                "Incident investigation workflows",
-              ],
-            },
-            {
-                icon: CloudIcon,
-              title: "Cloud Security Posture Management (CSPM)",
-              desc: "Continuous monitoring and remediation of cloud misconfigurations and compliance violations.",
-              items: [
-                "Multi-cloud security assessment",
-                "Automated compliance checks",
-                "Misconfiguration remediation",
-                "Cloud workload protection",
-              ],
-            },
-            {
-              icon: LockClosedIcon,
-              title: "Data Security & Data Loss Prevention (DLP)",
-              desc: "Protect sensitive data across endpoints, networks, and cloud with advanced DLP strategies.",
-              items: [
-                "Data classification & discovery",
-                "Policy-based data protection",
-                "Encryption & tokenization",
-                "Insider threat detection",
-              ],
-            },
-            {
-              icon: GlobeAltIcon,
-              title: "Security Operations Center (SOC) Setup",
-              desc: "24/7 security monitoring, threat hunting, and incident response capabilities.",
-              items: [
-                "SOC infrastructure setup",
-                "Playbooks & runbook development",
-                "Threat intelligence integration",
-                "Incident response automation",
-              ],
-            },
-            {
-              icon: BugAnIcon,
-              title: "Security Posture Assessment & Penetration Testing",
-              desc: "Comprehensive audits, vulnerability assessments, and ethical hacking exercises.",
-              items: [
-                "Infrastructure vulnerability scanning",
-                "Application penetration testing",
-                "Red team exercises",
-                "Remediation roadmap",
-              ],
-            },
-          ].map((service) => (
-            <div
-              key={service.title}
-              className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition"
-            >
-              <h3 className="text-base font-semibold text-slate-900">
-                {service.title}
-              </h3>
+             title: "Identity & Access Management (IAM)",
+             desc: "Comprehensive IAM strategy, implementation, and governance for enterprise identity infrastructure.",
+             items: [
+               "Centralized identity governance",
+               "MFA & adaptive authentication",
+               "Role-based access control (RBAC)",
+               "Privileged access management (PAM)",
+             ],
+           },
+           {
+             icon: ComputerDesktopIcon,
+             title: "Security Monitoring & SIEM",
+             desc: "Deploy enterprise-grade SIEM and event management for real-time threat detection.",
+             items: [
+               "Centralized log management",
+               "Threat detection & correlation",
+               "Compliance reporting automation",
+               "Incident investigation workflows",
+             ],
+           },
+           {
+               icon: CloudIcon,
+             title: "Cloud Security Posture Management (CSPM)",
+             desc: "Continuous monitoring and remediation of cloud misconfigurations and compliance violations.",
+             items: [
+               "Multi-cloud security assessment",
+               "Automated compliance checks",
+               "Misconfiguration remediation",
+               "Cloud workload protection",
+             ],
+           },
+           {
+             icon: LockClosedIcon,
+             title: "Data Security & Data Loss Prevention (DLP)",
+             desc: "Protect sensitive data across endpoints, networks, and cloud with advanced DLP strategies.",
+             items: [
+               "Data classification & discovery",
+               "Policy-based data protection",
+               "Encryption & tokenization",
+               "Insider threat detection",
+             ],
+           },
+           {
+             icon: GlobeAltIcon,
+             title: "Security Operations Center (SOC) Setup",
+             desc: "24/7 security monitoring, threat hunting, and incident response capabilities.",
+             items: [
+               "SOC infrastructure setup",
+               "Playbooks & runbook development",
+               "Threat intelligence integration",
+               "Incident response automation",
+             ],
+           },
+           {
+             icon: BugAnIcon,
+             title: "Security Posture Assessment & Penetration Testing",
+             desc: "Comprehensive audits, vulnerability assessments, and ethical hacking exercises.",
+             items: [
+               "Infrastructure vulnerability scanning",
+               "Application penetration testing",
+               "Red team exercises",
+               "Remediation roadmap",
+             ],
+           },
+         ].map((service) => (
+           <div
+             key={service.title}
+             className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition"
+           >
+             <h3 className="text-base font-semibold text-slate-900">
+               {service.title}
+             </h3>
 
-              <p className="mt-3 text-sm text-slate-600">
-                {service.desc}
-              </p>
+             <p className="mt-3 text-sm text-slate-600">
+               {service.desc}
+             </p>
 
-              <ul className="mt-5 space-y-2">
-                {service.items.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-2 text-sm text-slate-600"
-                  >
-                    <span className="mt-1 h-4 w-4 rounded-full border border-emerald-500 text-emerald-500 flex items-center justify-center text-xs">
-                      ✓
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+             <ul className="mt-5 space-y-2">
+               {service.items.map((item) => (
+                 <li
+                   key={item}
+                   className="flex items-start gap-2 text-sm text-slate-600"
+                 >
+                   <span className="mt-1 h-4 w-4 rounded-full border border-emerald-500 text-emerald-500 flex items-center justify-center text-xs">
+                     ✓
+                   </span>
+                   {item}
+                 </li>
+               ))}
+             </ul>
+           </div>
+         ))}
+       </div>
 
-        {/* CTA *
-        <div className="mt-16 text-center">
-          <button className="inline-flex items-center px-6 py-2.5 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
-            Request Detailed Scope
-          </button>
-        </div>
-      </Container>
-    </section>
-  );
+       {/* CTA *
+       <div className="mt-16 text-center">
+         <button className="inline-flex items-center px-6 py-2.5 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
+           Request Detailed Scope
+         </button>
+       </div>
+     </Container>
+   </section>
+ );
 }  */
 
 
-  // top of file//
+// top of file//
 function ServicesCards() {
   const services = [
     {
@@ -312,25 +315,46 @@ function ServicesCards() {
   ];
 
   return (
+
+    <section className="py-20 bg-white">
+      {/* ===== SECTION HEADER ===== */}
+      
+      {/* ===== SECTION HEADER ===== */}
+<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+  {/* Badge */}
+  <span className="inline-block text-sm font-medium text-sky-600 bg-sky-50 px-3 py-1 rounded-full">
+    Service Catalogue
+  </span>
+
+  {/* Heading */}
+  <h2 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900">
+    Cybersecurity Services We Deliver
+  </h2>
+
+  {/* Subheading */}
+  <p className="mt-3 max-w-2xl text-lg text-slate-600">
+    Comprehensive security services spanning identity, infrastructure,
+    data, and operations
+  </p>
+</div>
+
     <div className="mx-auto max-w-7xl grid gap-10 grid-cols-1 md:grid-cols-2 px-4 sm:px-6 lg:px-8">
       {services.map((service) => {
         const Icon = service.icon;
         return (
           <div
             key={service.title}
-            className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-transform transform hover:-translate-y-1"
-          >
+            className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-transform transform hover:-translate-y-1">
             {/* Icon above title */}
-            <div  className="flex justify-center">
-              <div className="flex items-center justify-center rounded-full bg-gradient-to-br from-sky-50 to-indigo-50 p-3 lg:p-4 shadow-sm hover:border-blue-500">
+            <div>
+              <div className="inline-flex items-center justify-center rounded-full bg-gradient-to-br from-sky-50 to-indigo-50 p-3 lg:p-4 shadow-sm">
                 <Icon className="h-6 w-6 text-indigo-600 transition-transform duration-300 group-hover:scale-110" />
               </div>
+
             </div>
 
             {/* Title + description (centered for visual balance) */}
-            <h3 className="text-basefont-semiboldtext-slate-900transition-colorsduration-900
-    group-hover:text-indigo-600
-  ">
+            <h3 className=" mt-4 text-base font-semibold text-slate-900 transition-colors duration-900 group-hover:text-indigo-600">
               {service.title}
             </h3>
 
@@ -355,6 +379,7 @@ function ServicesCards() {
         );
       })}
     </div>
+    </section>
   );
 }
 
@@ -500,7 +525,7 @@ function WayOfWorking() {
 
 
 
-/* our methodology*/
+/* our methodology 
 
 
 function Methodology() {
@@ -530,12 +555,12 @@ function Methodology() {
   return (
     <section className="py-20 border-t border-slate-100 bg-white text-center">
 
-      {/* Section Badge */}
+      {/* Section Badge *
       <div className="inline-block text-sm px-3 py-1 rounded-full bg-sky-600 text-white text-sm font-medium hover:bg-sky-700 transition">
         Industry Applications
       </div>
 
-      {/* Headings */}
+      {/* Headings *
       <h3 className="mt-4 text-3xl font-bold text-slate-900">
         Built for High-Compliance Industries
       </h3>
@@ -544,7 +569,7 @@ function Methodology() {
         Tailored cybersecurity approaches for industry-specific challenges and regulatory requirements
       </p>
 
-      {/* Steps */}
+      {/* Steps *
       <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
         {steps.map((s) => (
           <div
@@ -563,37 +588,7 @@ function Methodology() {
       </div>
     </section>
   );
-}
-
-/* =====================
-Industries Section
-===================== */
-
-
-function Industries() {
-  const industries = ["BFSI", "Healthcare", "Education",];
-  return (
-    <section className="py-20">
-      <Container>
-        <div className="text-center mb-14">
-          <SectionBadge text="Platform Integration" />
-          <h2 className="text-3xl font-bold">How Services Amplify the MSPL Platform</h2>
-          <p className="mt-3 text-slate-600">Our cybersecurity services are designed to integrate seamlessly <br></br> with MSPL's product ecosystem</p>
-        </div>
-
-
-        <div className="grid gap-8 w-180 ml-70 ">
-          {industries.map((i) => (
-            <div key={i} className="rounded-xl border border-slate-200 bg-white p-6">
-              <h3 className="font-semibold">{i}</h3>
-              <p className="mt-2 text-sm text-slate-600">Security architectures aligned with industry‑specific regulations.</p>
-            </div>
-          ))}
-        </div>
-      </Container>
-    </section>
-  );
-}
+} */
 
 
 /* =====================
@@ -782,11 +777,11 @@ export default function CybersecurityServicesPage() {
 
 
       <Philosophy />
-      <ServicesCards/>
+      <ServicesCards />
       <WayOfWorking />
-      <Methodology />
-      <Industries />
-      <WhyMSPL />
+      <IndustriesPage />
+      <ServicesAmplifyPage/>
+     
       <Enterprise />
 
 
