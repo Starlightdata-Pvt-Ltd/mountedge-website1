@@ -766,7 +766,7 @@ function JoinTeam() {
 
       <h3 className="text-2xl font-bold">Join Our Team</h3>
       <p className="mt-2 text-lg text-slate-600 max-w-xl mx-auto">
-        We're building a future-ready team for modern cybersecurity and cloud innovation.
+        We&apos;re building a future-ready team for modern cybersecurity and cloud innovation.
       </p>
 
       <motion.button

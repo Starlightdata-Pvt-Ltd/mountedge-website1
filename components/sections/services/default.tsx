@@ -319,7 +319,7 @@ export default function Services({ className }: { className?: string }) {
           <div className="flex-1">
             <h4 className="text-lg font-semibold text-gray-900">Need a tailored solution?</h4>
             <p className="mt-2 text-muted-foreground">
-              Request a technical demo or a security posture assessment and we'll
+              Request a technical demo or a security posture assessment and we&apos;ll
               prepare a customised plan for your organisation.
             </p>
             <div className="mt-3 flex flex-wrap gap-3 items-center">

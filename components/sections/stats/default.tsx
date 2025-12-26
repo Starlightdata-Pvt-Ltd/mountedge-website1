@@ -52,7 +52,7 @@ function useCount(target: number, duration = 1100) {
 /* -------------------- Single Stat Item -------------------- */
 function StatItem({ item, index }: { item: StatItemProps; index: number }) {
   const isNumber = typeof item.value === "number" && !Number.isNaN(item.value);
-  const animatedValue = isNumber ? useCount(item.value as number, 1200 + index * 120) : null;
+  const animatedValue = useCount(isNumber ? (item.value as number) : 0, 1200 + index * 120);
 
   const formatNumber = (n: number) => {
     const decimals = n % 1 !== 0 ? 2 : 0;

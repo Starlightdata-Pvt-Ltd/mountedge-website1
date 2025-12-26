@@ -13,9 +13,9 @@ export default function ManagedSecurityServices() {
       <section className="max-w-6xl mx-auto px-6 py-16 text-center">
         <h1 className="text-4xl font-bold">Managed Security Services</h1>
         <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-          Starlight Data's Managed Security Services (MSS) deliver continuous
+          Starlight Data&apos;s Managed Security Services (MSS) deliver continuous
           protection, threat detection, and rapid incident response to safeguard
-          your organization’s IT infrastructure, critical assets, and business
+          your organization&apos;s IT infrastructure, critical assets, and business
           operations.
         </p>
 

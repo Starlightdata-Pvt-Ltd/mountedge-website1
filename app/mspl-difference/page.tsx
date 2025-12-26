@@ -27,7 +27,7 @@ export default function MSPLDifferencePage(): React.ReactElement {
               The Problem <span className="text-slate-400">→</span> MSPL's Approach
             </h1>
             <p className="mt-4 max-w-3xl mx-auto text-slate-600 text-sm sm:text-base">
-              Cybersecurity today is fragmented — multiple vendors, disjointed policies,
+              Cybersecurity today is fragmented &ndash; multiple vendors, disjointed policies,
               inconsistent enforcement, and wide blind spots across browsers, networks,
               and devices. MSPL unifies governance, policy, and enforcement under a single
               modern Zero-Trust platform.

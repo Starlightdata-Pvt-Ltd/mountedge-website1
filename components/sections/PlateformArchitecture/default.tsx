@@ -58,7 +58,7 @@ export default function PlatformArchitecture() {
 
   const pillars: {
     key: string;
-    icon: React.ComponentType<any>;
+    icon: React.ComponentType<Record<string, unknown>>;
     title: string;
     desc: string;
     details: string;
@@ -280,7 +280,7 @@ function Pillar({
 }: {
   data: {
     key: string;
-    icon: React.ComponentType<any>;
+    icon: React.ComponentType<Record<string, unknown>>;
     title: string;
     desc: string;
     details: string;
@@ -316,7 +316,7 @@ function Pillar({
       onFocus={() => onHover && onHover()}
       onBlur={() => onLeave && onLeave()}
       tabIndex={0}
-      role="group"
+      role="button"
       aria-pressed={active}
     >
       <div className="flex items-start justify-between">

@@ -13,7 +13,7 @@ export default function DigitalForensics() {
       <section className="max-w-6xl mx-auto px-6 py-16 text-center">
         <h1 className="text-4xl font-bold">Digital Forensics Services</h1>
         <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-          Starlight Data's Digital Forensics services help organizations investigate and recover crucial evidence from digital devices and networks. We provide comprehensive solutions to uncover the truth, preserve evidence, and support legal or corporate investigations with the highest level of accuracy.
+          Starlight Data&apos;s Digital Forensics services help organizations investigate and recover crucial evidence from digital devices and networks. We provide comprehensive solutions to uncover the truth, preserve evidence, and support legal or corporate investigations with the highest level of accuracy.
         </p>
 
         <div className="mt-10 relative w-full h-80 sm:h-96 mx-auto">
