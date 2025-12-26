@@ -1,17 +1,17 @@
-# Stage 1: install prod deps (faster layer caching)
+# Stage 1: install production deps (cacheable, for final runtime)
 FROM node:20-alpine AS deps
 WORKDIR /app
-# only copy package manifests
 COPY package*.json ./
-# install production deps
+# install only production deps for final image copy
 RUN npm ci --omit=dev
 
-# Stage 2: build
+# Stage 2: builder (install dev deps here so Next can build .ts config)
 FROM node:20-alpine AS builder
 WORKDIR /app
+# copy everything for build
 COPY . .
-# copy prod node_modules from deps stage
-COPY --from=deps /app/node_modules ./node_modules
+# Install full deps (dev + prod) for build step
+RUN npm ci
 # build Next app
 RUN npm run build
 
@@ -19,18 +19,16 @@ RUN npm run build
 FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
-# copy only what's needed
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/node_modules ./node_modules
-
-# Cloud Run provides PORT via env var; default 8080
 ENV PORT=8080
 EXPOSE 8080
+
+# copy only the built output and production node_modules
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
 # disable telemetry (optional)
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# start the Next production server (reads $PORT)
 CMD ["npm", "run", "start"]
