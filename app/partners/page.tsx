@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const PARTNER_COUNT = 6;
-
 // images placed in: public/partners/1.png ... 6.png
 const PARTNER_SRC = (i: number) => `/${i}.png`;
 
@@ -67,8 +66,8 @@ export default function PartnersPage() {
           <div className="mt-10">
             <div className="relative overflow-hidden">
               <div className="mx-auto max-w-4xl">
-                <div className="relative rounded-2xl border border-white/6 bg-gradient-to-b from-white/3 to-white/2 p-6 shadow-lg">
-
+                {/* Simplified container: no background gradients/white overlays */}
+                <div className="relative rounded-2xl p-6">
                   <div
                     ref={trackRef}
                     className="partners-track will-change-transform flex gap-8 items-center"
@@ -124,8 +123,7 @@ export default function PartnersPage() {
                     ))}
                   </div>
 
-                  <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white/95 to-transparent" />
-                  <div className="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white/95 to-transparent" />
+                  {/* removed the white fade overlays so nothing else animates */}
                 </div>
               </div>
             </div>
@@ -141,15 +139,18 @@ export default function PartnersPage() {
           100% { transform: translateX(-50%); }
         }
 
+        /* marquee only moves the logo track */
         .partners-track {
           width: calc(200% + 6rem);
           gap: 2rem;
           padding: 0.5rem 0;
+          display: flex;
+          align-items: center;
           animation: partners-marquee var(--marquee-duration) linear infinite;
         }
 
+        /* keep logos simple — subtle lift on hover */
         .logo-img {
-          filter: drop-shadow(0 6px 20px rgba(14,165,233,0.06));
           transition: transform 220ms ease, filter 220ms ease;
           border-radius: 6px;
         }
@@ -157,7 +158,6 @@ export default function PartnersPage() {
         .logo-img:hover,
         .logo-img:focus {
           transform: translateY(-3px) scale(1.06);
-          filter: drop-shadow(0 10px 30px rgba(14,165,233,0.09));
         }
 
         @media (prefers-reduced-motion: reduce) {

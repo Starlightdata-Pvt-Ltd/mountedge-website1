@@ -5,6 +5,22 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@media (prefers-reduced-motion: no-preference) {
+  .float-hover:hover {
+    animation: float 6s ease-in-out infinite;
+  }
+}
+/* globals.css ya Tailwind base */
+html, body {
+  overflow-x: hidden;
+}
+
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
 
 
 @theme inline {

@@ -2,7 +2,8 @@
 
 import React from "react";
 import { motion, Variants } from "framer-motion";
-import { Code2, ShieldCheck, Zap, Users } from "lucide-react";
+import { Code2, ShieldCheck, Zap, Users , ArrowRight, CheckCircle } from "lucide-react";
+
 
 
 /*
@@ -53,11 +54,11 @@ const fadeUp: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.2, 0.8, 0.2, 1] } },
 };
 
-const heroBgGradient = "bg-gradient-to-br from-sky-50 to-white";
+const heroBgGradient = "bg-white";
 
 export default function HomePage() {
   return (
-    <main className="text-slate-900 antialiased selection:bg-sky-200 selection:text-slate-900">
+    <main className="text-slate-900 antialiased  selection:text-slate-900">
       <Hero />
 
       <SectionWrapper id="who" bg="white">
@@ -72,9 +73,7 @@ export default function HomePage() {
         <WhatMakesUsDifferent />
       </SectionWrapper>
 
-      <SectionWrapper id="expertise" bg="slate-50">
-        <Expertise />
-      </SectionWrapper>
+      
 
       <SectionWrapper id="leadership" bg="white">
         <Leadership />
@@ -100,11 +99,8 @@ export default function HomePage() {
         <JoinTeam />
       </SectionWrapper>
 
-      <SectionWrapper id="final" bg="slate-900 text-white py-24">
-        <FinalCTA />
-      </SectionWrapper>
-
-      <footer className="py-10 text-center text-sm text-slate-500">© 2025 MSPL. All rights reserved.</footer>
+      
+      <FinalCTA/>
     </main>
   );
 }
@@ -151,7 +147,7 @@ function Hero() {
       <motion.div
         animate={{ x: [0, -12, 0], y: [0, -6, 0] }}
         transition={{ duration: 8, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
-        className="absolute right-0 top-10 -z-10 opacity-20 pointer-events-none w-80 h-80 rounded-full bg-gradient-to-br from-sky-200 to-indigo-200 hidden lg:block"
+        className="absolute right-0 top-10 -z-10 opacity-20 pointer-events-none w-80 h-80 rounded-full  hidden lg:block"
       />
 
       <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-12">
@@ -164,7 +160,7 @@ function Hero() {
           <motion.div
             variants={fadeUp}
             className="inline-flex items-center gap-2 px-5 py-1 rounded-full 
-             bg-sky-50 border border-sky-200 
+              border border-sky-200 
              text-sm text-sky-700 font-medium mb-5"
           >
             <span className="w-2 h-2 rounded-full bg-sky-500"></span>
@@ -355,12 +351,12 @@ function WhatMakesUsDifferent() {
     background:
       "linear-gradient(180deg, rgba(240,251,255,0.9), rgba(255,255,255,1))",
     boxShadow:
-      "0 0 0 1px rgba(34, 48, 238, 0.45), 0 20px 40px rgba(34, 48, 238, 0.18)",
+      "0 0 0 1px rgba(34, 68, 238, 0.45), 0 20px 40px rgba(34, 48, 238, 0.18)",
   }}
   transition={{ type: "spring", stiffness: 180, damping: 26 }}
   style={{
     boxShadow:
-      "0 0 0 1px rgba(34, 34, 238, 0.35), 0 10px 28px rgba(34,211,238,0.12)",
+      "0 0 0 1px rgba(34, 34, 238, 0.35), 0 10px 28px rgba(34, 68, 238, 0.12)",
   }}
   className="
     rounded-xl
@@ -382,64 +378,6 @@ function WhatMakesUsDifferent() {
 }
 
 
-/* ----------------------------- Expertise ----------------------------- */
-function Expertise() {
-  const items = [
-    { title: "Zero Trust Architecture", subtitle: "Policy, posture, governance", accent: "sky" },
-    { title: "Secure Access & Governance", subtitle: "Unified enforcement layers", accent: "teal" },
-    { title: "Cybersecurity & Threat Protection", subtitle: "Ransomware, phishing, DLP", accent: "purple" },
-    { title: "Cloud & IT Infrastructure", subtitle: "Hybrid, infra modernization", accent: "amber" },
-    { title: "Digital Transformation & Automation", subtitle: "Apps, APIs, automation", accent: "emerald" },
-    { title: "Data Security & Compliance", subtitle: "Sovereignty, auditability", accent: "rose" },
-  ];
-
-  return (
-    <section className="py-8">
-      <div className="text-center">
-        <motion.div
-  whileHover={{ scale: 1.04 }}
-  className="inline-block text-sm px-4 py-1.5 
-             rounded-full 
-             bg-gradient-to-r from-sky-700 to-blue-700
-             text-white 
-             font-medium
-             shadow-md
-             transition-transform"
->
-  Core capabilities
-</motion.div>
-
-        <h2 className="mt-4 text-3xl font-bold">Our Expertise</h2>
-        <p className="mt-2 text-lg text-slate-600 max-w-2xl mx-auto">Six core capabilities that power our products and services.</p>
-      </div>
-
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {items.map((it) => (
-          <motion.div
-            key={it.title}
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            whileHover={{ borderRadius: "1rem",
-    boxShadow: "0 12px 28px rgba(73, 37, 235, 0.18)", }}
-            transition={{ type: "spring", stiffness: 250, damping: 20 }}
-            className="rounded-lg border border-slate-200 p-5 hover:shadow-lg transition"
-          >
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-md flex items-center justify-center ring-1" style={{ background: getBg(it.accent), color: "white" }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="6" fill="white" opacity="0.12" /></svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-slate-800">{it.title}</h3>
-                <p className="mt-1 text-sm text-slate-500">{it.subtitle}</p>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 /* ----------------------------- Leadership ----------------------------- */
 function Leadership() {
@@ -459,8 +397,8 @@ function Leadership() {
           <motion.div
   key={l.role}
   whileHover={{
-    boxShadow: "0 14px 30px rgba(14, 165, 233, 0.18)",
-    borderColor: "#38bdf8",
+    boxShadow: "0 14px 30px rgba(14, 149, 233, 0.18)",
+    borderColor: "#386ef8ff",
   }}
   transition={{ type: "spring", stiffness: 200, damping: 28 }}
   className="
@@ -554,7 +492,7 @@ function Approach() {
   viewport={{ once: true, amount: 0.15 }}
   whileHover={{
     borderColor: "#2563eb",
-    boxShadow: "0 14px 32px rgba(37,99,235,0.18)",
+    boxShadow: "0 14px 32px rgba(47, 37, 235, 0.18)",
   }}
   transition={{ type: "spring", stiffness: 200, damping: 26 }}
   className="
@@ -664,7 +602,7 @@ function SecurityCompliance() {
   transition={{ type: "spring", stiffness: 180, damping: 28 }}
   style={{
     boxShadow:
-      "0 0 0 1px rgba(34,211,238,0.35), 0 20px 40px rgba(34,211,238,0.12)",
+      "0 0 0 1px rgba(34, 119, 238, 0.35), 0 20px 40px rgba(34, 119, 238, 0.12)",
   }}
   className="
     rounded-xl
@@ -729,7 +667,7 @@ function CultureValues() {
   transition={{ type: "spring", stiffness: 180, damping: 28 }}
   style={{
     boxShadow:
-      "0 0 0 1px rgba(34,211,238,0.35), 0 20px 40px rgba(34,211,238,0.12)",
+      "0 0 0 1px rgba(34, 34, 238, 0.35), 0 20px 40px rgba(34, 44, 238, 0.12)",
   }}
   className="
     rounded-xl
@@ -786,34 +724,95 @@ function JoinTeam() {
 function FinalCTA() {
   return (
     <section className="py-24 bg-slate-900 text-white">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="rounded-xl border border-white/10 p-10 text-center bg-slate-900">
-          <h2 className="text-2xl font-semibold">
-            Ready to strengthen your enterprise security?
-          </h2>
-          <p className="mt-3 text-sm text-slate-300">
-            Partner with MSPL to build a comprehensive Zero Trust security architecture.
-          </p>
+      <div className="max-w-4xl mx-auto px-6 relative">
+        {/* Decorative background blobs */}
+        <div
+          aria-hidden={true}
+          className="pointer-events-none absolute inset-x-0 top-0 -translate-y-1/3 -z-10 flex justify-center"
+          style={{ height: 260 }}
+        >
+          <div
+            className="w-full max-w-3xl rounded-3xl blur-3xl opacity-20"
+            style={{
+              height: 260,
+              background:
+                "radial-gradient(400px 120px at 20% 20%, rgba(14,165,233,0.08), transparent 15%), radial-gradient(420px 120px at 80% 80%, rgba(59,130,246,0.06), transparent 18%)",
+            }}
+          />
+        </div>
 
-          <div className="mt-8 flex justify-center gap-4 flex-wrap">
-            <button className="px-6 py-2 rounded-md bg-sky-600 text-white text-sm font-medium hover:bg-sky-700">
-              Book Consultation
-            </button>
-            <button className="px-6 py-2 rounded-md border border-white/30 text-sm font-medium hover:bg-white/10">
-              Explore Secure Access Platform
-            </button>
-          </div>
+        <div className="relative">
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45 }}
+            className="rounded-xl border border-white/10 p-10 text-center bg-gradient-to-b from-slate-900/80 to-slate-900/95 shadow-xl backdrop-blur-md"
+            role="region"
+            aria-labelledby="enterprise-cta-title"
+          >
+            <h2 id="enterprise-cta-title" className="text-2xl font-semibold">
+              Ready to strengthen your enterprise security?
+            </h2>
 
-          <div className="mt-6 flex justify-center gap-6 text-xs text-slate-400">
-            <span>Engineering-first approach</span>
-            <span>Compliance-ready solutions</span>
-            <span>Proven track record</span>
-          </div>
+            <p className="mt-3 text-sm text-slate-300 max-w-xl mx-auto">
+              Partner with MSPL to design and deploy a comprehensive Zero Trust
+              security architecture — built for scale, observability and
+              compliance.
+            </p>
+
+            {/* CTAs */}
+            <div className="mt-8 flex justify-center gap-4 flex-wrap">
+              <a
+                href="/contact"
+                role="button"
+                aria-label="Book consultation"
+                className="inline-flex items-center gap-3 px-6 py-2 rounded-md bg-gradient-to-r from-sky-500 to-indigo-500 text-white text-sm font-medium shadow-md transform-gpu transition duration-200 hover:scale-[1.02] focus:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/30"
+              >
+                <ShieldCheck className="h-4 w-4" />
+                Book Consultation
+              </a>
+
+              <a
+                href="/platform"
+                role="button"
+                aria-label="Explore secure access platform"
+                className="inline-flex items-center gap-3 px-6 py-2 rounded-md border border-white/20 text-sm font-medium hover:bg-white/6 transition focus:outline-none focus-visible:ring-4 focus-visible:ring-slate-700/40"
+              >
+                Explore Secure Access Platform
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+
+            {/* Trust list + badges */}
+            <div className="mt-6 flex justify-center gap-6 text-xs text-slate-300 flex-wrap items-center">
+              <div className="flex items-center gap-2">
+                <Users className="h-4 w-4 text-sky-400" />
+                <span>Engineering-first approach</span>
+              </div>
+
+              <div className="hidden sm:block h-0.5 w-px bg-white/8 mx-2" aria-hidden={true} />
+
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-sky-400" />
+                <span>Compliance-ready solutions</span>
+              </div>
+
+              <div className="hidden sm:block h-0.5 w-px bg-white/8 mx-2" aria-hidden={true} />
+
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-sky-400" />
+                <span>Proven track record</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 }
+
+
+
 
 /* ----------------------------- Small icons (same as your original file) ----------------------------- */
 function IconWrapper({ children }: { children: React.ReactNode }) {
@@ -855,6 +854,7 @@ function LockIcon() {
     </IconWrapper>
   );
 }
+
 
 function getBg(accent = "sky") {
   const map: Record<string, string> = {
