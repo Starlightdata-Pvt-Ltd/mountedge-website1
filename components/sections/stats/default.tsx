@@ -60,9 +60,11 @@ function StatItem({
 }) {
   const isNumber =
     typeof item.value === "number" && !Number.isNaN(item.value);
-  const animated = isNumber
-    ? useCount(Number(item.value), 1200 + index * 120)
-    : null;
+  // Always call the hook in the same order - call with safe default if not a number
+  const animated = useCount(
+    isNumber ? Number(item.value) : 0,
+    1200 + index * 120
+  );
 
   const formatNumber = (n: number) => {
     const decimals = n % 1 !== 0 ? 2 : 0;
