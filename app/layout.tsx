@@ -4,9 +4,6 @@ import "./globals.css";
 import Navbar from "@/components/sections/navbar/default";
 import FooterSection from "@/components/sections/footer/default";
 
-
-
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,18 +21,23 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body>
-       
-       <Navbar/>
-        {children}
-       
+      <body className="overflow-x-hidden">
 
-       <FooterSection/>
+        {/* 🔥 FIXED NAVBAR WITHOUT LINE */}
+        <header className="fixed top-0 left-0 w-full z-[999] bg-transparent backdrop-blur-none shadow-none border-none">
+          <Navbar className="max-w-7xl mx-auto px-6" />
+        </header>
+
+        <main className="pt-20">
+          {children}
+        </main>
+
+        <FooterSection />
       </body>
     </html>
   );

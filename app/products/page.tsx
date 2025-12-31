@@ -17,7 +17,7 @@ export default function ProductsPage() {
               className="absolute left-1/2 -translate-x-1/2 -top-6 w-[420px] h-[120px] rounded-full blur-3xl opacity-60"
               style={{
                 background:
-                  "radial-gradient(circle at 30% 40%, rgba(37,99,235,0.12), rgba(37,99,235,0.04) 40%, transparent 70%)",
+                  "radial-gradient(circle at 30% 40%, rgba(37,99,235,0.12), rgba(37, 73, 235, 0.04) 40%, transparent 70%)",
               }}
             />
 
@@ -30,21 +30,21 @@ export default function ProductsPage() {
               <span className="text-blue-600">Security & Performance</span>
             </h1>
 
-            <p className="relative z-10 text-muted-foreground mt-4">
+            <p className="relative z-10 text-muted-foreground mt-4 text-sm sm:text-base">
               We build enterprise-grade secure solutions that protect your
               workforce, infrastructure, and business operations.
             </p>
           </div>
 
           {/* Products Grid */}
-          <div className="mt-14 grid gap-8 md:grid-cols-2">
+          <div className="mt-14 grid gap-6 sm:gap-8 md:grid-cols-2">
             {/* Product Card */}
             <div
               className="
-                group relative p-8 rounded-3xl border border-gray-100 bg-white
+                group relative p-6 sm:p-8 rounded-3xl border border-gray-100 bg-white
                 shadow-sm transition-all duration-300
                 hover:shadow-xl hover:border-blue-200
-                flex gap-6
+                flex flex-col sm:flex-row gap-4 sm:gap-6
               "
             >
               {/* left accent rail */}
@@ -54,48 +54,56 @@ export default function ProductsPage() {
               />
 
               <div className="flex-shrink-0">
-                <div className="h-20 w-20 rounded-2xl border border-gray-100 bg-white shadow-sm flex items-center justify-center transition-transform group-hover:scale-105">
+                <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-2xl border border-gray-100 bg-white shadow-sm flex items-center justify-center transition-transform group-hover:scale-105">
                   <img
                     src="https://mountedge-website.netlify.app/star-secure-logo-transparent.svg"
                     alt="Star Secure"
-                    className="h-12 w-12 object-contain"
+                    className="h-12 sm:h-16 w-auto object-contain"
                   />
                 </div>
               </div>
 
-              <div>
-                <h3 className="text-xl font-bold text-gray-900">
+              <div className="flex-1">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                   Star Secure Browser (SSB)
                 </h3>
 
-                <p className="text-muted-foreground mt-2 leading-relaxed">
+                <p className="text-sm sm:text-base text-muted-foreground mt-2 leading-relaxed">
                   An enterprise-grade secure browser built using zero-trust
                   architecture to protect people, data, networks, and IT assets.
                 </p>
 
-                <Button
-                  variant="ghost"
-                  className="mt-4 px-0 group-hover:text-blue-600"
-                  asChild
-                >
-                  <a
-                    href="/products/star-secure"
-                    className="flex items-center gap-1"
-                  >
-                    Learn More
-                    <ArrowRight
-                      size={16}
-                      className="transition-transform group-hover:translate-x-1"
-                    />
-                  </a>
-                </Button>
+                <Button variant="ghost" className="mt-4 p-0" asChild>
+  <a
+    href="/products/star-secure"
+    className="
+      group
+      inline-flex
+      items-center
+      gap-1
+      px-3
+      py-2
+      rounded-md
+      transition-colors
+      hover:text-blue-600
+      hover:bg-salate-50
+    "
+  >
+    Learn More
+    <ArrowRight
+      size={16}
+      className="transition-transform group-hover:translate-x-2"
+    />
+  </a>
+</Button>
+
               </div>
             </div>
 
             {/* Why MountEdge Card */}
             <div
               className="
-                group relative p-8 rounded-3xl border border-gray-100 bg-white
+                group relative p-6 sm:p-8 rounded-3xl border border-gray-100 bg-white
                 shadow-sm transition-all duration-300
                 hover:shadow-xl hover:border-blue-200
               "
@@ -103,18 +111,18 @@ export default function ProductsPage() {
               {/* subtle corner highlight */}
               <div
                 aria-hidden
-                className="absolute -top-8 -right-8 w-32 h-32 rounded-full blur-3xl opacity-40"
+                className="absolute -top-8 -right-8 w-24 sm:w-32 h-24 sm:h-32 rounded-full blur-3xl opacity-40"
                 style={{
                   background:
                     "radial-gradient(circle at center, rgba(37,99,235,0.10), transparent 60%)",
                 }}
               />
 
-              <h3 className="text-xl font-bold text-gray-900">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                 Why MountEdge?
               </h3>
 
-              <p className="text-muted-foreground mt-3 leading-relaxed">
+              <p className="text-sm sm:text-base text-muted-foreground mt-3 leading-relaxed">
                 We combine industry expertise, client-first processes, and
                 innovation-driven engineering. Our products deliver measurable
                 security outcomes backed by strong R&D and a deep understanding
@@ -126,7 +134,13 @@ export default function ProductsPage() {
                 className="mt-4 px-0 group-hover:text-blue-600"
                 asChild
               >
-                <a href="/about" className="flex items-center gap-1">
+                <a href="/about" className="flex  group
+      inline-flex
+      items-center
+      gap-1
+      px-3
+      py-2
+      rounded-md  hover:bg-salate-50 items-center gap-1">
                   Explore Our Approach
                   <ArrowRight
                     size={16}

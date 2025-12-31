@@ -5,21 +5,24 @@ import React from "react";
 import Image from "next/image";
 import Stats from "@/components/sections/stats/default";
 
-// Fully TypeScript-safe Data Analytics Page
-export default function DataAnalytics() {
+
+// Fully TypeScript-safe IT Infrastructure Page
+export default function ITInfrastructure() {
   return (
     <main className="bg-white text-slate-900">
       {/* Hero Section */}
       <section className="max-w-6xl mx-auto px-6 py-16 text-center">
-        <h1 className="text-4xl font-bold">Data Analytics Services</h1>
+        <h1 className="text-4xl font-bold">Automation Services</h1>
         <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-          Starlight Data’s Data Analytics services empower organizations to transform raw data into meaningful insights. We help businesses make informed decisions, optimize operations, and drive growth using advanced analytics, visualization, and data-driven strategies.
+          Modern, resilient cloud architectures, migration services, and
+          24/7 managed operations to keep your business available at scale with
+          performance, reliability and security.
         </p>
 
         <div className="mt-10 relative w-full h-80 sm:h-96 mx-auto">
           <Image
-            src="/digital.png"
-            alt="Data Analytics"
+            src="/IT infrasturcture.png" // replace with your image path
+            alt="IT Infrasturcture"
             fill
             style={{ objectFit: "cover" }}
             className="rounded-xl shadow-lg"
@@ -27,6 +30,7 @@ export default function DataAnalytics() {
         </div>
       </section>
 
+      
       {/* Services + Sticky Form */}
       <section className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column: Services List */}
@@ -78,7 +82,7 @@ export default function DataAnalytics() {
               <div>
                 <label className="block text-sm font-medium mb-1">How Can We Help?</label>
                 <textarea
-                  placeholder="Describe your data or analytics needs..."
+                  placeholder="Write your message..."
                   className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500 h-24 resize-none"
                 ></textarea>
               </div>
@@ -93,13 +97,13 @@ export default function DataAnalytics() {
           </div>
         </div>
       </section>
-
       {/* CTA / Contact Section */}
       <section className="bg-slate-50 py-12">
         <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-xl font-semibold">Ready to Unlock Insights?</h3>
+          <h3 className="text-xl font-semibold">Ready to Get Started?</h3>
           <p className="mt-2 text-slate-600">
-            Turn your data into a strategic advantage with advanced analytics and expert guidance.
+            Supercharge your organisation’s success with cutting-edge IT
+            solutions and 24/7 expert support.
           </p>
           <a
             href="#contact"
@@ -109,12 +113,17 @@ export default function DataAnalytics() {
           </a>
         </div>
       </section>
-
-      <PartnersPage />
-      <Stats />
+      <PartnersPage/>
+      <Stats/>
     </main>
   );
 }
+
+
+      
+    
+  
+
 
 // Type definitions for service sections
 interface ServiceSectionProps {
@@ -134,40 +143,52 @@ function ServiceSection({ title, children }: ServiceSectionProps) {
 function ServiceList() {
   return (
     <section className="max-w-5xl mx-auto px-6 py-8">
-      <ServiceSection title="Data Analytics Services">
-        <p>• Descriptive Analytics: Understanding historical data to identify trends, patterns, and performance metrics.</p>
-        <p>• Diagnostic Analytics: Analyzing data to determine why certain events or outcomes occurred.</p>
-        <p>• Predictive Analytics: Using statistical models and machine learning to forecast future trends and behaviors.</p>
-        <p>• Prescriptive Analytics: Providing actionable recommendations to optimize business decisions.</p>
-        <p>• Real-Time Analytics: Processing live data streams for immediate insights and faster decision-making.</p>
+      <ServiceSection title="Data Center Services">
+        <p>• Custom-designed data centers built for high reliability.</p>
+        <p>• 24/7 management and monitoring with efficient uptime.</p>
+        <p>• Secure colocation with advanced connectivity.</p>
       </ServiceSection>
 
-      <ServiceSection title="Business Intelligence & Reporting">
-        <p>• Dashboard Development: Interactive dashboards for real-time visibility into key business metrics.</p>
-        <p>• Data Visualization: Clear and intuitive charts, graphs, and reports for better understanding.</p>
-        <p>• KPI Tracking: Monitoring critical performance indicators aligned with business goals.</p>
-        <p>• Executive Reporting: High-level reports designed for leadership and stakeholders.</p>
+      <ServiceSection title="Cloud Services">
+        <p>• Seamless Cloud Migration with minimal disruption.</p>
+        <p>• Ongoing Cloud Management and optimization.</p>
+        <p>• Hybrid cloud solutions for continuity and scale.</p>
       </ServiceSection>
 
-      <ServiceSection title="Advanced Analytics & AI">
-        <p>• Machine Learning Models: Building intelligent models to detect patterns and automate insights.</p>
-        <p>• Customer Analytics: Understanding customer behavior, segmentation, and lifetime value.</p>
-        <p>• Risk & Fraud Analytics: Identifying anomalies and mitigating risks through data-driven analysis.</p>
-        <p>• Forecasting & Demand Planning: Predicting demand and optimizing supply chain operations.</p>
+      <ServiceSection title="IT Operations">
+        <p>• Managed IT with proactive monitoring and fast response.</p>
+        <p>• 24/7 system monitoring and issue resolution.</p>
+        <p>• Patch Management and Help Desk support.</p>
       </ServiceSection>
 
-      <ServiceSection title="Data Engineering & Management">
-        <p>• Data Warehousing: Designing and managing scalable data warehouses.</p>
-        <p>• ETL / ELT Pipelines: Extracting, transforming, and loading data from multiple sources.</p>
-        <p>• Data Quality & Governance: Ensuring accuracy, consistency, and compliance of data.</p>
-        <p>• Cloud Data Platforms: Leveraging cloud technologies for scalable analytics solutions.</p>
+      <ServiceSection title="Network Services">
+        <p>• Network design and implementation tailored to performance.</p>
+        <p>• Continuous network monitoring and optimization.</p>
+        <p>• High security with advanced routing and firewalls.</p>
       </ServiceSection>
 
-      <ServiceSection title="Industry-Specific Analytics Solutions">
-        <p>• Financial Analytics: Performance analysis, forecasting, and compliance reporting.</p>
-        <p>• Marketing Analytics: Campaign performance, attribution modeling, and ROI analysis.</p>
-        <p>• Operations Analytics: Process optimization and efficiency improvement.</p>
-        <p>• Healthcare & Public Sector Analytics: Data-driven insights for better outcomes and planning.</p>
+      <ServiceSection title="Infrastructure Security">
+        <p>• Firewall and IDS/IPS protecting against threats.</p>
+        <p>• SD-WAN solutions for secure, flexible networks.</p>
+        <p>• Structured cabling and resilient connectivity.</p>
+      </ServiceSection>
+
+      <ServiceSection title="Data Management">
+        <p>• Database optimization and secure administration.</p>
+        <p>• Fast and reliable data migration services.</p>
+        <p>• Trusted backup and disaster recovery plans.</p>
+      </ServiceSection>
+
+      <ServiceSection title="IT Consulting">
+        <p>• Infrastructure assessments for performance and security.</p>
+        <p>• Future-ready capacity planning.</p>
+        <p>• Strategic technology roadmaps aligned with business goals.</p>
+      </ServiceSection>
+
+      <ServiceSection title="AV & Monitoring Solutions">
+        <p>• Seamless AV integration for effective communication.</p>
+        <p>• High-quality conferencing and digital signage.</p>
+        <p>• NOC room solutions for real-time infrastructure monitoring.</p>
       </ServiceSection>
     </section>
   );

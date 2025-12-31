@@ -56,10 +56,10 @@ export default function HomePage() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-sky-50 via-blue-50 to-white">
+    <section className="relative overflow-hidden bg-white">
       {/* Background blur elements */}
-      <div className="absolute -top-24 -right-24 w-96 h-96 bg-sky-300/30 rounded-full blur-3xl" />
-      <div className="absolute top-40 -left-24 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl" />
+      <div className="absolute -top-24 -right-24 w-96 h-96  rounded-full blur-3xl" />
+      <div className="absolute top-40 -left-24 w-96 h-96  rounded-full blur-3xl" />
 
       <motion.div
         variants={containerVariants}

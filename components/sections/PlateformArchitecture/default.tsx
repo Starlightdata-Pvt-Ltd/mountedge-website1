@@ -107,13 +107,14 @@ export default function PlatformArchitecture() {
       <div className="max-w-6xl mx-auto text-center relative">
         {/* Decorative top glow */}
         <div
-          aria-hidden
-          className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 w-[820px] h-[360px] rounded-full blur-3xl"
-          style={{
-            background:
-              "radial-gradient(circle at 40% 30%, rgba(11,110,255,0.14), rgba(11,110,255,0.06) 35%, transparent 60%)",
-          }}
-        />
+  aria-hidden
+  className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[90vw] max-w-[820px] h-[260px] rounded-full blur-[120px]"
+  style={{
+    background:
+      "radial-gradient(circle at 40% 30%, rgba(11,110,255,0.14), rgba(11,110,255,0.06) 35%, transparent 60%)",
+  }}
+/>
+
 
         {/* Badge */}
         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-200 text-sm font-medium text-blue-600 bg-white/60 backdrop-blur-sm">
@@ -342,71 +343,6 @@ function Pillar({
             e.stopPropagation();
           }}
         >
-          <div ref={menuRef} className="relative">
-            <button
-              onClick={() => setMenuOpen((s) => !s)}
-              aria-haspopup="menu"
-              aria-expanded={menuOpen}
-              className="p-2 rounded-full hover:bg-gray-100 transition"
-              title="More actions"
-            >
-              <EllipsisVerticalIcon className="h-5 w-5 text-gray-600" />
-            </button>
-
-            {menuOpen && (
-              <div
-                role="menu"
-                aria-label={`${data.title} actions`}
-                className="absolute right-0 mt-2 w-44 rounded-lg bg-white border border-gray-100 shadow-lg z-20"
-              >
-                <ul className="py-2">
-                  <li>
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setMenuOpen(false);
-                        // Overview action — for now just highlight this card (keeping behaviour inline)
-                        // you can wire this to a route if needed
-                      }}
-                      role="menuitem"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                    >
-                      Overview
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setMenuOpen(false);
-                        window.open("/docs", "_blank");
-                      }}
-                      role="menuitem"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                    >
-                      Docs
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setMenuOpen(false);
-                        window.location.href = "/request-demo";
-                      }}
-                      role="menuitem"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                    >
-                      Request Demo
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
         </div>
       </div>
 

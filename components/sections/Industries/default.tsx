@@ -1,163 +1,172 @@
+// components/IndustriesSection.tsx
 "use client";
 
 import React from "react";
-import Link from "next/link";
-import {
-  BuildingLibraryIcon,
-  HeartIcon,
-  AcademicCapIcon,
-  BriefcaseIcon,
-} from "@heroicons/react/24/outline";
-import { motion } from "framer-motion";
 
-const INDUSTRIES = [
-  {
-    id: "bfsi",
-    tag: "Compliance Risk",
-    title: "BFSI",
-    desc: "Built for regulatory compliance, data sovereignty, and secure digital banking.",
-    icon: BuildingLibraryIcon,
-  },
-  {
-    id: "healthcare",
-    tag: "Data Governance",
-    title: "Healthcare",
-    desc: "Built for patient data protection, EMR security, and HIPAA compliance.",
-    icon: HeartIcon,
-  },
-  {
-    id: "education",
-    tag: "Security & Integrity",
-    title: "Education",
-    desc: "Built for secure exam environments, learning platforms, and academic integrity.",
-    icon: AcademicCapIcon,
-  },
-  {
-    id: "enterprise",
-    tag: "Distributed Workforce",
-    title: "Enterprise",
-    desc: "Built for distributed teams, remote access, and hybrid infrastructure.",
-    icon: BriefcaseIcon,
-  },
-];
+type Card = {
+  tag: { label: string; color: string }; // color is a Tailwind bg/border color token fragment (e.g. "amber-600")
+  title: string;
+  desc: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+};
 
 export default function IndustriesSection() {
+  const cards: Card[] = [
+    {
+      tag: { label: "COMPLIANCE RISK", color: "amber-600" },
+      title: "BFSI",
+      desc: "Built for regulatory compliance, data sovereignty, and secure digital banking",
+      icon: IconBank,
+    },
+    {
+      tag: { label: "DATA GOVERNANCE", color: "sky-500" },
+      title: "Healthcare",
+      desc: "Built for patient data protection, EMR security, and HIPAA compliance",
+      icon: IconHeart,
+    },
+    {
+      tag: { label: "SECURITY & INTEGRITY", color: "teal-400" },
+      title: "Education",
+      desc: "Built for secure exam environments, learning platforms, and academic integrity",
+      icon: IconGraduation,
+    },
+    {
+      tag: { label: "DISTRIBUTED WORKFORCE", color: "violet-500" },
+      title: "Enterprise",
+      desc: "Built for distributed teams, remote access, and hybrid infrastructure",
+      icon: IconBriefcase,
+    },
+  ];
+
   return (
-    <section className="relative bg-white/80 py-20 px-4">
-      {/* Decorative gradient */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -translate-y-1/3 -z-10 flex justify-center"
-      >
-        <div
-          className="w-full max-w-6xl rounded-3xl blur-3xl opacity-20"
-          style={{
-            height: 340,
-            background:
-              "radial-gradient(800px 200px at 10% 20%, rgba(59,130,246,0.06), transparent 12%), radial-gradient(700px 200px at 90% 80%, rgba(14,165,233,0.04), transparent 12%)",
-          }}
-        />
-      </div>
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Dark card panel */}
+        <div className="relative rounded-3xl bg-white px-10 py-16 overflow-hidden">
+          {/* Decorative centered glow behind the header */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -top-36 left-1/2 -translate-x-1/2 w-[820px] h-[360px] rounded-full blur-3xl"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 40%, rgba(11, 214, 255, 0.03), rgba(11, 202, 255, 0.04) 40%, transparent 60%)",
+            }}
+          />
 
-      <div className="max-w-7xl mx-auto text-center">
-        {/* Badge */}
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-100 text-sm font-medium text-blue-700 bg-blue-50">
-          Industry Solutions
-        </span>
+          {/* Small pill badge above title */}
+          <div className="relative z-10 text-center mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-cyan-700 text-sm font-medium text-blue-300  ">
+              <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.2" />
+              </svg>
+              Industry Solutions
+            </span>
+          </div>
 
-        {/* Heading */}
-        <h2 className="mt-6 text-3xl sm:text-4xl md:text-5xl font-semibold text-slate-900">
-          Industries We Support
-        </h2>
+          {/* Header */}
+          <header className="relative z-10 text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-semibold text-black">
+              Industries We Support
+            </h2>
+            <p className="mt-3 text-slate-600 max-w-2xl mx-auto">
+              Purpose-built for compliance-heavy, mission-critical sectors.
+            </p>
+          </header>
 
-        {/* Subtitle */}
-        <p className="mt-4 max-w-2xl mx-auto text-slate-600">
-          Purpose-built for compliance-heavy, mission-critical sectors. Secure,
-          auditable, and tailored to industry-specific regulations.
-        </p>
-
-        {/* Cards */}
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {INDUSTRIES.map((item, idx) => {
-            const Icon = item.icon;
-            const headingId = `industry-${item.id}`;
-
-            return (
-              <motion.article
-                key={item.id}
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ scale: 1.02, y: -4 }}
-                transition={{ duration: 0.36, delay: idx * 0.06 }}
-                viewport={{ once: true, amount: 0.25 }}
-                className="group rounded-2xl border border-slate-100 p-6 hover:shadow-2xl transition-shadow bg-white/70 backdrop-blur-sm"
-                aria-labelledby={headingId}
-              >
-                {/* Top row */}
-                <div className="flex items-start justify-between gap-4">
-                  <span className="inline-block mb-2 px-3 py-1 text-xs font-semibold rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-50/60">
-                    {item.tag}
-                  </span>
-
-                  <div
-                    className="h-12 w-12 rounded-xl flex items-center justify-center"
-                    aria-hidden
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(59,130,246,0.06), rgba(14,165,233,0.04))",
-                    }}
-                  >
-                    <Icon className="h-6 w-6 text-blue-600" />
-                  </div>
-                </div>
-
-                {/* Title */}
-                <h3
-                  id={headingId}
-                  className="mt-3 text-lg font-semibold text-slate-900"
+          {/* Cards grid */}
+          <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {cards.map((c, i) => {
+              const tagColor = c.tag.color;
+              return (
+                <article
+                  key={i}
+                  className="group relative rounded-2xl border border-slate-800/60 p-6 bg-white hover:bg-sky-blue transition-colors duration-300"
                 >
-                  {item.title}
-                </h3>
-
-                {/* Description */}
-                <p className="mt-3 text-sm text-slate-600 leading-relaxed">
-                  {item.desc}
-                </p>
-
-                {/* Footer */}
-                <div className="mt-6 flex items-center justify-between gap-4">
-                  <Link
-                    href={`/industries/${item.id}`}
-                    className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-800 transition"
-                    aria-label={`Explore ${item.title} industry`}
-                  >
-                    Explore Industry
+                  {/* small tag pill top-left */}
+                  <div className="absolute top-2 left-6 z-20">
                     <span
-                      className="inline-block transform transition group-hover:translate-x-1"
-                      aria-hidden
+                      className={`inline-flex items-center gap-2 px-3 py-0.5 rounded-full text-[11px] font-medium text-${tagColor} border border-${tagColor}/20`}
+                      // NOTE: className interpolation with Tailwind color names must match the set of classes compiled by Tailwind.
                     >
-                      →
+                      • {c.tag.label}
                     </span>
-                  </Link>
-
-                  <div className="hidden sm:inline-flex items-center gap-2 rounded-full px-2 py-1 bg-white/40 text-xs text-slate-500 ring-1 ring-slate-50">
-                    <span className="font-medium text-blue-600">Tailored</span>
-                    <span>solutions</span>
                   </div>
-                </div>
 
-                <style jsx>{`
-                  article:focus-within {
-                    outline: 3px solid rgba(59, 130, 246, 0.12);
-                    outline-offset: 6px;
-                    border-radius: 14px;
-                  }
-                `}</style>
-              </motion.article>
-            );
-          })}
+                  <div className="flex flex-col h-full">
+                    <div className="mt-5 mb-6">
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center border border-slate-700 bg-black group-hover:bg-black transition-colors">
+                        <c.icon className="w-6 h-6 text-cyan-300" />
+                      </div>
+                    </div>
+
+                    <h3 className="text-white text-lg mb-2">{c.title}</h3>
+                    <p className="text-slate-600 text-sm mb-6 flex-1">{c.desc}</p>
+
+                    <div>
+                      <a className="text-blue-600 hover:underline text-sm font-medium inline-flex items-center gap-2">
+                        Explore Industry
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" aria-hidden>
+                          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* subtle inner stroke using pseudo layer */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 rounded-2xl"
+                    style={{
+                      boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.02)",
+                    }}
+                  />
+                </article>
+              );
+            })}
+          </div>
+
+          {/* bottom subtle grid line */}
+          <div className="mt-12 h-12" />
         </div>
       </div>
     </section>
+  );
+}
+
+/* ---------------- Inline Icons (typed) ---------------- */
+
+function IconBank(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} viewBox="0 0 24 24" fill="none">
+      <path d="M3 10.5L12 5l9 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M5 21V11h14v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M10 14v3M14 14v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconHeart(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} viewBox="0 0 24 24" fill="none">
+      <path d="M20.8 7.6a4.6 4.6 0 00-6.4-.2L12 9.9l-2.4-2.5a4.6 4.6 0 10-6.4 6.6L12 21l9.2-6.8a4.6 4.6 0 00-.4-6.6z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconGraduation(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} viewBox="0 0 24 24" fill="none">
+      <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4 17c1.8 1.2 4 2 8 2s6.2-.8 8-2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconBriefcase(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="7" width="18" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M8 7V6a4 4 0 018 0v1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }

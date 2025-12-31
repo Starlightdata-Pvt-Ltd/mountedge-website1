@@ -27,14 +27,14 @@ interface HeroProps {
 
 export default function Hero({
   title = (
-    <>
-      <span className="block tracking-tight">
+    <div className="text-center md:text-left mt-15 md:mt-1">
+      <span className="block tracking-tight text-center ">
         Secure. Scalable.
       </span>
       <span className="block tracking-tight text-blue-600">
         Unified Cybersecurity.
       </span>
-    </>
+    </div>
   ),
   description = (
     <>
@@ -44,26 +44,24 @@ export default function Hero({
     </>
   ),
   mockup = (
-    <div className="relative">
-      {/* Blue atmospheric overlay to neutralize warm tones */}
-      <div className="pointer-events-none absolute inset-0 rounded-xl bg-blue-500/5 mix-blend-multiply" />
+    <div className="mx-auto max-w-6xl">
+  <img
+    src="/Dashboard-light.png.png"
+    alt="MSPL platform dashboard"
+    width={1248}
+    height={765}
+    className="relative z-10 w-full h-auto rounded-xl object-contain contrast-105 saturate-110"
+    draggable={false}
+  />
+</div>
 
-      <img
-        src="/Dashboard-light.png.png"
-        alt="MSPL platform dashboard"
-        width={1248}
-        height={765}
-        className="relative z-10 w-full h-auto rounded-xl object-contain contrast-105 saturate-110"
-        draggable={false}
-      />
-    </div>
   ),
   badge = (
     <Badge
       variant="outline"
       className="border-muted bg-white text-muted-foreground animate-appear"
     >
-      Enterprise-Grade Security Platform
+    
     </Badge>
   ),
   buttons = [

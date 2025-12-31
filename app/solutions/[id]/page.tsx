@@ -21,6 +21,7 @@ import {
 
 
 
+import { Code2, ShieldCheck, Zap, Users, ArrowRight, CheckCircle } from "lucide-react";
 
 
 type CTAButtonProps = {
@@ -38,6 +39,7 @@ type FeatureCardProps = {
   Icon: ComponentType<React.SVGProps<SVGSVGElement>>;
   title: string;
   desc: string;
+  index?: number;
 };
 
 
@@ -57,23 +59,59 @@ const CTAButton = ({ children, variant = "primary" }: CTAButtonProps) => (
 );
 
 /* ---------------- Featured Button ---------------- */
-const FeatureCard = ({ Icon, title, desc }: FeatureCardProps) => (
-  <motion.article
-    whileHover={{ y: -6 }}
-    transition={{ type: "spring", stiffness: 300 }}
-    className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md"
-  >
-    <div className="flex items-start gap-4">
-      <div className="flex h-12 w-12 items-center justify-center rounded-md bg-red-50">
-        <Icon className="h-6 w-6 text-red-600" />
-      </div>
-      <div>
+
+const FeatureCard = ({ Icon, title, desc, index = 0 }: FeatureCardProps) => {
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55, delay: index * 0.12, ease: "easeOut" }}
+      whileHover={{ y: -6 }}
+      className={`
+        group relative rounded-3xl p-6
+        backdrop-blur-xl bg-white/60
+        border border-white/30
+        shadow-[0_20px_60px_rgba(15,23,42,0.12)]
+        transition-all duration-400 will-change-transform
+        hover:-translate-y-2 hover:shadow-[0_30px_100px_rgba(37,99,235,0.16)]
+      `}
+    >
+      {/* subtle glow edge (appears on hover) */}
+      <div
+        aria-hidden
+        className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(37,99,235,0.12), rgba(99,102,241,0.06) 40%, transparent 70%)",
+        }}
+      />
+
+      {/* Icon + title */}
+      <div className="relative z-10 flex items-center gap-4 mb-4">
+        <div
+          className={`
+            p-3 rounded-2xl
+            bg-gradient-to-br from-sky-50/60 to-indigo-50/40
+            border border-sky-200/40 shadow-inner
+            transition-transform duration-300 group-hover:scale-105
+          `}
+        >
+          <Icon className="w-6 h-6 text-indigo-600" />
+        </div>
+
         <h3 className="text-sm font-semibold text-slate-900">{title}</h3>
-        <p className="mt-2 text-xs text-slate-600">{desc}</p>
       </div>
-    </div>
-  </motion.article>
-);
+
+      {/* description */}
+      <p className="relative z-10 text-sm text-slate-600 leading-relaxed">
+        {desc}
+      </p>
+
+      {/* bottom micro-line */}
+      <div className="relative z-10 mt-6 h-px w-full bg-gradient-to-r from-transparent via-indigo-400/30 to-transparent" />
+    </motion.article>
+  );
+};
 
 const Container = ({ children }: { children: React.ReactNode }) => (
   <div className="max-w-7xl mx-auto px-6">{children}</div>
@@ -86,150 +124,6 @@ const SectionBadge = ({ text }: { text: string }) => (
   </span>
 );
 
-
-
-
-/*function Services() {
- return (
-   <section className="py-24 bg-white">
-     <Container>
-       {/* Heading *
-       <div className="text-center mb-16">
-         <span className="inline-flex items-center px-4 py-1.5 mb-4 text-sm rounded-full border border-slate-300 text-slate-700">
-           Service Catalogue
-         </span>
-
-         <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
-           Cybersecurity Services We Deliver
-         </h2>
-
-         <p className="mt-4 text-sm text-slate-600 max-w-xl mx-auto">
-           Comprehensive security services spanning identity, infrastructure,
-           data, and operations
-         </p>
-       </div>
-
-       {/* Cards *
-       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-         {[
-           {
-              icon: ShieldCheckIcon,
-             title: "Zero Trust Network Access (ZTNA) Implementation",
-             desc: "Design and deploy identity-centric, context-aware access controls that eliminate implicit trust.",
-             items: [
-               "Policy-based access enforcement",
-               "Continuous verification architecture",
-               "Micro-segmentation implementation",
-               "Integration with identity providers",
-             ],
-           },
-           {
-             icon: KeyIcon,
-
-             title: "Identity & Access Management (IAM)",
-             desc: "Comprehensive IAM strategy, implementation, and governance for enterprise identity infrastructure.",
-             items: [
-               "Centralized identity governance",
-               "MFA & adaptive authentication",
-               "Role-based access control (RBAC)",
-               "Privileged access management (PAM)",
-             ],
-           },
-           {
-             icon: ComputerDesktopIcon,
-             title: "Security Monitoring & SIEM",
-             desc: "Deploy enterprise-grade SIEM and event management for real-time threat detection.",
-             items: [
-               "Centralized log management",
-               "Threat detection & correlation",
-               "Compliance reporting automation",
-               "Incident investigation workflows",
-             ],
-           },
-           {
-               icon: CloudIcon,
-             title: "Cloud Security Posture Management (CSPM)",
-             desc: "Continuous monitoring and remediation of cloud misconfigurations and compliance violations.",
-             items: [
-               "Multi-cloud security assessment",
-               "Automated compliance checks",
-               "Misconfiguration remediation",
-               "Cloud workload protection",
-             ],
-           },
-           {
-             icon: LockClosedIcon,
-             title: "Data Security & Data Loss Prevention (DLP)",
-             desc: "Protect sensitive data across endpoints, networks, and cloud with advanced DLP strategies.",
-             items: [
-               "Data classification & discovery",
-               "Policy-based data protection",
-               "Encryption & tokenization",
-               "Insider threat detection",
-             ],
-           },
-           {
-             icon: GlobeAltIcon,
-             title: "Security Operations Center (SOC) Setup",
-             desc: "24/7 security monitoring, threat hunting, and incident response capabilities.",
-             items: [
-               "SOC infrastructure setup",
-               "Playbooks & runbook development",
-               "Threat intelligence integration",
-               "Incident response automation",
-             ],
-           },
-           {
-             icon: BugAnIcon,
-             title: "Security Posture Assessment & Penetration Testing",
-             desc: "Comprehensive audits, vulnerability assessments, and ethical hacking exercises.",
-             items: [
-               "Infrastructure vulnerability scanning",
-               "Application penetration testing",
-               "Red team exercises",
-               "Remediation roadmap",
-             ],
-           },
-         ].map((service) => (
-           <div
-             key={service.title}
-             className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition"
-           >
-             <h3 className="text-base font-semibold text-slate-900">
-               {service.title}
-             </h3>
-
-             <p className="mt-3 text-sm text-slate-600">
-               {service.desc}
-             </p>
-
-             <ul className="mt-5 space-y-2">
-               {service.items.map((item) => (
-                 <li
-                   key={item}
-                   className="flex items-start gap-2 text-sm text-slate-600"
-                 >
-                   <span className="mt-1 h-4 w-4 rounded-full border border-emerald-500 text-emerald-500 flex items-center justify-center text-xs">
-                     ✓
-                   </span>
-                   {item}
-                 </li>
-               ))}
-             </ul>
-           </div>
-         ))}
-       </div>
-
-       {/* CTA *
-       <div className="mt-16 text-center">
-         <button className="inline-flex items-center px-6 py-2.5 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
-           Request Detailed Scope
-         </button>
-       </div>
-     </Container>
-   </section>
- );
-}  */
 
 
 // top of file//
@@ -315,70 +209,101 @@ function ServicesCards() {
   ];
 
   return (
-
     <section className="py-20 bg-white">
-      {/* ===== SECTION HEADER ===== */}
-      
-      {/* ===== SECTION HEADER ===== */}
-<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
-  {/* Badge */}
-  <span className="inline-block text-sm font-medium text-sky-600 bg-sky-50 px-3 py-1 rounded-full">
-    Service Catalogue
-  </span>
+      {/* SECTION HEADER */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span className="inline-block text-sm font-medium text-sky-600 bg-sky-50 px-3 py-1 rounded-full">
+          Service Catalogue
+        </span>
 
-  {/* Heading */}
-  <h2 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900">
-    Cybersecurity Services We Deliver
-  </h2>
+        <h2 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900">
+          Cybersecurity Services We Deliver
+        </h2>
 
-  {/* Subheading */}
-  <p className="mt-3 max-w-2xl text-lg text-slate-600">
-    Comprehensive security services spanning identity, infrastructure,
-    data, and operations
-  </p>
-</div>
+        <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-600">
+          Comprehensive security services spanning identity, infrastructure,
+          data, and operations
+        </p>
+      </div>
 
-    <div className="mx-auto max-w-7xl grid gap-10 grid-cols-1 md:grid-cols-2 px-4 sm:px-6 lg:px-8">
-      {services.map((service) => {
-        const Icon = service.icon;
-        return (
-          <div
-            key={service.title}
-            className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-transform transform hover:-translate-y-1">
-            {/* Icon above title */}
-            <div>
-              <div className="inline-flex items-center justify-center rounded-full bg-gradient-to-br from-sky-50 to-indigo-50 p-3 lg:p-4 shadow-sm">
-                <Icon className="h-6 w-6 text-indigo-600 transition-transform duration-300 group-hover:scale-110" />
+      {/* GLASS CARDS */}
+      <div className="mx-auto mt-14 max-w-7xl grid gap-10 grid-cols-1 md:grid-cols-2 px-4 sm:px-6 lg:px-8">
+        {services.map((service, i) => {
+          const Icon = service.icon;
+
+          return (
+            <div
+              key={service.title}
+              className="
+                group relative
+                rounded-3xl
+                p-8
+
+                backdrop-blur-xl
+                bg-white/65
+                border border-white/60
+
+                shadow-[0_30px_80px_rgba(15,30,70,0.15)]
+                transition-all duration-500 ease-out
+
+                hover:-translate-y-2
+                hover:shadow-[0_40px_120px_rgba(37,99,235,0.25)]
+                hover:border-indigo-500/40
+              "
+            >
+              {/* GLASS GLOW */}
+              <div
+                aria-hidden
+                className="
+                  absolute inset-0 rounded-3xl
+                  opacity-0 group-hover:opacity-100
+                  transition-opacity duration-500
+                "
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(79,70,229,0.18), transparent 40%, transparent 60%, rgba(59,130,246,0.12))",
+                }}
+              />
+
+              {/* CONTENT */}
+              <div className="relative z-10">
+                {/* ICON */}
+                <div className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-br from-sky-50 to-indigo-50 p-4 border border-indigo-200/40 shadow-inner">
+                  <Icon className="h-6 w-6 text-indigo-600 transition-transform duration-300 group-hover:scale-110" />
+                </div>
+
+                {/* TITLE */}
+                <h3 className="mt-5 text-base font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                  {service.title}
+                </h3>
+
+                {/* DESCRIPTION */}
+                <p className="mt-3 text-sm text-slate-600">
+                  {service.desc}
+                </p>
+
+                {/* LIST */}
+                <ul className="mt-5 space-y-2">
+                  {service.items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2 text-sm text-slate-600"
+                    >
+                      <span className="mt-1 h-4 w-4 rounded-full border border-emerald-500 text-emerald-500 flex items-center justify-center text-xs">
+                        ✓
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* MICRO DIVIDER */}
+                <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent" />
               </div>
-
             </div>
-
-            {/* Title + description (centered for visual balance) */}
-            <h3 className=" mt-4 text-base font-semibold text-slate-900 transition-colors duration-900 group-hover:text-indigo-600">
-              {service.title}
-            </h3>
-
-            <p className="mt-3 text-sm text-slate-600">
-              {service.desc}
-            </p>
-
-            <ul className="mt-5 space-y-2">
-              {service.items.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-2 text-sm text-slate-600"
-                >
-                  <span className="mt-1 h-4 w-4 rounded-full border border-emerald-500 text-emerald-500 flex items-center justify-center text-xs">
-                    ✓
-                  </span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
     </section>
   );
 }
@@ -405,7 +330,7 @@ function Philosophy() {
         </div>
 
         {/* top cards */}
-        <div className="relative grid gap-8 md:grid-cols-2">
+        <div className="relative grid  gap-8 md:grid-cols-2">
           {[
             {
               title: "Engineering-First Security",
@@ -426,7 +351,7 @@ operational workflows around continuous verification.`,
           ].map((card) => (
             <div
               key={card.title}
-              className="relative rounded-2xl p-8 bg-white border border-slate-200 shadow-sm"
+              className="relative rounded-2xl p-8 bg-white border border-blue-200 shadow-sm"
             >
               <h3 className="text-xl font-semibold text-slate-900 mb-4">
                 {card.title}
@@ -440,12 +365,12 @@ operational workflows around continuous verification.`,
         </div>
 
         {/* bottom section */}
-        <div className="relative mt-14 rounded-2xl border border-slate-200 bg-slate-50 p-8">
+        <div className="relative mt-14 rounded-2xl border border-blue-200 bg-slate-50 p-8">
           <h3 className="text-lg font-semibold text-slate-900 mb-6">
             Why MSPL’s Approach Is Different
           </h3>
 
-          <div className="grid gap-6 sm:grid-cols-3">
+          <div className="grid  gap-6 sm:grid-cols-3">
             {[
               {
                 title: "Vendor-Neutral Guidance",
@@ -510,169 +435,131 @@ function WayOfWorking() {
 
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => (
-            <div key={s.title} className="rounded-xl border border-slate-200 bg-white p-6 text-center">
-              <s.icon className="h-8 w-8 mx-auto text-indigo-600" />
-              <h3 className="mt-4 font-semibold">{s.title}</h3>
-              <p className="mt-2 text-sm text-slate-600">{s.desc}</p>
-            </div>
-          ))}
-        </div>
+  {steps.map((s) => (
+    <div
+      key={s.title}
+      className="
+        group
+        rounded-2xl
+        p-[1px]
+        bg-gradient-to-r from-blue-300 via-sky-400 to-indigo-300
+        transition-all duration-300
+      "
+    >
+      <div
+        className="
+          rounded-2xl
+          bg-white
+          p-6
+          text-center
+          transition-all duration-300
+          group-hover:shadow-[0_20px_50px_rgba(37,99,235,0.25)]
+        "
+      >
+        <s.icon className="h-8 w-8 mx-auto text-indigo-600" />
+        <h3 className="mt-4 font-semibold">{s.title}</h3>
+        <p className="mt-2 text-sm text-slate-600">{s.desc}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
       </Container>
     </section>
   );
 }
 
+/* ----------------------------- Final CTA ----------------------------- */
 
-
-/* our methodology 
-
-
-function Methodology() {
-  const steps = [
-    {
-      num: "01",
-      title: "Assess",
-      desc: "Deep-dive analysis of security posture, compliance requirements, and business objectives.",
-    },
-    {
-      num: "02",
-      title: "Architect",
-      desc: "Design tailored Zero Trust solutions aligned with your infrastructure and risk profile.",
-    },
-    {
-      num: "03",
-      title: "Implement",
-      desc: "Deployment with minimal disruption, comprehensive testing, and team enablement.",
-    },
-    {
-      num: "04",
-      title: "Manage",
-      desc: "Continuous monitoring, optimization, and support for long-term security resilience.",
-    },
-  ];
-
+function FinalCTA() {
   return (
-    <section className="py-20 border-t border-slate-100 bg-white text-center">
-
-      {/* Section Badge *
-      <div className="inline-block text-sm px-3 py-1 rounded-full bg-sky-600 text-white text-sm font-medium hover:bg-sky-700 transition">
-        Industry Applications
-      </div>
-
-      {/* Headings *
-      <h3 className="mt-4 text-3xl font-bold text-slate-900">
-        Built for High-Compliance Industries
-      </h3>
-
-      <p className="mt-3 text-lg text-slate-600 max-w-2xl mx-auto">
-        Tailored cybersecurity approaches for industry-specific challenges and regulatory requirements
-      </p>
-
-      {/* Steps *
-      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
-        {steps.map((s) => (
+    <section className="py-24 bg-slate-900 text-white">
+      <div className="max-w-4xl mx-auto px-6 relative">
+        {/* Decorative background blobs */}
+        <div
+          aria-hidden={true}
+          className="pointer-events-none absolute inset-x-0 top-0 -translate-y-1/3 -z-10 flex justify-center"
+          style={{ height: 260 }}
+        >
           <div
-            key={s.num}
-            className="rounded-xl border border-slate-200 p-8 text-left bg-white hover:shadow-lg transition"
+            className="w-full max-w-3xl rounded-3xl blur-3xl opacity-20"
+            style={{
+              height: 260,
+              background:
+                "radial-gradient(400px 120px at 20% 20%, rgba(14,165,233,0.08), transparent 15%), radial-gradient(420px 120px at 80% 80%, rgba(59,130,246,0.06), transparent 18%)",
+            }}
+          />
+        </div>
+
+        <div className="relative">
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45 }}
+            className="rounded-xl border border-white/10 p-10 text-center bg-gradient-to-b from-slate-900/80 to-slate-900/95 shadow-xl backdrop-blur-md"
+            role="region"
+            aria-labelledby="enterprise-cta-title"
           >
-            <div className="text-sky-600 font-bold text-xl">{s.num}</div>
-            <h4 className="mt-4 text-lg font-semibold text-slate-900">
-              {s.title}
-            </h4>
-            <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-              {s.desc}
+            <h2 id="enterprise-cta-title" className="text-2xl font-semibold">
+              Ready to strengthen your enterprise security?
+            </h2>
+
+            <p className="mt-3 text-sm text-slate-300 max-w-xl mx-auto">
+              Partner with MSPL to design and deploy a comprehensive Zero Trust
+              security architecture — built for scale, observability and
+              compliance.
             </p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-} */
 
+            {/* CTAs */}
+            <div className="mt-8 flex justify-center gap-4 flex-wrap">
+              <a
+                href="/contact"
+                role="button"
+                aria-label="Book consultation"
+                className="inline-flex items-center gap-3 px-6 py-2 rounded-md bg-gradient-to-r from-sky-500 to-indigo-500 text-white text-sm font-medium shadow-md transform-gpu transition duration-200 hover:scale-[1.02] focus:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/30"
+              >
+                <ShieldCheck className="h-4 w-4" />
+                Book Consultation
+              </a>
 
-/* =====================
-Why Choose MSPL
-===================== */
-
-function WhyMSPL() {
-  const points = [
-    "Engineering‑First Security",
-    "OEM Partnership Ecosystem",
-    "Methodology‑Driven Delivery",
-    "Platform‑Centric Approach",
-  ];
-
-
-  return (
-    <section className="py-20 border-t border-slate-200">
-      <Container>
-        <div className="text-center mb-14">
-          <SectionBadge text="Why MSPL" />
-          <h2 className="text-3xl font-bold">Why Choose MSPL for Cybersecurity Services</h2>
-          <p>Engineering excellence meets enterprise-grade security expertise</p>
-        </div>
-
-
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {points.map((p) => (
-            <div key={p} className="rounded-xl border border-slate-200 bg-white p-6 text-center">
-              <CheckCircleIcon className="h-8 w-8 mx-auto text-green-600" />
-              <p className="mt-3 text-sm font-medium">{p}</p>
+              <a
+                href="/platform"
+                role="button"
+                aria-label="Explore secure access platform"
+                className="inline-flex items-center gap-3 px-6 py-2 rounded-md border border-white/20 text-sm font-medium hover:bg-white/6 transition focus:outline-none focus-visible:ring-4 focus-visible:ring-slate-700/40"
+              >
+                Explore Secure Access Platform
+                <ArrowRight className="h-4 w-4" />
+              </a>
             </div>
-          ))}
-        </div>
-      </Container>
-    </section>
-  );
-}
 
+            {/* Trust list + badges */}
+            <div className="mt-6 flex justify-center gap-6 text-xs text-slate-300 flex-wrap items-center">
+              <div className="flex items-center gap-2">
+                <Users className="h-4 w-4 text-sky-400" />
+                <span>Engineering-first approach</span>
+              </div>
 
-function Enterprise() {
-  return (
-    <section className="py-24 bg-white text-slate-900">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="rounded-xl border border-slate-200 p-10 text-center bg-white">
+              <div className="hidden sm:block h-0.5 w-px bg-white/8 mx-2" aria-hidden={true} />
 
-          {/* Badge */}
-          <div className="inline-block text-sm px-3 py-1 rounded-full bg-sky-600 text-white text-sm font-medium hover:bg-sky-700 transition">
-            Ready to Modernize?
-          </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-sky-400" />
+                <span>Compliance-ready solutions</span>
+              </div>
 
-          {/* Heading */}
-          <h2 className="mt-4 text-2xl md:text-3xl font-semibold  text-slate-900">
-            Ready to Modernize Your Enterprise?
-          </h2>
+              <div className="hidden sm:block h-0.5 w-px bg-white/8 mx-2" aria-hidden={true} />
 
-          {/* Sub text */}
-          <p className="mt-4 text-base text-slate-600 max-w-3xl mx-auto">
-            Partner with MSPL for end-to-end cybersecurity and IT transformation services
-          </p>
-
-          {/* Highlights */}
-          <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-slate-600">
-            <span>50+ Years Expertise</span>
-            <span>10+ OEM Partners</span>
-            <span>Engineering-First Approach</span>
-          </div>
-
-          {/* Buttons */}
-          <div className="mt-10 flex justify-center gap-4 flex-wrap">
-            <button className="px-6 py-2 rounded-md bg-sky-600 text-white text-sm font-medium hover:bg-sky-700 transition">
-              Book a Consultation
-            </button>
-
-            <button className="px-6 py-2 rounded-md border border-slate-300 text-slate-700 text-sm font-medium hover:bg-slate-50 transition">
-              Download Service Portfolio
-            </button>
-          </div>
-
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-sky-400" />
+                <span>Proven track record</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 }
-
 
 /* =====================
 Page Export
@@ -746,8 +633,6 @@ export default function CybersecurityServicesPage() {
               </CTAButton>
             </div>
           </div>
-
-
         </section>
 
         {/* Divider */}
@@ -766,23 +651,18 @@ export default function CybersecurityServicesPage() {
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((item, i) => (
-              <FeatureCard key={i} {...item} />
+              <FeatureCard key={i} Icon={item.Icon} title={item.title} desc={item.desc} index={i} />
             ))}
           </div>
         </section>
-
-
       </div>
-
-
 
       <Philosophy />
       <ServicesCards />
       <WayOfWorking />
       <IndustriesPage />
-      <ServicesAmplifyPage/>
-     
-      <Enterprise />
+      <ServicesAmplifyPage />
+      <FinalCTA />
 
 
     </main>

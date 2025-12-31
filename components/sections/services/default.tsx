@@ -178,7 +178,8 @@ export default function Services({ className }: { className?: string }) {
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         {/* main blue glow */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 -top-36 w-[900px] h-[420px] rounded-full blur-[84px] opacity-70"
+          className="absolute left-1/2 -translate-x-1/2 -top-36 w-[600px] sm:w-[900px] h-[420px] rounded-full blur-[84px] opacity-70"
+
           style={{
             background:
               "radial-gradient(circle at 40% 30%, rgba(11,110,255,0.14), rgba(11,110,255,0.06) 35%, transparent 60%)",
@@ -186,7 +187,8 @@ export default function Services({ className }: { className?: string }) {
         />
         {/* secondary soft glow on right */}
         <div
-          className="absolute -right-24 top-12 w-56 h-56 rounded-full blur-3xl opacity-8"
+          className="absolute -right-12 sm:-right-24 top-12 w-40 sm:w-56 h-40 sm:h-56"
+
           style={{
             background:
               "radial-gradient(circle at center, rgba(43,176,255,0.12), transparent 60%)",
@@ -209,7 +211,8 @@ export default function Services({ className }: { className?: string }) {
           {/* blue texture directly behind heading */}
           <div
             aria-hidden
-            className="absolute left-1/2 -translate-x-1/2 -top-6 w-[520px] h-[120px] rounded-full blur-3xl opacity-60"
+            className="absolute left-1/2 -translate-x-1/2 -top-6 w-[320px] sm:w-[520px]
+ h-[120px] rounded-full blur-3xl opacity-60"
             style={{
               background:
                 "radial-gradient(circle at 30% 40%, rgba(11,110,255,0.12), rgba(11,110,255,0.05) 35%, transparent 70%)",
@@ -308,7 +311,7 @@ export default function Services({ className }: { className?: string }) {
                     </Link>
                   </Button>
 
-                  <div className="text-xs text-muted-foreground">Trusted partners</div>
+                  
                 </div>
               </article>
             );
@@ -341,12 +344,12 @@ export default function Services({ className }: { className?: string }) {
           <div className="flex-shrink-0">
             <div className="flex gap-3">
               <Button asChild>
-                <a href="#" className="shadow-sm">
+                <a href="/company/contact" className="shadow-sm">
                   Request Technical Demo
                 </a>
               </Button>
               <Button variant="ghost" asChild>
-                <a href="#">Contact Sales</a>
+                <a href="/company/contact">Contact Sales</a>
               </Button>
             </div>
           </div>
