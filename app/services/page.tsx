@@ -11,6 +11,7 @@ import {
   Building2,
 } from "lucide-react";
 import MethodologyHero from "@/components/ourmethodlogy/default";
+// Removing Methodology import since it's not used in the component
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -237,70 +238,6 @@ function Approach() {
     </section>
   );
 }
-
-
-function Methodology() {
-  const steps = [
-    {
-      num: "01",
-      title: "Assess",
-      desc: "Deep-dive analysis of security posture, compliance requirements, and business objectives.",
-    },
-    {
-      num: "02",
-      title: "Architect",
-      desc: "Design tailored Zero Trust solutions aligned with your infrastructure and risk profile.",
-    },
-    {
-      num: "03",
-      title: "Implement",
-      desc: "Deployment with minimal disruption, comprehensive testing, and team enablement.",
-    },
-    {
-      num: "04",
-      title: "Manage",
-      desc: "Continuous monitoring, optimization, and support for long-term security resilience.",
-    },
-  ];
-
-  return (
-    <section className="py-20 border-t border-slate-100 bg-white text-center">
-      
-      {/* Section Badge */}
-      <div className="inline-block text-sm px-3 py-1 rounded-full bg-sky-600 text-white text-sm font-medium hover:bg-sky-700 transition">
-        Our Methodology
-      </div>
-
-      {/* Headings */}
-      <h3 className="mt-4 text-3xl font-bold text-slate-900">
-        The MSPL Way of Working
-      </h3>
-
-      <p className="mt-3 text-lg text-slate-600 max-w-2xl mx-auto">
-        A proven, systematic approach to security transformation and IT modernization
-      </p>
-
-      {/* Steps */}
-      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {steps.map((s) => (
-          <div
-            key={s.num}
-            className="rounded-xl border border-slate-200 p-8 text-left bg-white hover:shadow-lg transition"
-          >
-            <div className="text-sky-600 font-bold text-xl">{s.num}</div>
-            <h4 className="mt-4 text-lg font-semibold text-slate-900">
-              {s.title}
-            </h4>
-            <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-              {s.desc}
-            </p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 
 
 function FinalCTA() {
