@@ -24,10 +24,10 @@ export default function MSPLDifferencePage(): React.ReactElement {
           {/* Heading */}
           <header className="mt-8 text-center">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
-              The Problem <span className="text-slate-400">→</span> MSPL's Approach
+                The Problem <span className="text-slate-400">→</span> MSPL&apos;s Approach
             </h1>
             <p className="mt-4 max-w-3xl mx-auto text-slate-600 text-sm sm:text-base">
-              Cybersecurity today is fragmented — multiple vendors, disjointed policies,
+              Cybersecurity today is fragmented &ndash; multiple vendors, disjointed policies,
               inconsistent enforcement, and wide blind spots across browsers, networks,
               and devices. MSPL unifies governance, policy, and enforcement under a single
               modern Zero-Trust platform.
@@ -153,7 +153,7 @@ export default function MSPLDifferencePage(): React.ReactElement {
                     </svg>
                   </div>
                   <h3 id="approach-heading" className="text-lg font-semibold">
-                    MSPL's Approach
+                      MSPL&apos;s Approach
                   </h3>
                 </div>
 

@@ -100,7 +100,7 @@ export default function CareersPage() {
       <Section className="pt-12 pb-8">
         <div className="max-w-full mx-auto text-center px-4 sm:px-6 lg:px-8">
           <Badge variant="outline" className="mx-auto mb-4">
-            We're hiring
+            We&apos;re hiring
           </Badge>
 
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight mb-4">
